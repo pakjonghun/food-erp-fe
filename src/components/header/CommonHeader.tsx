@@ -20,7 +20,9 @@ const CommonHeader: FC<Props> = ({ children }) => {
             p: '8px 12px',
           }}
         >
-          <Button startIcon={<ArrowBackIcon />}>뒤로가기</Button>
+          <Button size="small" variant="text" startIcon={<ArrowBackIcon />}>
+            뒤로가기
+          </Button>
           <Typography>제목</Typography>
         </Toolbar>
       </CustomAppBar>
