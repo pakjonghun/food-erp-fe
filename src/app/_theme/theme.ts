@@ -36,7 +36,6 @@ const MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'] = {
 const MuiFormLabel: Components<Theme>['MuiFormLabel'] = {
   styleOverrides: {
     root: ({ theme }) => ({
-      ...theme.typography.body2,
       color: theme.palette.text.disabled,
       fontWeight: 600,
     }),
@@ -77,6 +76,21 @@ const MuiDrawer: Components<Theme>['MuiDrawer'] = {
   },
 };
 
+const MuiPaper: Components<Theme>['MuiPaper'] = {
+  defaultProps: { elevation: 0 },
+  styleOverrides: {
+    outlined: ({ theme }) => ({ borderColor: alpha(theme.palette.grey[500], 0.16) }),
+  },
+};
+
+const MuiAlert: Components<Theme>['MuiAlert'] = {
+  styleOverrides: {
+    standard: ({ ownerState, theme }) => ({
+      colors: theme.palette.getContrastText,
+    }),
+  },
+};
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -97,6 +111,8 @@ const theme = createTheme({
     MuiButton,
     MuiAppBar,
     MuiDrawer,
+    MuiPaper,
+    MuiAlert,
   },
 });
 
