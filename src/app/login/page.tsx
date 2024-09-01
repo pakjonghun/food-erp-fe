@@ -64,8 +64,7 @@ const LoginPage = () => {
             bgcolor: 'white',
             alignSelf: 'center',
             width: '100%',
-            py: 6,
-            px: 4,
+            p: 4,
             maxWidth: 480,
           }}
         >
@@ -91,7 +90,7 @@ const LoginPage = () => {
                           shrink: true,
                         },
                       }}
-                      label="아이디(이메일)"
+                      label="아이디"
                       error={!!error}
                       helperText={error?.message ?? ''}
                       placeholder="아이디(이메일)"
@@ -105,7 +104,7 @@ const LoginPage = () => {
                   render={({ field, fieldState: { error } }) => (
                     <TextField
                       {...field}
-                      label="비밀번호 6자리이상"
+                      label="비밀번호"
                       error={!!error}
                       helperText={error?.message ?? ''}
                       type={showPassword ? 'text' : 'password'}
