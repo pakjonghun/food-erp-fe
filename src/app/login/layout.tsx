@@ -7,11 +7,7 @@ interface Props {
 }
 
 const LoginLayout: FC<Props> = ({ children }) => {
-  return (
-    <BaseLayout nav={<></>} header={<BaseHeader />}>
-      {children}
-    </BaseLayout>
-  );
+  return <BaseLayout header={<BaseHeader />}>{children}</BaseLayout>;
 };
 
 export default LoginLayout;

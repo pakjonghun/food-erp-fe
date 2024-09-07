@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ThemeProvider } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import ApolloClientProvider from '@/providers/ApolloClientProvider';
 import './globals.css';
 import MuiThemeProvider from '@/providers/ThemeProvider';
 import SnackProvider from '@/context/snackContext/SnackProvider';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,8 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <MuiThemeProvider>
+          <CssBaseline />
           <ApolloClientProvider>
-            <SnackProvider>{children}</SnackProvider>
+            <LocalizationProvider>
+              <SnackProvider>{children}</SnackProvider>
+            </LocalizationProvider>
           </ApolloClientProvider>
         </MuiThemeProvider>
       </body>

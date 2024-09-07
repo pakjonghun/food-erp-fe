@@ -11,7 +11,7 @@ interface Props {
 
 const BaseHeader: FC<Props> = ({ children }) => {
   return (
-    <CustomAppBar>
+    <CustomAppBar position="sticky">
       <Toolbar
         variant="dense"
         disableGutters

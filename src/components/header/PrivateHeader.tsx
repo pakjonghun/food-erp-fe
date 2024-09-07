@@ -29,10 +29,9 @@ const PrivateHeader = () => {
     }
     const result = await res.json();
     const redirectURL = result.redirect;
-    console.log('result : ', result);
     if (redirectURL) {
-      router.replace(redirectURL);
       setSnack({ message: '안녕히 가세요.' });
+      router.replace(redirectURL);
     }
   };
 
