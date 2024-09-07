@@ -2,7 +2,7 @@
 
 import BaseHeader from './BaseHeader';
 import Iconify from '../icon/Iconify';
-import { IconButton, MenuItem, MenuList, Popover } from '@mui/material';
+import { IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Popover } from '@mui/material';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
@@ -46,7 +46,7 @@ const PrivateHeader = () => {
   return (
     <BaseHeader>
       <IconButton onClick={handleClickMenu} ref={menuRef}>
-        <Iconify icon="ant-design:setting-filled" color="red" />
+        <Iconify icon="ant-design:setting-filled" />
       </IconButton>
       <Popover
         anchorEl={menuRef.current}
@@ -58,8 +58,8 @@ const PrivateHeader = () => {
           {menuList.map((menu) => {
             return (
               <MenuItem onClick={menu.callback} key={menu.lable}>
-                {menu.icon}
-                {menu.lable}
+                <ListItemIcon>{menu.icon}</ListItemIcon>
+                <ListItemText>{menu.lable}</ListItemText>
               </MenuItem>
             );
           })}

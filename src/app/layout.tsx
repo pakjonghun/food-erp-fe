@@ -5,7 +5,7 @@ import ApolloClientProvider from '@/providers/ApolloClientProvider';
 import './globals.css';
 import MuiThemeProvider from '@/providers/ThemeProvider';
 import SnackProvider from '@/context/snackContext/SnackProvider';
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import LocalizationProvider from '@/providers/LocalizationProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 

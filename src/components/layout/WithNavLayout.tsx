@@ -19,7 +19,9 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
 
   return (
     <Box component="main" sx={{ height: '100dvh' }}>
-      {nav}
+      <Box component="nav" sx={{ width: navWidthVar }}>
+        {nav}
+      </Box>
       <Box
         component="section"
         sx={{ display: 'flex', flexDirection: 'column', height: '100dvh', pl: navWidthVar }}

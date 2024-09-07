@@ -108,10 +108,11 @@ const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
   defaultProps: {
     disableRipple: true,
   },
+};
+
+const MuiListItemText: Components<Theme>['MuiListItemText'] = {
   styleOverrides: {
-    root: ({ theme }) => ({
-      ...theme.typography.body2,
-    }),
+    primary: ({ theme }) => theme.typography.body2,
   },
 };
 
@@ -139,6 +140,7 @@ const theme = createTheme({
     MuiAlert,
     MuiIconButton,
     MuiMenuItem,
+    MuiListItemText,
   },
 });
 
