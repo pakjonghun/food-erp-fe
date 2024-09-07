@@ -1,6 +1,6 @@
 'use client';
 
-import BaseHeader from './baseHeader/BaseHeader';
+import BaseHeader from '@/components/header/base/BaseHeader';
 import Iconify from '../icon/Iconify';
 import { IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Popover } from '@mui/material';
 import { useRef, useState } from 'react';
