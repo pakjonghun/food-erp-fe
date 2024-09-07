@@ -17,16 +17,6 @@ export const navList: NavItem[] = [
         label: '제품',
         icon: <Iconify icon="dashicons:products" width={20} />,
       },
-      {
-        path: '/back-data/product',
-        label: '제품',
-        icon: <Iconify icon="dashicons:products" width={20} />,
-      },
-      {
-        path: '/back-data/product',
-        label: '제품',
-        icon: <Iconify icon="dashicons:products" width={20} />,
-      },
     ],
   },
 ];

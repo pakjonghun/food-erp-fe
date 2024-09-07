@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import TagFacesIcon from '@mui/icons-material/TagFaces';
 import {
   Alert,
   AlertTitle,
@@ -40,7 +39,7 @@ const LoginPage = () => {
 
   const setSnack = useSnack();
   const [login, { loading }] = useLogin();
-  const onSubmit = async (variables: LoginInputType) => {
+  const onSubmit = (variables: LoginInputType) => {
     login({
       variables: {
         loginInput: variables,

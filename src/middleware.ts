@@ -21,6 +21,7 @@ export async function middleware(request: NextRequest) {
     request.cookies.delete(AUTH_TOKEN);
     return NextResponse.redirect(new URL('/login', request.url));
   }
+  return;
 }
 
 export const config = {
