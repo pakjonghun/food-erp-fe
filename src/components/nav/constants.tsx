@@ -3,16 +3,19 @@ import { NavItem } from './type';
 
 export const navList: NavItem[] = [
   {
+    type: 'link',
     path: '/dashboard',
     label: '대시보드',
     icon: <Iconify icon="ri:dashboard-fill" width={20} />,
   },
   {
-    path: '/back-data',
+    type: 'p',
+    path: 'back-data',
     label: '백데이터',
     icon: <Iconify icon="mdi:database" width={20} />,
     children: [
       {
+        type: 'link',
         path: '/back-data/product',
         label: '제품',
         icon: <Iconify icon="dashicons:products" width={20} />,

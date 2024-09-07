@@ -41,7 +41,7 @@ const NavMenu: FC<Props> = ({ item, sx }) => {
         onClick={handleClickMenu}
         href={item.path}
         disableRipple
-        LinkComponent={Link}
+        LinkComponent={item.type == 'link' ? Link : 'p'}
         key={item.path}
       >
         <ListItemIcon>{item.icon}</ListItemIcon>

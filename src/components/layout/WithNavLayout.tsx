@@ -24,23 +24,37 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
   const isDownMd = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
-    navOpen(!isDownMd);
+    // navOpen(!isDownMd);
+    if (isDownMd) {
+      navOpen(false);
+    } else {
+      navOpen(true);
+    }
   }, [isDownMd]);
 
   const handleExpandNav = () => {
     navExpand(!isNavExpand);
   };
 
+  const handleCloseMenu = () => {
+    navOpen(false);
+  };
+
   return (
     <Box component="main" sx={{ height: '100dvh', display: 'flex' }}>
       <Drawer
-        variant="permanent"
+        onClose={handleCloseMenu}
+        // variant={isDownMd ? 'temporary' : 'permanent'}
+        variant={'persistent'}
         anchor="left"
         open={isNavOpen}
         component="nav"
         PaperProps={{
           sx: {
-            width: navWidthVar,
+            width: {
+              xs: 'var(--nav-width)',
+              md: navWidthVar,
+            },
             transition: theme.transitions.create('width', {
               easing: 'var(--transition-easing)',
               duration: 'var(--transition-duration)',
@@ -48,11 +62,8 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
           },
         }}
         sx={{
+          position: 'fixed',
           zIndex: (theme) => theme.zIndex.appBar + 1,
-          display: {
-            xs: isNavOpen ? 'block' : 'none',
-            md: 'block',
-          },
         }}
       >
         <Stack
@@ -80,7 +91,7 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
           display: 'flex',
           flexDirection: 'column',
           height: '100dvh',
-          pl: navWidthVar,
+          pl: isDownMd ? 0 : navWidthVar,
           transition: theme.transitions.create('padding-left', {
             easing: 'var(--transition-easing)',
             duration: 'var(--transition-duration)',
