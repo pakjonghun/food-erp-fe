@@ -2,7 +2,7 @@
 
 import { Roboto } from 'next/font/google';
 import { Components, createTheme } from '@mui/material/styles';
-import { alpha, inputBaseClasses, inputLabelClasses, Theme, Typography } from '@mui/material';
+import { alpha, Theme } from '@mui/material';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -55,7 +55,9 @@ const MuiButton: Components<Theme>['MuiButton'] = {
     variant: 'contained',
   },
   styleOverrides: {
-    root: ({ theme }) => ({ fontFamily: theme.typography.fontFamily }),
+    contained: ({ theme }) => ({
+      backgroundColor: theme.palette.grey[800],
+    }),
   },
 };
 
@@ -91,6 +93,28 @@ const MuiAlert: Components<Theme>['MuiAlert'] = {
   },
 };
 
+const MuiIconButton: Components<Theme>['MuiIconButton'] = {
+  defaultProps: {
+    disableRipple: true,
+  },
+  styleOverrides: {
+    root: ({ theme }) => ({
+      color: theme.palette.grey[800],
+    }),
+  },
+};
+
+const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
+  defaultProps: {
+    disableRipple: true,
+  },
+  styleOverrides: {
+    root: ({ theme }) => ({
+      ...theme.typography.body2,
+    }),
+  },
+};
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -113,6 +137,8 @@ const theme = createTheme({
     MuiDrawer,
     MuiPaper,
     MuiAlert,
+    MuiIconButton,
+    MuiMenuItem,
   },
 });
 

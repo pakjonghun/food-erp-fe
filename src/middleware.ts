@@ -4,6 +4,7 @@ import { auth } from './actions/auth';
 import { publicPathList } from './constants/route';
 
 export async function middleware(request: NextRequest) {
+  console.log(1);
   const path = request.nextUrl.pathname;
   const isPublic = publicPathList.some((p) => path.indexOf(p) != -1);
   const cookie = request.cookies.get(AUTH_TOKEN);

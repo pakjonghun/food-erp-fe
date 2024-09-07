@@ -31,7 +31,7 @@ const SnackProvider: FC<Props> = ({ children }) => {
     <SnackContext.Provider value={{ setSnackState: handleSetSnackState }}>
       <Snackbar
         open={open}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         autoHideDuration={6000}
         onClose={handleClose}
       >

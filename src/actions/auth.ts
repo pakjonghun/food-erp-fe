@@ -20,8 +20,6 @@ export const auth = async (token: string) => {
     });
 
     return result.data?.auth;
-
-    return true;
   } catch (err) {
     console.error('erro', err);
     return false;
