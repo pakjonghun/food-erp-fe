@@ -1,24 +1,22 @@
 'use client';
 
-import { MenuList } from '@mui/material';
-import { navList } from './constants';
+import { Theme, useMediaQuery } from '@mui/material';
 import { useReactiveVar } from '@apollo/client';
 import { navExpand } from '@/store/nav';
 import MiniNav from './MiniNav';
-import NavMenu from './NavMenu';
+import { useTheme } from '@emotion/react';
+import WideNav from './WideNav';
 
 const BaseNav = () => {
+  const theme = useTheme() as Theme;
   const isNavExpand = useReactiveVar(navExpand);
+  const isDownMd = useMediaQuery(theme.breakpoints.down('md'));
 
-  return isNavExpand ? (
-    <MenuList>
-      {navList.map((item) => {
-        return <NavMenu item={item} key={item.path} />;
-      })}
-    </MenuList>
-  ) : (
-    <MiniNav />
-  );
+  if (isDownMd) {
+    return <WideNav />;
+  }
+
+  return isNavExpand ? <WideNav /> : <MiniNav />;
 };
 
 export default BaseNav;

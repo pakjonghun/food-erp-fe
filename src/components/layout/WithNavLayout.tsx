@@ -24,7 +24,6 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
   const isDownMd = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
-    // navOpen(!isDownMd);
     if (isDownMd) {
       navOpen(false);
     } else {
@@ -44,7 +43,6 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
     <Box component="main" sx={{ height: '100dvh', display: 'flex' }}>
       <Drawer
         onClose={handleCloseMenu}
-        // variant={isDownMd ? 'temporary' : 'permanent'}
         variant={'persistent'}
         anchor="left"
         open={isNavOpen}
@@ -71,7 +69,7 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
           direction="row"
           sx={{
             pl: 1,
-            justifyContent: 'flex-end',
+            justifyContent: !isNavExpand ? 'center' : 'flex-end',
             height: 'var(--header-height)',
           }}
         >
