@@ -1,8 +1,7 @@
+import { FC } from 'react';
 import Iconify from '@/components/icon/Iconify';
 import {
-  Box,
   FormControl,
-  FormLabel,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -10,7 +9,6 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import { FC } from 'react';
 import { searchTargetList } from './constants';
 
 interface Props {
@@ -24,6 +22,12 @@ const Search: FC<Props> = ({ targetKeyword, setTargetKeyword, setKeyword, keywor
   return (
     <Stack direction="row" gap={1}>
       <TextField
+        sx={{
+          minWidth: {
+            xs: 200,
+            md: 300,
+          },
+        }}
         label="검색"
         value={keyword}
         onChange={(event) => setKeyword(event.target.value)}

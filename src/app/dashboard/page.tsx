@@ -1,5 +1,5 @@
 import ProductSection from '@/section/product/Product';
-import { Box, Card, Grid2 } from '@mui/material';
+import { Box, Card } from '@mui/material';
 
 const DashboardPage = () => {
   return (

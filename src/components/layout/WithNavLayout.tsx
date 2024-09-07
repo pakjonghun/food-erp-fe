@@ -1,7 +1,7 @@
 'use client';
 
-import { FC, ReactNode } from 'react';
-import { Box, Drawer, IconButton, Stack, Theme } from '@mui/material';
+import { FC, ReactNode, useEffect } from 'react';
+import { Box, Drawer, IconButton, Stack, Theme, useMediaQuery } from '@mui/material';
 import { useReactiveVar } from '@apollo/client';
 import { navExpand, navOpen } from '@/store/nav';
 import { useTheme } from '@emotion/react';
@@ -21,6 +21,11 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
   const navWidth = isNavExpand ? 'var(--nav-width)' : 'var(--nav-mini-width)';
   const navWidthVar = isNavOpen ? navWidth : 0;
   const theme = useTheme() as Theme;
+  const isDownMd = useMediaQuery(theme.breakpoints.down('md'));
+
+  useEffect(() => {
+    navOpen(!isDownMd);
+  }, [isDownMd]);
 
   const handleExpandNav = () => {
     navExpand(!isNavExpand);
