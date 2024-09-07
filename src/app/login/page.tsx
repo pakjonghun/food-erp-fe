@@ -1,19 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import CommonHeader from '@/components/header/CommonHeader';
 import {
-  Alert,
   Box,
   Button,
   Card,
   CircularProgress,
-  FormControl,
   FormGroup,
-  FormLabel,
   InputAdornment,
   Paper,
   Stack,
@@ -25,8 +20,13 @@ import { Controller, useForm } from 'react-hook-form';
 import Form from '@/components/form/Form';
 import { loginInputSchema, LoginInputType } from './validate';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Iconify from '@/components/icon/Iconify';
+import { useRouter } from 'next/navigation';
+import { useSnack } from '@/context/snackContext/SnackProvider';
+import { error } from 'console';
 
 const LoginPage = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const methods = useForm<LoginInputType>({
     resolver: zodResolver(loginInputSchema),
@@ -38,12 +38,23 @@ const LoginPage = () => {
 
   const { control, handleSubmit } = methods;
 
+  const setSnack = useSnack();
   const [login, { loading }] = useLogin({
     id: 'email1',
     password: 'email1',
   });
-  const onSubmit = () => {
-    login();
+  const onSubmit = async () => {
+    login({
+      onCompleted: () => {
+        router.push('/dashboard');
+      },
+      onError: (e) => {
+        const msg = e.message;
+        const name = e.name;
+        if (!msg && !name) return;
+        setSnack({ title: name ?? '오류', message: e.message, variant: 'error' });
+      },
+    });
   };
 
   return (
@@ -119,7 +130,11 @@ const LoginPage = () => {
                               sx={{ cursor: 'pointer' }}
                               position="end"
                             >
-                              {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                              {showPassword ? (
+                                <Iconify icon="mdi:eye-lock" />
+                              ) : (
+                                <Iconify icon="mdi:eye-lock-open" />
+                              )}
                             </InputAdornment>
                           ),
                         },
@@ -129,18 +144,10 @@ const LoginPage = () => {
                   )}
                 />
               </FormGroup>
-              <Stack flexDirection="row" gap={1} sx={{ mt: -1 }}>
-                {/* <Alert sx={{ py: 0.2 }} severity="info">
-                  아이디 : 이메일 형식, 비밀번호 : 8자리 이상
-                </Alert> */}
-                <Button sx={{ ml: 'auto' }} variant="text">
-                  비밀번호 찾기
-                </Button>
-              </Stack>
               <Button
                 endIcon={loading ? <CircularProgress color="inherit" size={20} /> : <></>}
                 type="submit"
-                sx={{ mt: 1 }}
+                sx={{ mt: 2 }}
                 variant="contained"
               >
                 로그인

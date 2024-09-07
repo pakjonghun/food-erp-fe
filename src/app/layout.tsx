@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material';
 import ApolloClientProvider from '@/providers/ApolloClientProvider';
 import './globals.css';
 import MuiThemeProvider from '@/providers/ThemeProvider';
+import SnackProvider from '@/context/snackContext/SnackProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,7 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <MuiThemeProvider>
-          <ApolloClientProvider>{children}</ApolloClientProvider>
+          <ApolloClientProvider>
+            <SnackProvider>{children}</SnackProvider>
+          </ApolloClientProvider>
         </MuiThemeProvider>
       </body>
     </html>
