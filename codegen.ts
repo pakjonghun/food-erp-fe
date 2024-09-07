@@ -9,9 +9,6 @@ const config: CodegenConfig = {
       preset: 'client',
       plugins: [],
     },
-    '.graphql.schema.json': {
-      plugins: ['introspection'],
-    },
   },
 };
 

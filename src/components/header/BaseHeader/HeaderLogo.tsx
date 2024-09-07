@@ -1,6 +1,6 @@
 'use client';
 
-import { navExpand } from '@/store/global';
+import { navExpand } from '@/store/nav';
 import { useReactiveVar } from '@apollo/client';
 import Image from 'next/image';
 import logo from '@/assets/images/logo.png';

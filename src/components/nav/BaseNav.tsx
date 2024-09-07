@@ -1,10 +1,9 @@
 'use client';
 
-import { ListItemButton, ListItemIcon, ListItemText, MenuList } from '@mui/material';
+import { MenuList } from '@mui/material';
 import { navList } from './constants';
-import Link from 'next/link';
 import { useReactiveVar } from '@apollo/client';
-import { navExpand } from '@/store/global';
+import { navExpand } from '@/store/nav';
 import MiniNav from './MiniNav';
 import NavMenu from './NavMenu';
 

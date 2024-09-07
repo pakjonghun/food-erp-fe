@@ -3,10 +3,10 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { CssBaseline } from '@mui/material';
 import ApolloClientProvider from '@/providers/ApolloClientProvider';
-import './globals.css';
 import MuiThemeProvider from '@/providers/ThemeProvider';
 import SnackProvider from '@/context/snackContext/SnackProvider';
 import LocalizationProvider from '@/providers/LocalizationProvider';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

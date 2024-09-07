@@ -3,7 +3,7 @@
 import { FC, ReactNode } from 'react';
 import { Box, Drawer, IconButton, Stack, Theme } from '@mui/material';
 import { useReactiveVar } from '@apollo/client';
-import { navExpand, navOpen } from '@/store/global';
+import { navExpand, navOpen } from '@/store/nav';
 import { useTheme } from '@emotion/react';
 import Iconify from '../icon/Iconify';
 import Image from 'next/image';

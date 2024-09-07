@@ -1,6 +1,6 @@
 'use client';
 
-import { navList } from '@/components/navigation/constants';
+import { navList } from '@/components/nav/constants';
 import { Stack, Typography } from '@mui/material';
 import { usePathname } from 'next/navigation';
 
