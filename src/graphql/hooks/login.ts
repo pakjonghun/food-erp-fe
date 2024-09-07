@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { graphql } from '../codegen';
 
-const login = graphql(`
+export const login = graphql(`
   mutation login($loginInput: LoginInput!) {
     login(loginInput: $loginInput)
   }

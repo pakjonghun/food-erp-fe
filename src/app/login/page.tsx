@@ -23,7 +23,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Iconify from '@/components/icon/Iconify';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
-import { error } from 'console';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -40,7 +39,7 @@ const LoginPage = () => {
 
   const setSnack = useSnack();
   const [login, { loading }] = useLogin();
-  const onSubmit = (variables: LoginInputType) => {
+  const onSubmit = async (variables: LoginInputType) => {
     login({
       variables: {
         loginInput: variables,
