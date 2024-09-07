@@ -2,12 +2,12 @@
 
 import { AppBar, IconButton, styled, Theme, Toolbar, useMediaQuery } from '@mui/material';
 import { FC, ReactNode } from 'react';
-import HeaderLogo from './HeaderLogo';
-import MainTitle from './MainTitle';
 import Iconify from '@/components/icon/Iconify';
 import { useReactiveVar } from '@apollo/client';
 import { navOpen } from '@/store/nav';
 import { useTheme } from '@emotion/react';
+import MainTitle from './MainTitle';
+import HeaderLogo from './HeaderLogo';
 
 interface Props {
   children?: ReactNode;
