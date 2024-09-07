@@ -1,4 +1,4 @@
 import { makeVar } from '@apollo/client';
 
-export const isNavOpen = makeVar(true);
-export const isNavExpand = makeVar(true);
+export const navOpen = makeVar(true);
+export const navExpand = makeVar(true);

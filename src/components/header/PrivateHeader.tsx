@@ -1,6 +1,6 @@
 'use client';
 
-import BaseHeader from './BaseHeader';
+import BaseHeader from './BaseHeader/BaseHeader';
 import Iconify from '../icon/Iconify';
 import { IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Popover } from '@mui/material';
 import { useRef, useState } from 'react';
@@ -45,7 +45,7 @@ const PrivateHeader = () => {
 
   return (
     <BaseHeader>
-      <IconButton onClick={handleClickMenu} ref={menuRef}>
+      <IconButton sx={{ ml: 'auto' }} onClick={handleClickMenu} ref={menuRef}>
         <Iconify icon="ant-design:setting-filled" />
       </IconButton>
       <Popover

@@ -1,9 +1,6 @@
-'use client';
-
 import { AppBar, styled, Toolbar } from '@mui/material';
-import Image from 'next/image';
-import logo from '@/assets/images/logo.png';
 import { FC, ReactNode } from 'react';
+import HeaderLogo from './HeaderLogo';
 
 interface Props {
   children?: ReactNode;
@@ -11,7 +8,7 @@ interface Props {
 
 const BaseHeader: FC<Props> = ({ children }) => {
   return (
-    <CustomAppBar position="sticky">
+    <CustomAppBar sx={{ height: 'var(--header-height)' }} position="sticky">
       <Toolbar
         variant="dense"
         disableGutters
@@ -23,7 +20,7 @@ const BaseHeader: FC<Props> = ({ children }) => {
           p: '8px 12px',
         }}
       >
-        <Image alt="logo" src={logo} width={70} />
+        <HeaderLogo />
         {children}
       </Toolbar>
     </CustomAppBar>

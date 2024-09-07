@@ -1,8 +1,7 @@
 import { FC, ReactNode } from 'react';
 import PrivateHeader from '@/components/header/PrivateHeader';
-import BaseLayout from '@/components/layout/BaseLayout';
-import BaseNav from '@/components/navigation/BaseNav';
 import WithNavLayout from '@/components/layout/WithNavLayout';
+import BaseNav from '@/components/navigation/BaseNav';
 
 interface Props {
   children: ReactNode;
