@@ -36,16 +36,17 @@ const LoginPage = () => {
     },
   });
 
-  const { control, handleSubmit } = methods;
+  const { control, getValues, handleSubmit } = methods;
 
   const setSnack = useSnack();
-  const [login, { loading }] = useLogin({
-    id: 'email1',
-    password: 'email1',
-  });
-  const onSubmit = async () => {
+  const [login, { loading }] = useLogin();
+  const onSubmit = (variables: LoginInputType) => {
     login({
+      variables: {
+        loginInput: variables,
+      },
       onCompleted: () => {
+        setSnack({ message: `${getValues('id')}님 환영합니다.`, variant: 'success' });
         router.push('/dashboard');
       },
       onError: (e) => {

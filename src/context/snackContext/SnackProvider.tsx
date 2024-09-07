@@ -36,7 +36,7 @@ const SnackProvider: FC<Props> = ({ children }) => {
         onClose={handleClose}
       >
         <Alert severity={variant} onClick={handleClose} variant="standard">
-          <AlertTitle>{title}</AlertTitle>
+          {!!title && <AlertTitle>{title}</AlertTitle>}
           {message}
         </Alert>
       </Snackbar>
