@@ -1,3 +1,5 @@
+'use client';
+
 import { AppBar, styled, Toolbar } from '@mui/material';
 import { FC, ReactNode } from 'react';
 import HeaderLogo from './HeaderLogo';

@@ -1,3 +1,4 @@
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { CssBaseline } from '@mui/material';
@@ -22,14 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MuiThemeProvider>
-          <CssBaseline />
-          <ApolloClientProvider>
-            <LocalizationProvider>
-              <SnackProvider>{children}</SnackProvider>
-            </LocalizationProvider>
-          </ApolloClientProvider>
-        </MuiThemeProvider>
+        <AppRouterCacheProvider>
+          <MuiThemeProvider>
+            <CssBaseline />
+            <ApolloClientProvider>
+              <LocalizationProvider>
+                <SnackProvider>{children}</SnackProvider>
+              </LocalizationProvider>
+            </ApolloClientProvider>
+          </MuiThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
