@@ -1,6 +1,7 @@
 import { AppBar, styled, Toolbar } from '@mui/material';
 import { FC, ReactNode } from 'react';
 import HeaderLogo from './HeaderLogo';
+import MainTitle from './MainTitle';
 
 interface Props {
   children?: ReactNode;
@@ -21,6 +22,7 @@ const BaseHeader: FC<Props> = ({ children }) => {
         }}
       >
         <HeaderLogo />
+        <MainTitle />
         {children}
       </Toolbar>
     </CustomAppBar>

@@ -9,6 +9,6 @@ export const navList = [
   {
     path: '/back-data',
     label: '백데이터',
-    icon: <Iconify icon="material-symbols:data-table" width={20} />,
+    icon: <Iconify icon="mdi:database" width={20} />,
   },
 ];

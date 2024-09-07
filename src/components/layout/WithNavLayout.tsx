@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, ReactNode } from 'react';
-import { Box, Drawer, IconButton, Stack, Theme, Typography } from '@mui/material';
+import { Box, Drawer, IconButton, Stack, Theme } from '@mui/material';
 import { useReactiveVar } from '@apollo/client';
 import { navExpand, navOpen } from '@/store/global';
 import { useTheme } from '@emotion/react';

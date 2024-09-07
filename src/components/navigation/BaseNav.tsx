@@ -1,9 +1,16 @@
+'use client';
+
 import { ListItemButton, ListItemIcon, ListItemText, MenuList } from '@mui/material';
 import { navList } from './constants';
 import Link from 'next/link';
+import { useReactiveVar } from '@apollo/client';
+import { navExpand } from '@/store/global';
+import MiniNav from './MiniNav';
 
 const BaseNav = () => {
-  return (
+  const isNavExpand = useReactiveVar(navExpand);
+
+  return isNavExpand ? (
     <MenuList>
       {navList.map((v) => {
         return (
@@ -14,6 +21,8 @@ const BaseNav = () => {
         );
       })}
     </MenuList>
+  ) : (
+    <MiniNav />
   );
 };
 
