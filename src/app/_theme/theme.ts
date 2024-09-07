@@ -115,6 +115,15 @@ const MuiListItemText: Components<Theme>['MuiListItemText'] = {
     primary: ({ theme }) => ({ ...theme.typography.body2, fontWeight: 600 }),
   },
 };
+const MuiTextField: Components<Theme>['MuiTextField'] = {
+  defaultProps: {
+    slotProps: {
+      inputLabel: {
+        shrink: true,
+      },
+    },
+  },
+};
 
 const theme = createTheme({
   palette: {
@@ -141,6 +150,7 @@ const theme = createTheme({
     MuiIconButton,
     MuiMenuItem,
     MuiListItemText,
+    MuiTextField,
   },
 });
 

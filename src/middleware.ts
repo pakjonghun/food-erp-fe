@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { AUTH_TOKEN } from './constants/global';
+import { AUTH_TOKEN } from './constants/auth';
 import { auth } from './actions/auth';
 import { publicPathList } from './constants/route';
 

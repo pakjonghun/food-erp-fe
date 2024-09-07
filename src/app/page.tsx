@@ -1,4 +1,4 @@
-import { AUTH_TOKEN } from '@/constants/global';
+import { AUTH_TOKEN } from '@/constants/auth';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 

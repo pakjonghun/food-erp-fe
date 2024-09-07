@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { AUTH_TOKEN } from '@/constants/global';
+import { AUTH_TOKEN } from '@/constants/auth';
 
 export async function GET(request: NextRequest) {
   if (!request.cookies.get(AUTH_TOKEN)) {

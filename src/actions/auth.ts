@@ -1,4 +1,4 @@
-import { AUTH_TOKEN } from '@/constants/global';
+import { AUTH_TOKEN } from '@/constants/auth';
 import { client } from '@/graphql/client/apolloClient';
 import { gql } from '@apollo/client';
 
