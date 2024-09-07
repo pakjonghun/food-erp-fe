@@ -63,7 +63,7 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
             <Image alt="logo" src={logo} width={70} style={{ marginRight: 'auto' }} />
           )}
           <IconButton onClick={handleExpandNav}>
-            <Iconify icon={isNavExpand ? 'mingcute:left-fill' : 'mingcute:right-fill'} />
+            <Iconify icon={isNavExpand ? 'mingcute:left-line' : 'mingcute:right-line'} width={18} />
           </IconButton>
         </Stack>
         {nav}
