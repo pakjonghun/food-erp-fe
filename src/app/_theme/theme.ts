@@ -112,7 +112,7 @@ const MuiMenuItem: Components<Theme>['MuiMenuItem'] = {
 
 const MuiListItemText: Components<Theme>['MuiListItemText'] = {
   styleOverrides: {
-    primary: ({ theme }) => theme.typography.body2,
+    primary: ({ theme }) => ({ ...theme.typography.body2, fontWeight: 600 }),
   },
 };
 
