@@ -1,10 +1,9 @@
 'use client';
 
 import { uploadExcelFile } from '@/actions/upload';
-import Iconify from '@/components/icon/Iconify';
+import FileUploadInput from '@/components/input/FileUploadInput';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { client } from '@/graphql/client/apolloClient';
-import { Box, Button } from '@mui/material';
 import { AxiosError } from 'axios';
 import { useRef } from 'react';
 
@@ -39,24 +38,7 @@ const ExcelUpload = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Button
-        htmlFor="upload"
-        component="label"
-        startIcon={<Iconify icon="ic:baseline-upload" width={18} style={{ marginBottom: '1px' }} />}
-        sx={{ ml: 'auto', overflow: 'hidden' }}
-      >
-        엑셀파일 업로드
-      </Button>
-      <input
-        ref={inputFef}
-        onChange={(event) => handleChangeFile(event.target.files?.[0])}
-        id="upload"
-        type="file"
-        hidden
-        accept=".xlsx,.xls,.csv"
-      />
-    </Box>
+    <FileUploadInput ref={inputFef} handleChangeFile={handleChangeFile} title="엑셀파일 업로드" />
   );
 };
 

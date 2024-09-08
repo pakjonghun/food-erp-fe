@@ -48,18 +48,21 @@ const ProductGrid = () => {
       field: 'name',
       headerName: '제품이름',
       flex: 1,
+      minWidth: 300,
     },
     {
       field: 'code',
       headerName: '제품코드',
       minWidth: 200,
       maxWidth: 400,
+      flex: 0.4,
     },
     {
       field: 'wonPrice',
       headerName: '원가',
       minWidth: 200,
       maxWidth: 400,
+      flex: 0.5,
     },
   ];
 
