@@ -1,5 +1,6 @@
 'use client';
 
 export default function myImageLoader({ src, width, quality }) {
-  return `${window.location.origin}/${src}?w=${width}&q=${quality || 75}`;
+  console.log(`http://localhost:3000${src}?w=${width}&q=${quality || 75}`);
+  return `http://localhost:3000${src}?w=${width}&q=${quality || 75}`;
 }
