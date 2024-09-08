@@ -1,11 +1,10 @@
-import axios from 'axios';
 import { Instance } from './instance';
 
-export const uploadExcelFile = (serviceName: string, file: File) => {
+export const uploadExcelFile = async (serviceName: string, file: File) => {
   try {
     const formData = new FormData();
     formData.append('file', file);
-    Instance.post(`/upload/${serviceName}`, formData, {
+    await Instance.post(`/upload/${serviceName}`, formData, {
       headers: {
         'content-type': 'multipart/form-data',
       },

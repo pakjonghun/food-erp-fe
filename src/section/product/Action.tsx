@@ -17,9 +17,10 @@ const ExcelUpload = () => {
     if (!inputFile) {
       return;
     }
-    const err = (await uploadExcelFile('product', inputFile)) as AxiosError;
+    const err = (await uploadExcelFile('product', inputFile)) as AxiosError<{ message: string }>;
     if (err) {
-      setSnack({ message: err.message ?? '', title: err.name ?? '', variant: 'error' });
+      const message = err.response?.data?.message || err.message;
+      setSnack({ message: message ?? '', title: err.name ?? '', variant: 'error' });
     } else {
       setSnack({ message: '파일 업로드가 완료되었습니다.' });
 
@@ -53,7 +54,7 @@ const ExcelUpload = () => {
         id="upload"
         type="file"
         hidden
-        accept=".xlsx,.xls"
+        accept=".xlsx,.xls,.csv"
       />
     </Box>
   );

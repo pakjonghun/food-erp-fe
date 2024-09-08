@@ -2,35 +2,35 @@ import * as React from 'react';
 import {
   DataGrid,
   GridColDef,
-  gridSortedRowIdsSelector,
+  gridExpandedSortedRowIdsSelector,
   GridToolbarQuickFilter,
   useGridApiContext,
-  useGridApiRef,
 } from '@mui/x-data-grid';
 import { Button, Stack, Typography } from '@mui/material';
 import Iconify from '@/components/icon/Iconify';
 import { useProducts } from '@/graphql/hooks/product/products';
 import ExcelUpload from './Action';
 
-const getUnfilteredRows = (apiRef: any) => gridSortedRowIdsSelector(apiRef);
+const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(apiRef);
 
 const ProductGrid = () => {
   const { data, loading } = useProducts();
   // const totalCount = data?.products.totalCount;
   const rows = data?.products.data ?? [];
-  const apiRef = useGridApiRef();
-
-  const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
 
   const CustomToolBar = () => {
     const apiRef = useGridApiContext();
+    const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
     return (
       <Stack sx={{ p: 3 }} direction="column" gap={2}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" gap={1}>
           <Typography sx={{ mb: 2 }}>제품 백데이터</Typography>
           <Stack direction="row" alignItems="center" gap={1}>
             <ExcelUpload />
-            <Button startIcon={<Iconify icon="ic:baseline-download" width={18} />}>
+            <Button
+              onClick={() => handleExport({ getRowsToExport: getFilteredRow })}
+              startIcon={<Iconify icon="ic:baseline-download" width={18} />}
+            >
               엑셀다운로드
             </Button>
           </Stack>
