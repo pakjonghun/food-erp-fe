@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['best5997.com'],
+    loader: 'custom',
+    loaderFile: './loader.js',
   },
 };
 
