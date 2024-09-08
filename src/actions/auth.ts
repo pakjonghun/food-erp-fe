@@ -10,7 +10,7 @@ const AUTH_MUTATION = gql`
 `;
 
 export const auth = async (token: string) => {
-  console.log('auth api cookie', token);
+  console.log('auth api token', token);
   try {
     const result = await client.mutate({
       mutation: AUTH_MUTATION,
@@ -21,7 +21,7 @@ export const auth = async (token: string) => {
         },
       },
     });
-    console.log('result', result, `${AUTH_TOKEN}=${token}`);
+    console.log('auth api result', result, `${AUTH_TOKEN}=${token}`);
     return result.data?.auth;
   } catch (err) {
     console.error('erro', err);

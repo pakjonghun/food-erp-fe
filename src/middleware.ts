@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isPublic = publicPathList.some((p) => path.indexOf(p) != -1);
   const cookie = request.cookies.get(AUTH_TOKEN);
-  console.log('cookie', cookie);
+  console.log('미들웨어 cookie', cookie);
   if (!cookie && !isPublic) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
