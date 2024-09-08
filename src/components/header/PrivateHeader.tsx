@@ -22,7 +22,7 @@ const PrivateHeader = () => {
   };
 
   const logout = async () => {
-    const res = await fetch('/local/logout');
+    const res = await fetch('/local/logout', { credentials: 'include' });
     if (!res.ok) {
       setSnack({ variant: 'error', message: '로그인이 실패했습니다.' });
       return;
