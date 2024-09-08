@@ -22,7 +22,7 @@ const PrivateHeader = () => {
   };
 
   const logout = async () => {
-    const res = await fetch('/api/logout');
+    const res = await fetch('/local/logout');
     if (!res.ok) {
       setSnack({ variant: 'error', message: '로그인이 실패했습니다.' });
       return;
@@ -31,6 +31,7 @@ const PrivateHeader = () => {
     const redirectURL = result.redirect;
     if (redirectURL) {
       setSnack({ message: '안녕히 가세요.' });
+      console.log(redirectURL);
       router.replace(redirectURL);
     }
   };

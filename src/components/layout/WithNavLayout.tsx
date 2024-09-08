@@ -7,7 +7,6 @@ import { navExpand, navOpen } from '@/store/nav';
 import { useTheme } from '@emotion/react';
 import Iconify from '../icon/Iconify';
 import Image from 'next/image';
-import logo from '@/assets/images/logo.png';
 
 interface Props {
   nav: ReactNode;
@@ -74,7 +73,13 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
           }}
         >
           {isNavExpand && (
-            <Image alt="logo" src={logo} width={70} style={{ marginRight: 'auto' }} />
+            <Image
+              height={20}
+              alt="logo"
+              src={'/assets/images/logo.png'}
+              width={70}
+              style={{ marginRight: 'auto' }}
+            />
           )}
           <IconButton onClick={handleExpandNav}>
             <Iconify icon={isNavExpand ? 'mingcute:left-line' : 'mingcute:right-line'} width={18} />

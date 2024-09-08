@@ -3,7 +3,6 @@
 import { AppBar, styled, Toolbar } from '@mui/material';
 import MainTitle from './base/MainTitle';
 import Image from 'next/image';
-import logo from '@/assets/images/logo.png';
 
 const LoginHeader = () => {
   return (
@@ -19,7 +18,13 @@ const LoginHeader = () => {
           p: '8px 12px',
         }}
       >
-        <Image src={logo} alt="logo" width={70} style={{ marginRight: '20px' }} />
+        <Image
+          height={20}
+          src={'/assets/images/logo.png'}
+          alt="logo"
+          width={70}
+          style={{ marginRight: '20px' }}
+        />
         <MainTitle />
       </Toolbar>
     </CustomAppBar>
