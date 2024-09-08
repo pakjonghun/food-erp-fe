@@ -7,7 +7,6 @@ import MuiThemeProvider from '@/providers/ThemeProvider';
 import SnackProvider from '@/context/snackContext/SnackProvider';
 import LocalizationProvider from '@/providers/LocalizationProvider';
 import './globals.css';
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
