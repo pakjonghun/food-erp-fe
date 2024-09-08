@@ -8,6 +8,11 @@ export async function middleware(request: NextRequest) {
   const isPublic = publicPathList.some((p) => path.indexOf(p) != -1);
   const cookie = request.cookies.get(AUTH_TOKEN);
   console.log('미들웨어 cookie', cookie);
+
+  if (isPublic && !cookie) {
+    return;
+  }
+
   if (!cookie && !isPublic) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
