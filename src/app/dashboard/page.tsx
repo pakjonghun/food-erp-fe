@@ -44,7 +44,7 @@ const DashboardPage = () => {
           />
         </Box>
       </Box>
-      <Box sx={{ height: 3, flexGrow: 1 }}>
+      <Box sx={{ height: 3, flexGrow: 1, pb: 3 }}>
         <ProductSection />
       </Box>
     </Box>

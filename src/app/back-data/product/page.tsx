@@ -7,6 +7,7 @@ const BackDataPage = () => {
       sx={{
         flexGrow: 1,
         height: 3,
+        pb: 3,
       }}
     >
       <ProductSection />
