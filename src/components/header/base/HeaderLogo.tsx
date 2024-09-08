@@ -11,8 +11,8 @@ const HeaderLogo = () => {
   return isNavExpand ? (
     <></>
   ) : isNavOpen ? (
-    <img
-      src={'/src/assets/images/logo.png'}
+    <Image
+      src={'/assets/images/logo.png'}
       alt="logo"
       width={70}
       height={20}

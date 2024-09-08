@@ -74,10 +74,10 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
           }}
         >
           {isNavExpand && (
-            <img
+            <Image
               height={20}
               alt="logo"
-              src={'/src/assets/images/logo.png'}
+              src={'/assets/images/logo.png'}
               width={70}
               style={{ marginRight: 'auto' }}
             />

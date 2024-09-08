@@ -19,9 +19,9 @@ const LoginHeader = () => {
           p: '8px 12px',
         }}
       >
-        <img
+        <Image
           height={20}
-          src={'/src/assets/images/logo.png'}
+          src={'/assets/images/logo.png'}
           alt="logo"
           width={70}
           style={{ marginRight: '20px' }}
