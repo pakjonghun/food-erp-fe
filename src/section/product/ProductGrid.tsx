@@ -1,50 +1,35 @@
 import * as React from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { Stack } from '@mui/material';
 import Iconify from '@/components/icon/Iconify';
+import { useProducts } from '@/graphql/hooks/product/products';
 
 const ProductGrid = () => {
-  const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 90, editable: false },
-    {
-      field: 'firstName',
-      headerName: 'First name',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'lastName',
-      headerName: 'Last name',
-      width: 150,
-      editable: true,
-    },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 110,
-      editable: true,
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      // valueGetter: (value: any, row: any) => `${row.firstName || ''} ${row.lastName || ''}`,
-    },
-  ];
+  const { data, loading } = useProducts();
+  const totalCount = data?.products.totalCount;
+  const rows = data?.products.data ?? [];
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  const columns: GridColDef[] = [
+    {
+      field: 'name',
+      headerName: '제품이름',
+      flex: 1,
+      editable: true,
+    },
+    {
+      field: 'code',
+      headerName: '제품코드',
+      minWidth: 200,
+      maxWidth: 400,
+      editable: true,
+    },
+    {
+      field: 'wonPrice',
+      headerName: '원가',
+      minWidth: 200,
+      maxWidth: 400,
+      editable: true,
+    },
   ];
 
   const EmptyRow = () => {
@@ -72,21 +57,26 @@ const ProductGrid = () => {
   };
 
   return (
-    <div style={{ width: '100%' }}>
-      <div style={{ height: 300, width: '100%' }}>
-        <DataGrid
-          //   loading
-          disableColumnMenu={true}
-          slots={{
-            loadingOverlay: LoadingRow,
-            noRowsOverlay: EmptyRow,
-          }}
-          autoHeight
-          rows={rows}
-          columns={columns}
-        />
-      </div>
-    </div>
+    <DataGrid
+      getRowHeight={() => 'auto'}
+      hideFooter
+      hideFooterPagination
+      loading={loading}
+      disableColumnMenu={true}
+      slotProps={{
+        toolbar: {
+          showQuickFilter: true,
+        },
+      }}
+      slots={{
+        loadingOverlay: LoadingRow,
+        noRowsOverlay: EmptyRow,
+        toolbar: GridToolbar,
+      }}
+      //   autoHeight
+      rows={rows}
+      columns={columns}
+    />
   );
 };
 

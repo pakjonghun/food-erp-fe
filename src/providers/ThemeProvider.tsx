@@ -3,7 +3,7 @@
 import { FC, ReactNode } from 'react';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import theme from '@/app/_theme/theme';
+import theme from '@/theme/theme';
 
 interface Props {
   children: ReactNode;

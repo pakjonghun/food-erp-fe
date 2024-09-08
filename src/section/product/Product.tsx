@@ -22,9 +22,7 @@ const ProductSection = () => {
         targetKeyword={targetKeyword}
         setTargetKeyword={setTargetKeyword}
       />
-      <Box sx={{ width: '100%', height: 400 }}>
-        <ProductGrid />
-      </Box>
+      <ProductGrid />
     </>
   );
 };

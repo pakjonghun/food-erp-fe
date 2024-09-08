@@ -3,17 +3,11 @@ import { Box, Card } from '@mui/material';
 
 const DashboardPage = () => {
   return (
-    <Box sx={{ flex: '1 1 auto' }}>
+    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', py: 10 }}>
       <Card
         sx={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 3,
-          p: 4,
-          bgcolor: 'pink',
-          border: '1px solid grey',
-          borderRadius: 10,
+          flexGrow: 1,
+          height: 2,
         }}
       >
         <ProductSection />

@@ -11,11 +11,7 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-const MuiDataGrid: Components<Theme>['MuiDataGrid'] = {
-  styleOverrides: {
-    root: {},
-  },
-};
+const MuiDataGrid: Components<Theme>['MuiDataGrid'] = {};
 
 const MuiInputBase: Components<Theme>['MuiInputBase'] = {
   defaultProps: {

@@ -5,7 +5,6 @@ const BackDataPage = () => {
   return (
     <Box
       sx={{
-        bgcolor: 'pink',
         p: 3,
         flex: '1 1 auto',
         display: 'flex',
