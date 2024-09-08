@@ -14,7 +14,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useLogin } from '@/graphql/hooks/login';
+import { useLogin } from '@/graphql/hooks/auth/login';
 import { Controller, useForm } from 'react-hook-form';
 import Form from '@/components/form/Form';
 import { loginInputSchema, LoginInputType } from './validate';
