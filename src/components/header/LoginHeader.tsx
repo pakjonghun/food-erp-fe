@@ -19,7 +19,13 @@ const LoginHeader = () => {
           p: '8px 12px',
         }}
       >
-        <Image height={20} src={logo} alt="logo" width={70} style={{ marginRight: '20px' }} />
+        <img
+          height={20}
+          src={'/src/assets/images/logo.png'}
+          alt="logo"
+          width={70}
+          style={{ marginRight: '20px' }}
+        />
         <MainTitle />
       </Toolbar>
     </CustomAppBar>

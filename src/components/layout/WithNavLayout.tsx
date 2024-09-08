@@ -74,7 +74,13 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
           }}
         >
           {isNavExpand && (
-            <Image height={20} alt="logo" src={logo} width={70} style={{ marginRight: 'auto' }} />
+            <img
+              height={20}
+              alt="logo"
+              src={'/src/assets/images/logo.png'}
+              width={70}
+              style={{ marginRight: 'auto' }}
+            />
           )}
           <IconButton onClick={handleExpandNav}>
             <Iconify icon={isNavExpand ? 'mingcute:left-line' : 'mingcute:right-line'} width={18} />

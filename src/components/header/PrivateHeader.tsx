@@ -31,7 +31,6 @@ const PrivateHeader = () => {
     const redirectURL = result.redirect;
     if (redirectURL) {
       setSnack({ message: '안녕히 가세요.' });
-      console.log(redirectURL);
       router.replace(redirectURL);
     }
   };

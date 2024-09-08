@@ -11,7 +11,13 @@ const HeaderLogo = () => {
   return isNavExpand ? (
     <></>
   ) : isNavOpen ? (
-    <Image src={logo} alt="logo" width={70} height={20} style={{ marginRight: '20px' }} />
+    <img
+      src={'/src/assets/images/logo.png'}
+      alt="logo"
+      width={70}
+      height={20}
+      style={{ marginRight: '20px' }}
+    />
   ) : (
     <></>
   );
