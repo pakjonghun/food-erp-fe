@@ -20,7 +20,7 @@ export const downloadParsedExcelFile = async (clientName: ClientName, file: File
   try {
     const formData = new FormData();
     formData.append('file', file);
-    const result = await Instance.post(`/api//upload/edit-order/${clientName}`, formData, {
+    const result = await Instance.post(`/api/upload/edit-order/${clientName}`, formData, {
       headers: {
         'content-type': 'multipart/form-data',
       },

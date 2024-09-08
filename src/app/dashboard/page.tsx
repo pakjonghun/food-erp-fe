@@ -13,7 +13,6 @@ const DashboardPage = () => {
   const setSnack = useSnack();
 
   const handleChangeFile = async (clientName: ClientName, inputFile?: File) => {
-    console.log('working,clientName', clientName);
     if (!inputFile) {
       return;
     }
