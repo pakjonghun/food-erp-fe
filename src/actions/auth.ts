@@ -10,6 +10,7 @@ const AUTH_MUTATION = gql`
 `;
 
 export const auth = async (token: string) => {
+  console.log('auth api cookie', token);
   try {
     const result = await client.mutate({
       mutation: AUTH_MUTATION,
