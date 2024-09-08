@@ -3,12 +3,19 @@
 import { Roboto } from 'next/font/google';
 import { Components, createTheme } from '@mui/material/styles';
 import { alpha, Theme } from '@mui/material';
+import type {} from '@mui/x-data-grid/themeAugmentation';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
   display: 'swap',
 });
+
+const MuiDataGrid: Components<Theme>['MuiDataGrid'] = {
+  styleOverrides: {
+    root: {},
+  },
+};
 
 const MuiInputBase: Components<Theme>['MuiInputBase'] = {
   defaultProps: {
@@ -151,6 +158,7 @@ const theme = createTheme({
     MuiMenuItem,
     MuiListItemText,
     MuiTextField,
+    MuiDataGrid,
   },
 });
 

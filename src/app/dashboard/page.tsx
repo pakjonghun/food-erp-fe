@@ -6,6 +6,7 @@ const DashboardPage = () => {
     <Box sx={{ flex: '1 1 auto' }}>
       <Card
         sx={{
+          height: '100%',
           display: 'flex',
           flexDirection: 'column',
           gap: 3,

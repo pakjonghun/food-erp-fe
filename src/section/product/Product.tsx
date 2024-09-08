@@ -5,6 +5,7 @@ import Action from './Action';
 import Search from './Search';
 import { useState } from 'react';
 import { OrderNumber } from '@/type';
+import ProductGrid from './ProductGrid';
 
 const ProductSection = () => {
   const [keyword, setKeyword] = useState('');
@@ -21,7 +22,9 @@ const ProductSection = () => {
         targetKeyword={targetKeyword}
         setTargetKeyword={setTargetKeyword}
       />
-      <Box sx={{ width: '100%', height: 400 }}></Box>
+      <Box sx={{ width: '100%', height: 400 }}>
+        <ProductGrid />
+      </Box>
     </>
   );
 };

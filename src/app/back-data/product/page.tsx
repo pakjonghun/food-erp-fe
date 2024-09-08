@@ -3,7 +3,16 @@ import ProductSection from '@/section/product/Product';
 
 const BackDataPage = () => {
   return (
-    <Box sx={{ p: 3, flex: '1 1 auto', display: 'flex', flexDirection: 'column', gap: 3 }}>
+    <Box
+      sx={{
+        bgcolor: 'pink',
+        p: 3,
+        flex: '1 1 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 3,
+      }}
+    >
       <ProductSection />
     </Box>
   );
