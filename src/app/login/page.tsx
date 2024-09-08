@@ -46,7 +46,7 @@ const LoginPage = () => {
       },
       onCompleted: () => {
         setSnack({ message: `${getValues('id')}님 환영합니다.`, variant: 'success' });
-        router.push('/dashboard');
+        router.replace('/dashboard');
       },
       onError: (e) => {
         const msg = e.message;
