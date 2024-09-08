@@ -2,26 +2,45 @@ import * as React from 'react';
 import {
   DataGrid,
   GridColDef,
-  gridQuickFilterValuesSelector,
+  gridSortedRowIdsSelector,
   GridToolbarQuickFilter,
+  useGridApiContext,
   useGridApiRef,
 } from '@mui/x-data-grid';
-import { Stack } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import Iconify from '@/components/icon/Iconify';
 import { useProducts } from '@/graphql/hooks/product/products';
-import Search from './Search';
+import ExcelUpload from './Action';
+
+const getUnfilteredRows = (apiRef: any) => gridSortedRowIdsSelector(apiRef);
 
 const ProductGrid = () => {
-  const [keyword, setKeyword] = React.useState('');
-  const [targetKeyword, setTargetKeyword] = React.useState('name');
-
   const { data, loading } = useProducts();
-  const totalCount = data?.products.totalCount;
+  // const totalCount = data?.products.totalCount;
   const rows = data?.products.data ?? [];
   const apiRef = useGridApiRef();
 
-  const filterByKeyword = () => {
-    const filteredRowList = gridQuickFilterValuesSelector(apiRef);
+  const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
+
+  const CustomToolBar = () => {
+    const apiRef = useGridApiContext();
+    return (
+      <Stack sx={{ p: 3 }} direction="column" gap={2}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" gap={1}>
+          <Typography sx={{ mb: 2 }}>제품 백데이터</Typography>
+          <Stack direction="row" alignItems="center" gap={1}>
+            <ExcelUpload />
+            <Button startIcon={<Iconify icon="ic:baseline-download" width={18} />}>
+              엑셀다운로드
+            </Button>
+          </Stack>
+        </Stack>
+
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
+          <GridToolbarQuickFilter variant="outlined" placeholder="검색단어 입력" label="검색" />
+        </Stack>
+      </Stack>
+    );
   };
 
   const columns: GridColDef[] = [
@@ -70,6 +89,7 @@ const ProductGrid = () => {
 
   return (
     <DataGrid
+      density="compact"
       loading={loading}
       hideFooter
       hideFooterPagination
@@ -77,11 +97,15 @@ const ProductGrid = () => {
       slotProps={{
         toolbar: {
           showQuickFilter: true,
+          printOptions: {
+            disableToolbarButton: true,
+          },
         },
       }}
       slots={{
         loadingOverlay: LoadingRow,
         noRowsOverlay: EmptyRow,
+        toolbar: CustomToolBar,
       }}
       rows={rows}
       columns={columns}

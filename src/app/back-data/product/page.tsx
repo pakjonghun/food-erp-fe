@@ -5,11 +5,8 @@ const BackDataPage = () => {
   return (
     <Box
       sx={{
-        p: 3,
-        flex: '1 1 auto',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 3,
+        flexGrow: 1,
+        height: 3,
       }}
     >
       <ProductSection />

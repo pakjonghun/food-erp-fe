@@ -1,17 +1,10 @@
 'use client';
 
-import Action from './Action';
-import Search from './Search';
-import { useState } from 'react';
+import { Box } from '@mui/material';
 import ProductGrid from './ProductGrid';
 
 const ProductSection = () => {
-  return (
-    <>
-      <Action />
-      <ProductGrid />
-    </>
-  );
+  return <ProductGrid />;
 };
 
 export default ProductSection;

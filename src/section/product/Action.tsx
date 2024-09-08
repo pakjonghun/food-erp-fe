@@ -6,9 +6,9 @@ import { useSnack } from '@/context/snackContext/SnackProvider';
 import { client } from '@/graphql/client/apolloClient';
 import { Box, Button } from '@mui/material';
 import { AxiosError } from 'axios';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
-const Action = () => {
+const ExcelUpload = () => {
   const inputFef = useRef<HTMLInputElement | null>(null);
 
   const setSnack = useSnack();
@@ -59,4 +59,4 @@ const Action = () => {
   );
 };
 
-export default Action;
+export default ExcelUpload;
