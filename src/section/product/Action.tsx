@@ -8,7 +8,7 @@ import { AxiosError } from 'axios';
 import { useRef } from 'react';
 
 const ExcelUpload = () => {
-  const inputFef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const setSnack = useSnack();
 
@@ -32,13 +32,13 @@ const ExcelUpload = () => {
       }, 1000);
     }
 
-    if (inputFef.current?.value) {
-      inputFef.current.value = '';
+    if (inputRef.current?.value) {
+      inputRef.current.value = '';
     }
   };
 
   return (
-    <FileUploadInput ref={inputFef} handleChangeFile={handleChangeFile} title="엑셀파일 업로드" />
+    <FileUploadInput ref={inputRef} handleChangeFile={handleChangeFile} title="엑셀파일 업로드" />
   );
 };
 
