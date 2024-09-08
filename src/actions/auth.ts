@@ -18,7 +18,7 @@ export const auth = async (token: string) => {
         },
       },
     });
-
+    console.log('result', result);
     return result.data?.auth;
   } catch (err) {
     console.error('erro', err);
