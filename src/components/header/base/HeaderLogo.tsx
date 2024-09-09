@@ -3,7 +3,6 @@
 import { navExpand, navOpen } from '@/store/nav';
 import { useReactiveVar } from '@apollo/client';
 import Image from 'next/image';
-import logo from '@/assets/images/logo.png';
 
 const HeaderLogo = () => {
   const isNavOpen = useReactiveVar(navOpen);

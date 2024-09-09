@@ -3,7 +3,6 @@
 import { AppBar, styled, Toolbar } from '@mui/material';
 import MainTitle from './base/MainTitle';
 import Image from 'next/image';
-import logo from '@/assets/images/logo.png';
 
 const LoginHeader = () => {
   return (

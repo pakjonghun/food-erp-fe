@@ -7,7 +7,6 @@ import { navExpand, navOpen } from '@/store/nav';
 import { useTheme } from '@emotion/react';
 import Iconify from '../icon/Iconify';
 import Image from 'next/image';
-import logo from '@/assets/images/logo.png';
 
 interface Props {
   nav: ReactNode;
