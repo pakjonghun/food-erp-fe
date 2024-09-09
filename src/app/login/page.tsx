@@ -60,12 +60,8 @@ const LoginPage = () => {
   return (
     <Stack
       sx={{
-        py: 20,
+        py: '10%',
         height: '100%',
-        px: {
-          md: 20,
-          xs: 10,
-        },
       }}
     >
       <Card
@@ -131,9 +127,9 @@ const LoginPage = () => {
                             position="end"
                           >
                             {showPassword ? (
-                              <Iconify icon="mdi:eye-lock" />
-                            ) : (
                               <Iconify icon="mdi:eye-lock-open" />
+                            ) : (
+                              <Iconify icon="mdi:eye-lock" />
                             )}
                           </InputAdornment>
                         ),
