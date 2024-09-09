@@ -1,12 +1,12 @@
 'use client';
 
+import { FC } from 'react';
 import { uploadExcelFile } from '@/actions/upload';
 import FileUploadInput from '@/components/input/FileUploadInput';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { client } from '@/graphql/client/apolloClient';
 import { SxProps } from '@mui/material';
 import { AxiosError } from 'axios';
-import { FC } from 'react';
 
 interface Props {
   sx?: SxProps;
