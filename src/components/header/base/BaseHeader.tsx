@@ -36,7 +36,7 @@ const BaseHeader: FC<Props> = ({ children }) => {
         }}
       >
         {isMdDown && (
-          <IconButton sx={{ mr: 5 }} onClick={handleClickToggleNav}>
+          <IconButton sx={{ mr: 3 }} onClick={handleClickToggleNav}>
             <Iconify icon="mdi:hamburger-menu" />
           </IconButton>
         )}
