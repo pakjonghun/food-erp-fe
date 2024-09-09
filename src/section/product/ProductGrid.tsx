@@ -23,11 +23,30 @@ const ProductGrid = () => {
     const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
     return (
       <Stack sx={{ p: 3 }} direction="column" gap={2}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" gap={1}>
+        <Stack
+          justifyContent="space-between"
+          gap={1}
+          sx={{
+            flexDirection: {
+              xs: 'column',
+              sm: 'row',
+            },
+          }}
+        >
           <Typography sx={{ mb: 2 }}>제품 백데이터</Typography>
-          <Stack direction="row" alignItems="center" gap={1}>
-            <ExcelUpload />
+          <Stack
+            alignItems="center"
+            gap={1}
+            sx={{
+              flexDirection: {
+                xs: 'column',
+                sm: 'row',
+              },
+            }}
+          >
+            <ExcelUpload sx={{ width: { xs: '100%', sm: 'auto' } }} />
             <Button
+              sx={{ width: { xs: '100%', sm: 'auto' } }}
               onClick={() => handleExport({ getRowsToExport: getFilteredRow })}
               startIcon={<Iconify icon="ic:baseline-download" width={18} />}
             >
@@ -37,7 +56,18 @@ const ProductGrid = () => {
         </Stack>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <GridToolbarQuickFilter variant="outlined" placeholder="검색단어 입력" label="검색" />
+          <GridToolbarQuickFilter
+            sx={{
+              width: {
+                xs: '100%',
+                sm: 'auto',
+              },
+              minWidth: 300,
+            }}
+            variant="outlined"
+            placeholder="검색단어 입력"
+            label="검색"
+          />
         </Stack>
       </Stack>
     );

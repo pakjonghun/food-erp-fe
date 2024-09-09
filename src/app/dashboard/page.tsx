@@ -35,12 +35,12 @@ const DashboardPage = () => {
           <FileUploadInput
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
             handleChangeFile={(file) => handleChangeFile('ume', file)}
-            title="우메종 엑셀파일 상품명 변경"
+            title="우메종"
           />
           <FileUploadInput
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
             handleChangeFile={(file) => handleChangeFile('ho', file)}
-            title="호제 엑셀파일 상품명 변경"
+            title="호제"
           />
         </Box>
       </Box>

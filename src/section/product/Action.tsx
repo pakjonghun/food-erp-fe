@@ -4,10 +4,15 @@ import { uploadExcelFile } from '@/actions/upload';
 import FileUploadInput from '@/components/input/FileUploadInput';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { client } from '@/graphql/client/apolloClient';
+import { SxProps } from '@mui/material';
 import { AxiosError } from 'axios';
-import { useRef } from 'react';
+import { FC, useRef } from 'react';
 
-const ExcelUpload = () => {
+interface Props {
+  sx?: SxProps;
+}
+
+const ExcelUpload: FC<Props> = ({ sx }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const setSnack = useSnack();
@@ -38,7 +43,12 @@ const ExcelUpload = () => {
   };
 
   return (
-    <FileUploadInput ref={inputRef} handleChangeFile={handleChangeFile} title="엑셀파일 업로드" />
+    <FileUploadInput
+      sx={sx}
+      ref={inputRef}
+      handleChangeFile={handleChangeFile}
+      title="엑셀파일 업로드"
+    />
   );
 };
 
