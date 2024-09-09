@@ -74,9 +74,19 @@ const LoginPage = () => {
           maxWidth: 480,
         }}
       >
-        <Alert severity="info">
+        {/* <Typography variant="overline">{`ID : ${account} / PW : ${account}`}</Typography> */}
+        <Alert
+          severity="info"
+          sx={{
+            py: {
+              xs: 0.6,
+              sm: 1,
+            },
+          }}
+        >
           <AlertTitle>테스트 계정</AlertTitle>
-          <Typography variant="overline">{`ID : ${account} / PW : ${account}`}</Typography>
+          <Typography component="p" variant="overline">{`ID : ${account}`}</Typography>
+          <Typography component="p" variant="overline">{`PW : ${account}`}</Typography>
         </Alert>
 
         <Typography sx={{ my: 2 }} variant="h5">
