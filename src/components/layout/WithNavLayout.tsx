@@ -82,7 +82,7 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
             pl: 1,
             justifyContent: {
               xs: 'flex-end',
-              sm: !isNavExpand ? 'center' : 'flex-end',
+              md: !isNavExpand ? 'center' : 'flex-end',
             },
             height: 'var(--header-height)',
           }}
