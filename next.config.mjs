@@ -4,13 +4,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_CLOUD_DOMAIN,
+        hostname: 'd3kouwd62bvdx0.cloudfront.net',
         port: '',
         pathname: '/**', // 모든 하위 경로 허용
       },
       {
         protocol: 'http',
-        hostname: process.env.NEXT_PUBLIC_CLOUD_DOMAIN,
+        hostname: 'd3kouwd62bvdx0.cloudfront.net',
         port: '',
         pathname: '/**', // 모든 하위 경로 허용
       },
