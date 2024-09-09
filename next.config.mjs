@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'best5997.com', // CloudFront 도메인 또는 외부 도메인
+        hostname: process.env.NEXT_PUBLIC_CLOUD_DOMAIN,
         port: '',
         pathname: '/**', // 모든 하위 경로 허용
       },
