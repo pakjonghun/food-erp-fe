@@ -6,7 +6,7 @@ import Iconify from '@/components/icon/Iconify';
 import FileUploadInput from '@/components/input/FileUploadInput';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import ProductSection from '@/section/product/Product';
-import { Box, Typography } from '@mui/material';
+import { Box, Card, Typography } from '@mui/material';
 import { AxiosError } from 'axios';
 
 const DashboardPage = () => {
@@ -28,9 +28,9 @@ const DashboardPage = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ p: 2 }}>
-        <Typography sx={{ mb: 1 }}>사방넷 파일 제품명 편집</Typography>
+    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: 2, m: 3 }}>
+      <Card sx={{ p: 2 }} variant="elevation" elevation={2}>
+        <Typography sx={{ mb: 1 }}>사방넷 엑셀파일 편집</Typography>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
           <FileUploadInput
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
@@ -43,10 +43,10 @@ const DashboardPage = () => {
             title="호제"
           />
         </Box>
-      </Box>
-      <Box sx={{ height: 3, flexGrow: 1, pb: 3 }}>
+      </Card>
+      <Card sx={{ height: 3, flexGrow: 1 }} variant="elevation" elevation={2}>
         <ProductSection />
-      </Box>
+      </Card>
     </Box>
   );
 };
