@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['d3kouwd62bvdx0.cloudfront.net', 'best5997.com'],
+    formats: ['image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -16,6 +16,7 @@ const nextConfig = {
         pathname: '/**', // 모든 하위 경로 허용
       },
     ],
+    unoptimized: true,
   },
 };
 
