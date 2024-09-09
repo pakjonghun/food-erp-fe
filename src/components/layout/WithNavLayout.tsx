@@ -31,7 +31,11 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
   }, [isDownMd]);
 
   const handleExpandNav = () => {
-    navExpand(!isNavExpand);
+    if (isDownMd) {
+      navOpen(!isNavOpen);
+    } else {
+      navExpand(!isNavExpand);
+    }
   };
 
   const handleCloseMenu = () => {
@@ -39,10 +43,16 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
   };
 
   return (
-    <Box component="main" sx={{ height: '100dvh', display: 'flex' }}>
+    <Box
+      component="main"
+      sx={{
+        height: '100dvh',
+        display: 'flex',
+      }}
+    >
       <Drawer
+        variant={isDownMd ? 'temporary' : 'permanent'}
         onClose={handleCloseMenu}
-        variant={'persistent'}
         anchor="left"
         open={isNavOpen}
         component="nav"
@@ -59,8 +69,10 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
           },
         }}
         sx={{
-          position: 'fixed',
-          zIndex: (theme) => theme.zIndex.appBar + 1,
+          width: {
+            xs: isNavOpen ? 'var(--nav-width)' : 0,
+            md: 0,
+          },
         }}
       >
         <Stack
@@ -68,7 +80,10 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
           direction="row"
           sx={{
             pl: 1,
-            justifyContent: !isNavExpand ? 'center' : 'flex-end',
+            justifyContent: {
+              xs: 'flex-end',
+              sm: !isNavExpand ? 'center' : 'flex-end',
+            },
             height: 'var(--header-height)',
           }}
         >

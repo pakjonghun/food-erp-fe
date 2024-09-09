@@ -23,6 +23,8 @@ const MiniNavMenu: FC<Props> = ({ item }) => {
     setOpen(false);
   };
 
+  const isLink = item.type == 'link';
+
   return (
     <>
       <ListItemButton
@@ -30,8 +32,7 @@ const MiniNavMenu: FC<Props> = ({ item }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         sx={{ height: '44px' }}
-        LinkComponent={Link}
-        href={item.path}
+        href={isLink ? item.path : ''}
         disableRipple
       >
         <Tooltip title={item.label}>

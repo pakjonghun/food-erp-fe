@@ -36,7 +36,7 @@ const BaseHeader: FC<Props> = ({ children }) => {
         }}
       >
         {isMdDown && (
-          <IconButton onClick={handleClickToggleNav}>
+          <IconButton sx={{ mr: 5 }} onClick={handleClickToggleNav}>
             <Iconify icon="mdi:hamburger-menu" />
           </IconButton>
         )}
@@ -56,10 +56,8 @@ const CustomAppBar = styled(AppBar)(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   flexShrink: 0,
-  borderBottom: '1px solid',
   borderColor: theme.palette.divider,
   background: theme.palette.background.paper,
-  zIndex: theme.zIndex.drawer + 1,
   flex: '0 0  auto',
   boxShadow: theme.shadows[0],
 }));

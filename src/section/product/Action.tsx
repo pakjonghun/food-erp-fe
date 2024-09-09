@@ -6,15 +6,13 @@ import { useSnack } from '@/context/snackContext/SnackProvider';
 import { client } from '@/graphql/client/apolloClient';
 import { SxProps } from '@mui/material';
 import { AxiosError } from 'axios';
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 
 interface Props {
   sx?: SxProps;
 }
 
 const ExcelUpload: FC<Props> = ({ sx }) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
   const setSnack = useSnack();
 
   const handleChangeFile = async (inputFile?: File) => {
@@ -36,20 +34,9 @@ const ExcelUpload: FC<Props> = ({ sx }) => {
         client.cache.gc();
       }, 1000);
     }
-
-    if (inputRef.current?.value) {
-      inputRef.current.value = '';
-    }
   };
 
-  return (
-    <FileUploadInput
-      sx={sx}
-      ref={inputRef}
-      handleChangeFile={handleChangeFile}
-      title="엑셀파일 업로드"
-    />
-  );
+  return <FileUploadInput sx={sx} handleChangeFile={handleChangeFile} title="엑셀파일 업로드" />;
 };
 
 export default ExcelUpload;

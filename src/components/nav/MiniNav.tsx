@@ -1,6 +1,5 @@
-import { ListItemButton, ListItemIcon, MenuList, Tooltip } from '@mui/material';
+import { MenuList } from '@mui/material';
 import { navList } from './constants';
-import Link from 'next/link';
 import MiniNavMenu from './MiniNavMenu';
 
 const MiniNav = () => {
