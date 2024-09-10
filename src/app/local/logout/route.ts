@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { AUTH_TOKEN } from '@/constants/auth';
 
 export async function GET(request: NextRequest) {
-  console.log('cookie', request.cookies.get(AUTH_TOKEN));
+  console.log('call logout cookie', request.cookies.get(AUTH_TOKEN));
   if (!request.cookies.get(AUTH_TOKEN)) {
     return NextResponse.json(
       { message: '인증되지 않은 요청입니다.' },
@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
 
   const response = NextResponse.json({ redirect: '/login' });
   response.cookies.set(AUTH_TOKEN, '', {
+    expires: new Date(0),
     maxAge: -1,
     path: '/',
   });

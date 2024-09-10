@@ -22,6 +22,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Iconify from '@/components/icon/Iconify';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
+import Error from 'next/error';
+import { AxiosError } from 'axios';
+import { ApolloError } from '@apollo/client';
 
 const LoginPage = () => {
   const account = 'admin@admin.com';
@@ -39,22 +42,22 @@ const LoginPage = () => {
 
   const setSnack = useSnack();
   const [login, { loading }] = useLogin();
-  const onSubmit = (variables: LoginInputType) => {
-    login({
-      variables: {
-        loginInput: variables,
-      },
-      onCompleted: () => {
-        setSnack({ message: `${getValues('id')}님 환영합니다.`, variant: 'success' });
-        router.replace('/dashboard');
-      },
-      onError: (e) => {
-        const msg = e.message;
-        const name = e.name;
-        if (!msg && !name) return;
-        setSnack({ title: name ?? '오류', message: e.message, variant: 'error' });
-      },
-    });
+  const onSubmit = async (variables: LoginInputType) => {
+    try {
+      await login({
+        variables: {
+          loginInput: variables,
+        },
+      });
+      setSnack({ message: `${getValues('id')}님 환영합니다.`, variant: 'success' });
+      router.replace('/dashboard');
+    } catch (err) {
+      const e = err as ApolloError;
+      const msg = e.message;
+      const name = e.name;
+      if (!msg && !name) return;
+      setSnack({ title: name ?? '오류', message: e.message, variant: 'error' });
+    }
   };
 
   return (
