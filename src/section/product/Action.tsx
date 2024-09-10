@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { uploadExcelFile } from '@/actions/upload';
 import FileUploadInput from '@/components/input/FileUploadInput';
 import { useSnack } from '@/context/snackContext/SnackProvider';
@@ -14,11 +14,13 @@ interface Props {
 
 const ExcelUpload: FC<Props> = ({ sx }) => {
   const setSnack = useSnack();
+  const [loading, setLoading] = useState(false);
 
   const handleChangeFile = async (inputFile?: File) => {
     if (!inputFile) {
       return;
     }
+    setLoading(true);
     const err = (await uploadExcelFile('product', inputFile)) as AxiosError<{ message: string }>;
     if (err) {
       const message = err.response?.data?.message || err.message;
@@ -32,11 +34,19 @@ const ExcelUpload: FC<Props> = ({ sx }) => {
           fieldName: 'products',
         });
         client.cache.gc();
+        setLoading(true);
       }, 1000);
     }
   };
 
-  return <FileUploadInput sx={sx} handleChangeFile={handleChangeFile} title="엑셀파일 업로드" />;
+  return (
+    <FileUploadInput
+      loading={loading}
+      sx={sx}
+      handleChangeFile={handleChangeFile}
+      title="엑셀파일 업로드"
+    />
+  );
 };
 
 export default ExcelUpload;

@@ -5,7 +5,7 @@ export const uploadExcelFile = async (serviceName: string, file: File) => {
   try {
     const formData = new FormData();
     formData.append('file', file);
-    await Instance.post(`/api/upload/${serviceName}`, formData, {
+    await Instance.post(`/upload/${serviceName}`, formData, {
       headers: {
         'content-type': 'multipart/form-data',
       },
@@ -20,7 +20,7 @@ export const downloadParsedExcelFile = async (clientName: ClientName, file: File
   try {
     const formData = new FormData();
     formData.append('file', file);
-    const result = await Instance.post(`/api/upload/edit-order/${clientName}`, formData, {
+    const result = await Instance.post(`/upload/edit-order/${clientName}`, formData, {
       headers: {
         'content-type': 'multipart/form-data',
       },
@@ -34,6 +34,7 @@ export const downloadParsedExcelFile = async (clientName: ClientName, file: File
     document.body.appendChild(link);
     link.click();
     link.remove();
+    console.log('result : ', result);
   } catch (err) {
     console.error(err);
     return err;

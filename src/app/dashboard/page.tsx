@@ -6,25 +6,34 @@ import Iconify from '@/components/icon/Iconify';
 import FileUploadInput from '@/components/input/FileUploadInput';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import ProductSection from '@/section/product/Product';
-import { Box, Card, Typography } from '@mui/material';
+import { Box, Card, CircularProgress, Typography } from '@mui/material';
 import { AxiosError } from 'axios';
+import { useState } from 'react';
 
 const DashboardPage = () => {
   const setSnack = useSnack();
+  const [umeLoading, setUmeLoading] = useState(false);
+  const [hoLoading, setHoLoading] = useState(false);
 
   const handleChangeFile = async (clientName: ClientName, inputFile?: File) => {
     if (!inputFile) {
       return;
     }
+
+    const isUme = clientName == 'ume';
+    const setLoadingFunc = isUme ? setUmeLoading : setHoLoading;
+    setLoadingFunc(true);
     const err = (await downloadParsedExcelFile(clientName, inputFile)) as AxiosError<{
       message: string;
     }>;
     if (err) {
+      console.log('err : ', err);
       const message = err.response?.data?.message || err.message;
       setSnack({ message: message ?? '', title: err.name ?? '', variant: 'error' });
     } else {
       setSnack({ message: '엑셀파일 수정이 완료되었습니다.' });
     }
+    setLoadingFunc(false);
   };
 
   return (
@@ -33,11 +42,15 @@ const DashboardPage = () => {
         <Typography sx={{ mb: 1 }}>사방넷 엑셀파일 편집</Typography>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 1 }}>
           <FileUploadInput
+            loading={umeLoading}
+            onlyExcel
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
             handleChangeFile={(file) => handleChangeFile('ume', file)}
             title="우메종"
           />
           <FileUploadInput
+            loading={hoLoading}
+            onlyExcel
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
             handleChangeFile={(file) => handleChangeFile('ho', file)}
             title="호제"

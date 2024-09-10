@@ -1,17 +1,26 @@
 'use client';
 
 import { FC, ReactNode, useState } from 'react';
-import { Box, Button, SxProps } from '@mui/material';
+import { Box, Button, CircularProgress, SxProps } from '@mui/material';
 import Iconify from '../icon/Iconify';
 
 interface Props {
   title: string;
   handleChangeFile: (file?: File) => void;
+  onlyExcel?: boolean;
+  loading?: boolean;
   icon?: ReactNode;
   sx?: SxProps;
 }
 
-const FileUploadInput: FC<Props> = ({ title, handleChangeFile, icon, sx }) => {
+const FileUploadInput: FC<Props> = ({
+  title,
+  handleChangeFile,
+  icon,
+  sx,
+  onlyExcel = false,
+  loading,
+}) => {
   const [fileKey, setFileKey] = useState(Date.now());
 
   const handleUpload = async (file?: File) => {
@@ -25,7 +34,11 @@ const FileUploadInput: FC<Props> = ({ title, handleChangeFile, icon, sx }) => {
         htmlFor={title}
         component="label"
         startIcon={
-          icon ?? <Iconify icon="ic:baseline-upload" width={18} style={{ marginBottom: '1px' }} />
+          loading ? (
+            <CircularProgress size={18} />
+          ) : (
+            icon ?? <Iconify icon="ic:baseline-upload" width={18} style={{ marginBottom: '1px' }} />
+          )
         }
         sx={{ overflow: 'hidden', width: '100%' }}
       >
@@ -37,7 +50,7 @@ const FileUploadInput: FC<Props> = ({ title, handleChangeFile, icon, sx }) => {
         id={title}
         type="file"
         hidden
-        accept=".xlsx,.xls,.csv"
+        accept={onlyExcel ? '.xlsx,.xls' : '.xlsx,.xls,.csv'}
       />
     </Box>
   );
