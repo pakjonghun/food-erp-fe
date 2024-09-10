@@ -10,11 +10,13 @@ export async function GET(request: NextRequest) {
   }
 
   const response = NextResponse.json({ redirect: '/login' });
+  // 쿠키 삭제 설정
   response.cookies.set(AUTH_TOKEN, '', {
-    expires: new Date(0),
-    maxAge: -1,
+    expires: new Date(),
+    maxAge: 0,
     path: '/',
+    sameSite: 'lax',
+    secure: true,
   });
-
   return response;
 }

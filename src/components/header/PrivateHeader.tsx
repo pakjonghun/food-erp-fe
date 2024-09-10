@@ -26,10 +26,10 @@ const PrivateHeader = () => {
     const failAction = () => setSnack({ variant: 'error', message: '로그인이 실패했습니다.' });
     const result = await logout(failAction);
     const redirectURL = result.redirect;
-    // if (redirectURL) {
-    //   setSnack({ message: '안녕히 가세요.' });
-    //   router.replace(redirectURL);
-    // }
+    if (redirectURL) {
+      setSnack({ message: '안녕히 가세요.' });
+      router.replace(redirectURL);
+    }
   };
 
   const menuList = [
