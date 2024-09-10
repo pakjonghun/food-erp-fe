@@ -27,7 +27,6 @@ const DashboardPage = () => {
       message: string;
     }>;
     if (err) {
-      console.log('err : ', err);
       const message = err.response?.data?.message || err.message;
       setSnack({ message: message ?? '', title: err.name ?? '', variant: 'error' });
     } else {

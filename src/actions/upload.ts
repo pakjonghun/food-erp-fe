@@ -34,7 +34,6 @@ export const downloadParsedExcelFile = async (clientName: ClientName, file: File
     document.body.appendChild(link);
     link.click();
     link.remove();
-    console.log('result : ', result);
   } catch (err) {
     console.error(err);
     return err;

@@ -14,7 +14,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
   const isGranted = await auth(cookie?.value ?? '');
-  console.log('isGranted : ', isGranted);
 
   if (isPublic && isGranted) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
