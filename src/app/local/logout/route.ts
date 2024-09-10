@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { AUTH_TOKEN } from '@/constants/auth';
 
 export async function GET(request: NextRequest) {
+  console.log('cookie', request.cookies.get(AUTH_TOKEN));
   if (!request.cookies.get(AUTH_TOKEN)) {
     return NextResponse.json(
       { message: '인증되지 않은 요청입니다.' },

@@ -14,7 +14,6 @@ export const auth = async (token: string) => {
       mutation: AUTH_MUTATION,
       context: {
         headers: {
-          cookies: `${AUTH_TOKEN}=${token}`,
           cookie: `${AUTH_TOKEN}=${token}`,
         },
       },

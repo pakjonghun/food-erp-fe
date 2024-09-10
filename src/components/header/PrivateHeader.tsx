@@ -26,6 +26,7 @@ const PrivateHeader = () => {
   const handleLogout = async () => {
     const failAction = () => setSnack({ variant: 'error', message: '로그인이 실패했습니다.' });
     const result = await logout(failAction);
+    console.log('result', result);
     const redirectURL = result.redirect;
     if (redirectURL) {
       setSnack({ message: '안녕히 가세요.' });
