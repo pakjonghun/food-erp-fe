@@ -11,6 +11,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   if (!cookie && !isPublic) {
+    console.log('no cookie go login');
     return NextResponse.redirect(new URL('/login', request.url));
   }
   const isGranted = await auth(cookie?.value ?? '');
@@ -20,6 +21,7 @@ export async function middleware(request: NextRequest) {
   }
   if (!isPublic && !isGranted) {
     await logout(() => {});
+    console.log('not granted logout and  go login');
     return NextResponse.redirect(new URL('/login', request.url));
   }
 }
