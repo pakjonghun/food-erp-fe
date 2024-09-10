@@ -6,8 +6,9 @@ import { publicPathList } from './constants/route';
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isPublic = publicPathList.some((p) => path.indexOf(p) != -1);
+  const all = request.cookies.getAll();
   const cookie = request.cookies.get(AUTH_TOKEN);
-  console.log(path, 'cookie', cookie);
+  console.log(path, 'all cookies', all, 'cookie', cookie);
   return NextResponse.next();
   // console.log('미들웨어 cookie', cookie);
   // if (isPublic && !cookie) {
