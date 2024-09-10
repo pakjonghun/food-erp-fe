@@ -24,12 +24,7 @@ const PrivateHeader = () => {
 
   const handleLogout = async () => {
     const failAction = () => setSnack({ variant: 'error', message: '로그인이 실패했습니다.' });
-    const res = await fetch('/local/logout', { credentials: 'include' });
-    if (!res.ok) {
-      failAction;
-      return;
-    }
-    const result = await res.json();
+    const result = await logout(failAction);
     const redirectURL = result.redirect;
     if (redirectURL) {
       setSnack({ message: '안녕히 가세요.' });

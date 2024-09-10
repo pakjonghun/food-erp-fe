@@ -56,7 +56,7 @@ const DashboardPage = () => {
           />
         </Box>
       </Card>
-      <Card sx={{ height: 3, flexGrow: 1 }} variant="elevation" elevation={2}>
+      <Card sx={{ height: 3, flexGrow: 1, pb: 2 }} variant="elevation" elevation={2}>
         <ProductSection />
       </Card>
     </Box>

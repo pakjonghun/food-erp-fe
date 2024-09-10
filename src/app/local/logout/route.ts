@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
     path: '/',
     sameSite: 'lax',
     secure: true,
+    domain: '.best5997.com',
   });
   return response;
 }
