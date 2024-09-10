@@ -88,14 +88,6 @@ const MuiPaper: Components<Theme>['MuiPaper'] = {
   },
 };
 
-const MuiAlert: Components<Theme>['MuiAlert'] = {
-  styleOverrides: {
-    standard: ({ ownerState, theme }) => ({
-      colors: theme.palette.getContrastText,
-    }),
-  },
-};
-
 const MuiIconButton: Components<Theme>['MuiIconButton'] = {
   defaultProps: {
     disableRipple: true,
@@ -149,7 +141,6 @@ const theme = createTheme({
     MuiAppBar,
     MuiDrawer,
     MuiPaper,
-    MuiAlert,
     MuiIconButton,
     MuiMenuItem,
     MuiListItemText,
