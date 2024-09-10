@@ -6,7 +6,6 @@ import { IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Popover } f
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
-import { Irish_Grover } from 'next/font/google';
 import { logout } from '@/actions/auth';
 
 const PrivateHeader = () => {
@@ -27,10 +26,10 @@ const PrivateHeader = () => {
     const failAction = () => setSnack({ variant: 'error', message: '로그인이 실패했습니다.' });
     const result = await logout(failAction);
     const redirectURL = result.redirect;
-    if (redirectURL) {
-      setSnack({ message: '안녕히 가세요.' });
-      router.replace(redirectURL);
-    }
+    // if (redirectURL) {
+    //   setSnack({ message: '안녕히 가세요.' });
+    //   router.replace(redirectURL);
+    // }
   };
 
   const menuList = [
