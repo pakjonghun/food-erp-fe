@@ -6,6 +6,8 @@ import { IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Popover } f
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
+import { Irish_Grover } from 'next/font/google';
+import { logout } from '@/actions/auth';
 
 const PrivateHeader = () => {
   const router = useRouter();
@@ -21,13 +23,9 @@ const PrivateHeader = () => {
     setOpenMenu((prev) => !prev);
   };
 
-  const logout = async () => {
-    const res = await fetch('/local/logout', { credentials: 'include' });
-    if (!res.ok) {
-      setSnack({ variant: 'error', message: '로그인이 실패했습니다.' });
-      return;
-    }
-    const result = await res.json();
+  const handleLogout = async () => {
+    const failAction = () => setSnack({ variant: 'error', message: '로그인이 실패했습니다.' });
+    const result = await logout(failAction);
     const redirectURL = result.redirect;
     if (redirectURL) {
       setSnack({ message: '안녕히 가세요.' });
@@ -39,7 +37,7 @@ const PrivateHeader = () => {
     {
       lable: '로그아웃',
       icon: <Iconify sx={{ mr: 1 }} icon="material-symbols:logout" width={18} />,
-      callback: logout,
+      callback: handleLogout,
     },
   ];
 

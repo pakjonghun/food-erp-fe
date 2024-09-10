@@ -1,7 +1,6 @@
 import { AUTH_TOKEN } from '@/constants/auth';
 import { client } from '@/graphql/client/apolloClient';
 import { gql } from '@apollo/client';
-import { cookies } from 'next/headers';
 
 const AUTH_MUTATION = gql`
   mutation {
@@ -10,7 +9,6 @@ const AUTH_MUTATION = gql`
 `;
 
 export const auth = async (token: string) => {
-  console.log('auth api token', token);
   try {
     const result = await client.mutate({
       mutation: AUTH_MUTATION,
@@ -21,10 +19,19 @@ export const auth = async (token: string) => {
         },
       },
     });
-    console.log('auth api result', result, `${AUTH_TOKEN}=${token}`);
+
     return result.data?.auth;
   } catch (err) {
-    console.error('erro', err);
     return false;
   }
+};
+
+export const logout = async (failedAction: () => void) => {
+  const res = await fetch('/local/logout', { credentials: 'include' });
+  if (!res.ok) {
+    failedAction();
+    return;
+  }
+  const result = await res.json();
+  return result;
 };
