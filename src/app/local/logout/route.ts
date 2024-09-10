@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     path: '/',
     sameSite: 'lax',
     secure: true,
-    domain: '.best5997.com',
+    domain: `.${process.env.NEXT_PUBLIC_CLOUD_DOMAIN}`,
   });
   return response;
 }
