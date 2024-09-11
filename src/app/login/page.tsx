@@ -23,7 +23,6 @@ import Iconify from '@/components/icon/Iconify';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import Error from 'next/error';
-import { AxiosError } from 'axios';
 import { ApolloError } from '@apollo/client';
 
 const LoginPage = () => {
@@ -38,7 +37,12 @@ const LoginPage = () => {
     },
   });
 
-  const { control, getValues, handleSubmit } = methods;
+  const {
+    control,
+    formState: { errors },
+    getValues,
+    handleSubmit,
+  } = methods;
 
   const setSnack = useSnack();
   const [login, { loading }] = useLogin();
@@ -88,8 +92,8 @@ const LoginPage = () => {
           }}
         >
           <AlertTitle>테스트 계정</AlertTitle>
-          <Typography component="p" variant="overline">{`ID : ${account}`}</Typography>
-          <Typography component="p" variant="overline">{`PW : ${account}`}</Typography>
+          <Typography component="p" variant="body2">{`ID : ${account}`}</Typography>
+          <Typography component="p" variant="body2">{`PW : ${account}`}</Typography>
         </Alert>
 
         <Typography sx={{ my: 2 }} variant="h5">
@@ -154,6 +158,7 @@ const LoginPage = () => {
               />
             </FormGroup>
             <Button
+              disabled={loading || Object.keys(errors).length > 0}
               endIcon={loading ? <CircularProgress color="inherit" size={20} /> : <></>}
               type="submit"
               sx={{ mt: 2 }}

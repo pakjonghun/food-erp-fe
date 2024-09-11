@@ -31,6 +31,7 @@ const FileUploadInput: FC<Props> = ({
   return (
     <Box sx={{ display: 'flex', justifyContent: 'flex-end', ...sx }}>
       <Button
+        disabled={loading}
         htmlFor={title}
         component="label"
         startIcon={
