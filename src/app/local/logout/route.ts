@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AUTH_TOKEN } from '@/constants/auth';
+import { cookies } from 'next/headers';
 
 export async function GET(request: NextRequest) {
   if (!request.cookies.get(AUTH_TOKEN)) {
@@ -19,5 +20,6 @@ export async function GET(request: NextRequest) {
     secure: true,
     domain: `.${process.env.NEXT_PUBLIC_CLOUD_DOMAIN}`,
   });
+  console.log(cookies(), process.env.NEXT_PUBLIC_CLOUD_DOMAIN);
   return response;
 }
