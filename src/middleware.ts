@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { AUTH_TOKEN } from './constants/auth';
-import { auth, logout } from './actions/auth';
+import { auth } from './actions/auth';
 import { publicPathList } from './constants/route';
+import { logout } from './components/header/actions';
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
@@ -11,7 +12,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   if (!cookie && !isPublic) {
-    console.log('no cookie go login');
     return NextResponse.redirect(new URL('/login', request.url));
   }
   const isGranted = await auth(cookie?.value ?? '');
@@ -20,12 +20,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
   if (!isPublic && !isGranted) {
-    await logout(() => {});
-    console.log('not granted logout and  go login');
+    await logout();
     return NextResponse.redirect(new URL('/login', request.url));
   }
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
+  matcher: ['/((?!api|local|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
 };

@@ -6,7 +6,7 @@ import { IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Popover } f
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
-import { logout } from '@/actions/auth';
+import { logout } from './actions';
 
 const PrivateHeader = () => {
   const router = useRouter();
@@ -23,12 +23,17 @@ const PrivateHeader = () => {
   };
 
   const handleLogout = async () => {
-    const failAction = () => setSnack({ variant: 'error', message: '로그인이 실패했습니다.' });
-    const result = await logout(failAction);
-    const redirectURL = result.redirect;
-    if (redirectURL) {
-      setSnack({ message: '안녕히 가세요.' });
-      router.replace(redirectURL);
+    try {
+      const result = await logout();
+      if (result) {
+        setSnack({ message: '안녕히 가세요' });
+        router.replace('/login');
+      } else {
+        setSnack({ variant: 'error', message: '로그아웃이 실패했습니다.' });
+      }
+    } catch (err) {
+      console.error(err);
+      setSnack({ variant: 'error', message: '로그아웃이 실패했습니다.' });
     }
   };
 

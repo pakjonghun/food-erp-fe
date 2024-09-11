@@ -12,14 +12,16 @@ export async function GET(request: NextRequest) {
 
   const response = NextResponse.json({ redirect: '/login' });
   // 쿠키 삭제 설정
-  response.cookies.set(AUTH_TOKEN, '', {
-    expires: new Date(),
-    maxAge: 0,
+  const token = response.cookies.get(AUTH_TOKEN)?.value ?? '';
+  console.log('token', response.cookies.getAll());
+  response.cookies.set(AUTH_TOKEN, token, {
+    // expires: new Date(),
+    httpOnly: true,
+    maxAge: 36000,
     path: '/',
     sameSite: 'lax',
-    secure: true,
-    domain: `.${process.env.NEXT_PUBLIC_CLOUD_DOMAIN}`,
+    // secure: true,
+    domain: 'localhost',
   });
-  console.log(cookies(), process.env.NEXT_PUBLIC_CLOUD_DOMAIN);
   return response;
 }

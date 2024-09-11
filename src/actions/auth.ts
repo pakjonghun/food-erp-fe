@@ -18,19 +18,8 @@ export const auth = async (token: string) => {
         },
       },
     });
-
     return result.data?.auth;
   } catch (err) {
     return false;
   }
-};
-
-export const logout = async (failedAction: () => void) => {
-  const res = await fetch('/local/logout', { credentials: 'include' });
-  if (!res.ok) {
-    failedAction();
-    return;
-  }
-  const result = await res.json();
-  return result;
 };
