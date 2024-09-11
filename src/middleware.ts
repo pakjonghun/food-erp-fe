@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { AUTH_TOKEN } from './constants/auth';
 import { auth, logout } from './actions/auth';
 import { publicPathList } from './constants/route';
@@ -22,6 +22,8 @@ export async function middleware(request: NextRequest) {
     await logout();
     return NextResponse.redirect(new URL('/login', request.url));
   }
+
+  return NextResponse.next();
 }
 
 export const config = {
