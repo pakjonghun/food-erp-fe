@@ -1,8 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { AUTH_TOKEN } from './constants/auth';
-import { auth } from './actions/auth';
+import { auth, logout } from './actions/auth';
 import { publicPathList } from './constants/route';
-import { logout } from './components/header/actions';
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
@@ -26,5 +25,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|local|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
 };

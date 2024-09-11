@@ -6,7 +6,7 @@ import { IconButton, ListItemIcon, ListItemText, MenuItem, MenuList, Popover } f
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
-import { logout } from './actions';
+import { logout } from '@/actions/auth';
 
 const PrivateHeader = () => {
   const router = useRouter();
