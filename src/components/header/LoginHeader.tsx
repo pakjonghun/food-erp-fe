@@ -24,7 +24,6 @@ const LoginHeader = () => {
           alt="logo"
           width={70}
           style={{ marginRight: '20px' }}
-          unoptimized={true}
         />
         <MainTitle />
       </Toolbar>

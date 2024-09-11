@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { logout } from '@/actions/auth';
+import { PATH } from '@/constants/route';
 
 const PrivateHeader = () => {
   const router = useRouter();
@@ -27,7 +28,7 @@ const PrivateHeader = () => {
       const result = await logout();
       if (result) {
         setSnack({ message: '안녕히 가세요' });
-        router.replace('/login');
+        router.replace(`/${PATH['sign-in'].path}`);
       } else {
         setSnack({ variant: 'error', message: '로그아웃이 실패했습니다.' });
       }

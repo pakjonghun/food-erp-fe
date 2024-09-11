@@ -22,7 +22,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Iconify from '@/components/icon/Iconify';
 import { useRouter } from 'next/navigation';
 import { useSnack } from '@/context/snackContext/SnackProvider';
-import Error from 'next/error';
 import { ApolloError } from '@apollo/client';
 
 const LoginPage = () => {

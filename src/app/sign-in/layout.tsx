@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react';
-import BaseHeader from '@/components/header/base/BaseHeader';
 import BaseLayout from '@/components/layout/BaseLayout';
 import LoginHeader from '@/components/header/LoginHeader';
 
