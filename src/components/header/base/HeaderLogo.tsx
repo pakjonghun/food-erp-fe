@@ -15,6 +15,7 @@ const HeaderLogo = () => {
   if (isNavOpen && isUpLg && !isNavExpand) {
     return (
       <Image
+        priority
         src={'/assets/images/logo.png'}
         alt="logo"
         width={70}
