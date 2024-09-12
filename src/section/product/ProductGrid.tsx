@@ -15,7 +15,6 @@ const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(api
 
 const ProductGrid = () => {
   const { data, loading } = useProducts();
-  // const totalCount = data?.products.totalCount;
   const rows = data?.products.data ?? [];
 
   const CustomToolBar = () => {
