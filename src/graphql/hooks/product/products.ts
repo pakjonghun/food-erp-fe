@@ -7,7 +7,6 @@ const products = graphql(`
       totalCount
       data {
         id
-        code
         name
         wonPrice
         leadTime

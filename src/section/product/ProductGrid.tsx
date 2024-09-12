@@ -81,7 +81,7 @@ const ProductGrid = () => {
       minWidth: 300,
     },
     {
-      field: 'code',
+      field: 'id',
       headerName: '제품코드',
       minWidth: 200,
       maxWidth: 400,
