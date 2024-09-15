@@ -3,15 +3,17 @@ import { useProducts } from '@/graphql/hooks/product/products';
 import Toolbar from './ProductToolbar';
 import { productColumnList } from './constants';
 import { useReactiveVar } from '@apollo/client';
-import { productKeyword, productTarget } from '@/store/backdata';
+import { productCount, productKeyword, productTarget } from '@/store/backdata';
 import LoadingRow from '@/components/dataGrid/LoadingRow';
 import EmptyRow from '@/components/dataGrid/EmptyRow';
+import { useEffect } from 'react';
 
 const ProductGrid = () => {
   const { data, loading } = useProducts();
   const rows = data?.products.data ?? [];
   const target = useReactiveVar(productTarget);
   const keyword = useReactiveVar(productKeyword);
+  const handleSetCount = (count: number) => productCount(count);
   const filteredRow = rows.filter((row) => {
     const value = row[target as keyof typeof row];
     if (typeof value == 'string') {
@@ -24,6 +26,10 @@ const ProductGrid = () => {
 
     return true;
   });
+
+  useEffect(() => {
+    handleSetCount(filteredRow.length);
+  }, [filteredRow.length]);
 
   return (
     <DataGrid

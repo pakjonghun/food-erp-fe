@@ -4,7 +4,7 @@ import Iconify from '@/components/icon/Iconify';
 import ProductUpload from './ProductUpload';
 import { productColumnList } from './constants';
 import { useCallback, useEffect, useState } from 'react';
-import { productKeyword, productTarget } from '@/store/backdata';
+import { productCount, productKeyword, productTarget } from '@/store/backdata';
 import { useReactiveVar } from '@apollo/client';
 import useTextDebounce from '@/hooks/useTextDebounce';
 import BaseToolbar from '@/components/dataGrid/BaseToolbar';
@@ -16,6 +16,7 @@ const ProductToolbar = () => {
   const delayText = useTextDebounce({ keyword });
   const handleChangeTarget = (target: string) => productTarget(target);
   const handleChangeProductKeyword = (target: string) => productKeyword(target);
+  const searchCount = useReactiveVar(productCount);
   const target = useReactiveVar(productTarget);
   const handleChangeKeyword = useCallback((value: string) => {
     setKeyword(value);
@@ -29,6 +30,7 @@ const ProductToolbar = () => {
   const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
   return (
     <BaseToolbar
+      searchCount={searchCount}
       targetList={productColumnList}
       target={target}
       onChangeTarget={handleChangeTarget}

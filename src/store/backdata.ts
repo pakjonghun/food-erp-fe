@@ -3,3 +3,4 @@ import { makeVar } from '@apollo/client';
 
 export const productKeyword = makeVar('');
 export const productTarget = makeVar(productColumnList[1].field);
+export const productCount = makeVar(0);

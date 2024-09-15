@@ -8,6 +8,7 @@ interface Props {
   keyword: string;
   target: string;
   targetList: GridColDef[];
+  searchCount: number;
   onChangeKeyword: (value: string) => void;
   onChangeTarget: (value: string) => void;
 }
@@ -18,6 +19,7 @@ const BaseToolbar: FC<Props> = ({
   keyword,
   target,
   targetList,
+  searchCount,
   onChangeKeyword,
   onChangeTarget,
 }) => {
@@ -84,6 +86,7 @@ const BaseToolbar: FC<Props> = ({
           </Select>
         </FormControl>
       </Stack>
+      {searchCount > 0 && <Typography variant="caption">{`검색 결과 ${searchCount}건`}</Typography>}
     </Stack>
   );
 };
