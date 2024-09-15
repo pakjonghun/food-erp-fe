@@ -1,123 +1,29 @@
-import * as React from 'react';
-import {
-  DataGrid,
-  GridColDef,
-  gridExpandedSortedRowIdsSelector,
-  GridToolbarQuickFilter,
-  useGridApiContext,
-} from '@mui/x-data-grid';
-import { Button, Stack, Typography } from '@mui/material';
-import Iconify from '@/components/icon/Iconify';
+import { DataGrid } from '@mui/x-data-grid';
 import { useProducts } from '@/graphql/hooks/product/products';
-import ExcelUpload from './Action';
-
-const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(apiRef);
+import Toolbar from './ProductToolbar';
+import { productColumnList } from './constants';
+import { useReactiveVar } from '@apollo/client';
+import { productKeyword, productTarget } from '@/store/backdata';
+import LoadingRow from '@/components/dataGrid/LoadingRow';
+import EmptyRow from '@/components/dataGrid/EmptyRow';
 
 const ProductGrid = () => {
   const { data, loading } = useProducts();
   const rows = data?.products.data ?? [];
+  const target = useReactiveVar(productTarget);
+  const keyword = useReactiveVar(productKeyword);
+  const filteredRow = rows.filter((row) => {
+    const value = row[target as keyof typeof row];
+    if (typeof value == 'string') {
+      return value.toLowerCase().includes(keyword.toLowerCase());
+    }
 
-  const CustomToolBar = () => {
-    const apiRef = useGridApiContext();
-    const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
-    return (
-      <Stack sx={{ p: 3 }} direction="column" gap={2}>
-        <Stack
-          justifyContent="space-between"
-          gap={1}
-          sx={{
-            flexDirection: {
-              xs: 'column',
-              sm: 'row',
-            },
-          }}
-        >
-          <Typography sx={{ mb: 2 }}>제품 백데이터</Typography>
-          <Stack
-            alignItems="center"
-            gap={1}
-            sx={{
-              flexDirection: {
-                xs: 'column',
-                sm: 'row',
-              },
-            }}
-          >
-            <ExcelUpload sx={{ width: { xs: '100%', sm: 'auto' } }} />
-            <Button
-              sx={{ width: { xs: '100%', sm: 'auto' } }}
-              onClick={() => handleExport({ getRowsToExport: getFilteredRow })}
-              startIcon={<Iconify icon="ic:baseline-download" width={18} />}
-            >
-              엑셀다운로드
-            </Button>
-          </Stack>
-        </Stack>
+    if (typeof value == 'number') {
+      return value.toString().includes(keyword);
+    }
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <GridToolbarQuickFilter
-            sx={{
-              width: {
-                xs: '100%',
-                sm: 'auto',
-              },
-              minWidth: 300,
-            }}
-            variant="outlined"
-            placeholder="검색단어 입력"
-            label="검색"
-          />
-        </Stack>
-      </Stack>
-    );
-  };
-
-  const columns: GridColDef[] = [
-    {
-      field: 'name',
-      headerName: '제품이름',
-      flex: 1,
-      minWidth: 300,
-    },
-    {
-      field: 'id',
-      headerName: '제품코드',
-      minWidth: 200,
-      maxWidth: 400,
-      flex: 0.4,
-    },
-    {
-      field: 'wonPrice',
-      headerName: '원가',
-      minWidth: 200,
-      maxWidth: 400,
-      flex: 0.5,
-    },
-  ];
-
-  const EmptyRow = () => {
-    return (
-      <Stack
-        direction="row"
-        sx={{ mt: 4, color: (theme) => theme.palette.grey[700] }}
-        justifyContent="center"
-      >
-        검색된 데이터가 없습니다.
-      </Stack>
-    );
-  };
-
-  const LoadingRow = () => {
-    return (
-      <Stack
-        direction="row"
-        sx={{ mt: 4, color: (theme) => theme.palette.grey[700] }}
-        justifyContent="center"
-      >
-        <Iconify icon="svg-spinners:3-dots-bounce" />
-      </Stack>
-    );
-  };
+    return true;
+  });
 
   return (
     <DataGrid
@@ -126,6 +32,8 @@ const ProductGrid = () => {
       hideFooter
       hideFooterPagination
       disableColumnMenu={true}
+      rows={filteredRow}
+      columns={productColumnList}
       slotProps={{
         toolbar: {
           showQuickFilter: true,
@@ -137,10 +45,8 @@ const ProductGrid = () => {
       slots={{
         loadingOverlay: LoadingRow,
         noRowsOverlay: EmptyRow,
-        toolbar: CustomToolBar,
+        toolbar: Toolbar,
       }}
-      rows={rows}
-      columns={columns}
     />
   );
 };

@@ -12,7 +12,7 @@ interface Props {
   sx?: SxProps;
 }
 
-const ExcelUpload: FC<Props> = ({ sx }) => {
+const ProductUpload: FC<Props> = ({ sx }) => {
   const setSnack = useSnack();
   const [loading, setLoading] = useState(false);
 
@@ -26,16 +26,15 @@ const ExcelUpload: FC<Props> = ({ sx }) => {
       const message = err.response?.data?.message || err.message;
       setSnack({ message: message ?? '', title: err.name ?? '', variant: 'error' });
     } else {
-      setSnack({ message: '파일 업로드가 완료되었습니다.' });
-
       setTimeout(() => {
         client.cache.evict({
           id: 'ROOT_QUERY',
           fieldName: 'products',
         });
         client.cache.gc();
-        setLoading(true);
-      }, 1000);
+        setLoading(false);
+        setSnack({ message: '파일 업로드가 완료되었습니다.' });
+      }, 500);
     }
   };
 
@@ -49,4 +48,4 @@ const ExcelUpload: FC<Props> = ({ sx }) => {
   );
 };
 
-export default ExcelUpload;
+export default ProductUpload;
