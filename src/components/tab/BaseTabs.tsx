@@ -20,7 +20,7 @@ export const BasicTabs: FC<Props> = ({ tabs }) => {
 
   return (
     <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ ml: 3 }}>
+      <Box>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           {tabs.map((t) => {
             return <Tab key={t.label} disableRipple label={t.label} {...a11yProps(0)} />;
