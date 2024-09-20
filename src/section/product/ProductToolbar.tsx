@@ -1,6 +1,6 @@
+import Iconify from '@/components/icon/Iconify';
 import { Button, CircularProgress } from '@mui/material';
 import { gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
-import Iconify from '@/components/icon/Iconify';
 import ProductUpload from './ProductUpload';
 import { productColumnList } from './constants';
 import { useCallback, useEffect, useState } from 'react';
@@ -57,16 +57,12 @@ const ProductToolbar = () => {
   };
   return (
     <BaseToolbar
-      deleting={loading}
-      onClickDelete={handleClickDelete}
-      selectedSize={selectedSize}
       searchCount={searchCount}
       targetList={productColumnList}
       target={target}
       onChangeTarget={handleChangeTarget}
       onChangeKeyword={handleChangeKeyword}
       keyword={keyword}
-      title="제품"
       actionSection={
         <>
           {selectedSize > 0 && (

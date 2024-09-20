@@ -1,58 +1,28 @@
-import {
-  Button,
-  CircularProgress,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { GridColDef, GridToolbarQuickFilter } from '@mui/x-data-grid';
 import { FC, ReactNode } from 'react';
-import Iconify from '../icon/Iconify';
+import { FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
+import { GridColDef, GridToolbarQuickFilter } from '@mui/x-data-grid';
 
 interface Props {
-  title: ReactNode;
   actionSection: ReactNode;
   keyword: string;
   target: string;
   targetList: GridColDef[];
   searchCount: number;
-  selectedSize: number;
-  deleting: boolean;
   onChangeKeyword: (value: string) => void;
   onChangeTarget: (value: string) => void;
-  onClickDelete: () => void;
 }
 
 const BaseToolbar: FC<Props> = ({
-  deleting,
-  title,
   actionSection,
   keyword,
   target,
   targetList,
   searchCount,
-  selectedSize,
   onChangeKeyword,
   onChangeTarget,
-  onClickDelete,
 }) => {
   return (
     <Stack sx={{ p: 3 }} direction="column" gap={2}>
-      <Stack
-        justifyContent="space-between"
-        gap={1}
-        sx={{
-          flexDirection: {
-            xs: 'column',
-            sm: 'row',
-          },
-        }}
-      >
-        <Typography sx={{ mb: 2 }}>{title}</Typography>
-      </Stack>
       <Stack
         gap={1}
         sx={{
