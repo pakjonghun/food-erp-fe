@@ -33,6 +33,7 @@ const ProductGrid = () => {
 
   return (
     <DataGrid
+      disableRowSelectionOnClick
       checkboxSelection
       density="compact"
       loading={loading}

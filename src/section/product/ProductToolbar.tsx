@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
 import Iconify from '@/components/icon/Iconify';
 import ProductUpload from './ProductUpload';
@@ -69,6 +69,20 @@ const ProductToolbar = () => {
       title="제품"
       actionSection={
         <>
+          {selectedSize > 0 && (
+            <Button
+              disabled={loading}
+              onClick={handleClickDelete}
+              sx={{ width: { xs: '100%', sm: 'auto' } }}
+              endIcon={
+                loading ? (
+                  <CircularProgress size={18} />
+                ) : (
+                  <Iconify icon="ph:trash-fill" width={20} />
+                )
+              }
+            >{`${selectedSize}개 선택 삭제`}</Button>
+          )}
           <ProductUpload sx={{ width: { xs: '100%', sm: 'auto' } }} />
           <Button
             sx={{ width: { xs: '100%', sm: 'auto' } }}

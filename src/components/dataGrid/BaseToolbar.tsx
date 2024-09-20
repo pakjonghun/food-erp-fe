@@ -52,10 +52,76 @@ const BaseToolbar: FC<Props> = ({
         }}
       >
         <Typography sx={{ mb: 2 }}>{title}</Typography>
+      </Stack>
+      <Stack
+        gap={1}
+        sx={{
+          justifyContent: 'space-between',
+          flexDirection: {
+            xs: 'column',
+            lg: 'row',
+          },
+        }}
+      >
         <Stack
-          alignItems="center"
+          sx={{
+            flex: 1,
+            gap: {
+              xs: 2,
+              sm: 1,
+            },
+            flexDirection: {
+              xs: 'column',
+              sm: 'row',
+            },
+          }}
+        >
+          <GridToolbarQuickFilter
+            value={keyword}
+            onChange={(event) => onChangeKeyword(event.target.value)}
+            sx={{
+              width: {
+                xs: '100%',
+                sm: 'auto',
+              },
+              minWidth: 300,
+              p: 0,
+            }}
+            variant="outlined"
+            placeholder="검색 키워드 입력"
+            label="검색"
+          />
+          <FormControl>
+            <InputLabel size="small" shrink>
+              검색대상
+            </InputLabel>
+            <Select
+              value={target}
+              onChange={(event) => onChangeTarget(event.target.value)}
+              size="small"
+              displayEmpty
+              sx={{
+                width: {
+                  xs: '100%',
+                  sm: 100,
+                },
+              }}
+              label="검색대상"
+            >
+              {targetList.map((c) => (
+                <MenuItem value={c.field} selected={target == c.field} key={c.field}>
+                  {c.headerName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Stack>
+        <Stack
           gap={1}
           sx={{
+            justifyContent: {
+              xs: 'flex-end',
+            },
             flexDirection: {
               xs: 'column',
               sm: 'row',
@@ -65,53 +131,8 @@ const BaseToolbar: FC<Props> = ({
           {actionSection}
         </Stack>
       </Stack>
-      <Stack direction="row" alignItems="center" justifyContent="flex-start" gap={1}>
-        <GridToolbarQuickFilter
-          value={keyword}
-          onChange={(event) => onChangeKeyword(event.target.value)}
-          sx={{
-            width: {
-              xs: '100%',
-              sm: 'auto',
-            },
-            minWidth: 300,
-            p: 0,
-          }}
-          variant="outlined"
-          placeholder="검색 키워드 입력"
-          label="검색"
-        />
-        <FormControl>
-          <InputLabel size="small" shrink>
-            검색대상
-          </InputLabel>
-          <Select
-            value={target}
-            onChange={(event) => onChangeTarget(event.target.value)}
-            size="small"
-            displayEmpty
-            sx={{ width: 100 }}
-            label="검색대상"
-          >
-            {targetList.map((c) => (
-              <MenuItem value={c.field} selected={target == c.field} key={c.field}>
-                {c.headerName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Stack>
+
       {searchCount > 0 && <Typography variant="caption">{`검색 결과 ${searchCount}건`}</Typography>}
-      {selectedSize > 0 && (
-        <Button
-          disabled={deleting}
-          onClick={onClickDelete}
-          sx={{ mr: 'auto' }}
-          endIcon={
-            deleting ? <CircularProgress size={18} /> : <Iconify icon="ph:trash-fill" width={20} />
-          }
-        >{`${selectedSize}개 선택 삭제`}</Button>
-      )}
     </Stack>
   );
 };
