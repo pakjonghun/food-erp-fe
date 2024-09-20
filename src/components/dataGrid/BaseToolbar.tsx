@@ -1,6 +1,16 @@
-import { FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  CircularProgress,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { GridColDef, GridToolbarQuickFilter } from '@mui/x-data-grid';
 import { FC, ReactNode } from 'react';
+import Iconify from '../icon/Iconify';
 
 interface Props {
   title: ReactNode;
@@ -9,19 +19,25 @@ interface Props {
   target: string;
   targetList: GridColDef[];
   searchCount: number;
+  selectedSize: number;
+  deleting: boolean;
   onChangeKeyword: (value: string) => void;
   onChangeTarget: (value: string) => void;
+  onClickDelete: () => void;
 }
 
 const BaseToolbar: FC<Props> = ({
+  deleting,
   title,
   actionSection,
   keyword,
   target,
   targetList,
   searchCount,
+  selectedSize,
   onChangeKeyword,
   onChangeTarget,
+  onClickDelete,
 }) => {
   return (
     <Stack sx={{ p: 3 }} direction="column" gap={2}>
@@ -49,7 +65,6 @@ const BaseToolbar: FC<Props> = ({
           {actionSection}
         </Stack>
       </Stack>
-
       <Stack direction="row" alignItems="center" justifyContent="flex-start" gap={1}>
         <GridToolbarQuickFilter
           value={keyword}
@@ -87,6 +102,16 @@ const BaseToolbar: FC<Props> = ({
         </FormControl>
       </Stack>
       {searchCount > 0 && <Typography variant="caption">{`검색 결과 ${searchCount}건`}</Typography>}
+      {selectedSize > 0 && (
+        <Button
+          disabled={deleting}
+          onClick={onClickDelete}
+          sx={{ mr: 'auto' }}
+          endIcon={
+            deleting ? <CircularProgress size={18} /> : <Iconify icon="ph:trash-fill" width={20} />
+          }
+        >{`${selectedSize}개 선택 삭제`}</Button>
+      )}
     </Stack>
   );
 };

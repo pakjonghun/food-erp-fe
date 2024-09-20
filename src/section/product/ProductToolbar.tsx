@@ -8,6 +8,9 @@ import { productCount, productKeyword, productTarget } from '@/store/backdata';
 import { useReactiveVar } from '@apollo/client';
 import useTextDebounce from '@/hooks/useTextDebounce';
 import BaseToolbar from '@/components/dataGrid/BaseToolbar';
+import { useRemoveManyProduct } from '@/graphql/hooks/product/removeMany';
+import { client } from '@/graphql/client/apolloClient';
+import { useSnack } from '@/context/snackContext/SnackProvider';
 
 const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(apiRef);
 
@@ -18,6 +21,10 @@ const ProductToolbar = () => {
   const handleChangeProductKeyword = (target: string) => productKeyword(target);
   const searchCount = useReactiveVar(productCount);
   const target = useReactiveVar(productTarget);
+
+  const [removeProductList, { loading }] = useRemoveManyProduct();
+  const setSnack = useSnack();
+
   const handleChangeKeyword = useCallback((value: string) => {
     setKeyword(value);
   }, []);
@@ -27,9 +34,32 @@ const ProductToolbar = () => {
   }, [delayText]);
 
   const apiRef = useGridApiContext();
+  const selectedRows = apiRef.current.getSelectedRows();
+  const selectedSize = selectedRows.size;
+  const selectedIds = Array.from(selectedRows, (item) => item[0]) as string[];
+
   const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
+  const handleClickDelete = () => {
+    removeProductList({
+      variables: {
+        idListInput: {
+          idList: selectedIds,
+        },
+      },
+      onCompleted: () => {
+        setSnack({ message: '삭제가 완료되었습니다.', variant: 'success' });
+        client.cache.evict({ fieldName: 'products', broadcast: true });
+      },
+      onError: (err) => {
+        setSnack({ message: err?.message ?? '삭제가 실패하였습니다.', variant: 'error' });
+      },
+    });
+  };
   return (
     <BaseToolbar
+      deleting={loading}
+      onClickDelete={handleClickDelete}
+      selectedSize={selectedSize}
       searchCount={searchCount}
       targetList={productColumnList}
       target={target}

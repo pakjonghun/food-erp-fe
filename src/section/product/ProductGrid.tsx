@@ -33,6 +33,7 @@ const ProductGrid = () => {
 
   return (
     <DataGrid
+      checkboxSelection
       density="compact"
       loading={loading}
       hideFooter
