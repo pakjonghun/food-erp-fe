@@ -13,7 +13,6 @@ const ProductGrid = () => {
   const rows = data?.products.data ?? [];
   const target = useReactiveVar(productTarget);
   const keyword = useReactiveVar(productKeyword);
-  const handleSetCount = (count: number) => productCount(count);
   const filteredRow = rows.filter((row) => {
     const value = row[target as keyof typeof row];
     if (typeof value == 'string') {
@@ -27,8 +26,14 @@ const ProductGrid = () => {
     return true;
   });
 
+  const handleSetCount = (count: number) => {
+    productCount(count);
+  };
+
   useEffect(() => {
-    handleSetCount(filteredRow.length);
+    if (filteredRow.length) {
+      handleSetCount(filteredRow.length);
+    }
   }, [filteredRow.length]);
 
   return (
@@ -37,8 +42,6 @@ const ProductGrid = () => {
       checkboxSelection
       density="compact"
       loading={loading}
-      hideFooter
-      hideFooterPagination
       disableColumnMenu={true}
       rows={filteredRow}
       columns={productColumnList}
@@ -54,6 +57,12 @@ const ProductGrid = () => {
         loadingOverlay: LoadingRow,
         noRowsOverlay: EmptyRow,
         toolbar: Toolbar,
+      }}
+      localeText={{
+        MuiTablePagination: {
+          labelDisplayedRows: ({ from, to, count }) => `현재 ${from}-${to} / 총 ${count}`,
+          labelRowsPerPage: '페이지 당 데이터수',
+        },
       }}
     />
   );

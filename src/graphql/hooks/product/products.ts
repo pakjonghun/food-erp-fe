@@ -10,6 +10,14 @@ const products = graphql(`
         name
         wonPrice
         leadTime
+        salePrice
+        barCode
+        leadTime
+        deliveryType
+        category {
+          id
+          name
+        }
       }
     }
   }
