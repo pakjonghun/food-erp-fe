@@ -13,6 +13,7 @@ export const productColumnList: GridColDef[] = [
     headerName: '이름',
     minWidth: 350,
     flex: 1,
+    editable: true,
   },
   {
     field: 'category',
@@ -21,11 +22,13 @@ export const productColumnList: GridColDef[] = [
     valueGetter: (value: ProductCategoryItem, row) => {
       return value?.name;
     },
+    editable: true,
   },
   {
     field: 'barCode',
     headerName: '바코드',
     minWidth: 150,
+    editable: true,
   },
   {
     field: 'wonPrice',
@@ -38,6 +41,7 @@ export const productColumnList: GridColDef[] = [
 
       return numberFormat(value);
     },
+    editable: true,
   },
   {
     field: 'salePrice',
@@ -50,6 +54,7 @@ export const productColumnList: GridColDef[] = [
 
       return numberFormat(value);
     },
+    editable: true,
   },
   {
     field: 'deliveryType',
@@ -62,5 +67,6 @@ export const productColumnList: GridColDef[] = [
 
       return value == DeliveryType.Free ? '무료배송' : '유료배송';
     },
+    editable: true,
   },
 ];

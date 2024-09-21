@@ -1,4 +1,4 @@
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridCellEditStartParams, GridCellParams } from '@mui/x-data-grid';
 import { useProducts } from '@/graphql/hooks/product/products';
 import Toolbar from './ProductToolbar';
 import { productColumnList } from './constants';
@@ -6,9 +6,13 @@ import { useReactiveVar } from '@apollo/client';
 import { productCount, productKeyword, productTarget } from '@/store/backdata';
 import LoadingRow from '@/components/dataGrid/LoadingRow';
 import EmptyRow from '@/components/dataGrid/EmptyRow';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useUpdateProduct } from '@/graphql/hooks/product/updateProduct';
+import { Products } from '@/graphql/codegen/graphql';
 
 const ProductGrid = () => {
+  const [updateProduct, { loading: updating }] = useUpdateProduct();
+
   const { data, loading } = useProducts();
   const rows = data?.products.data ?? [];
   const target = useReactiveVar(productTarget);
@@ -36,8 +40,50 @@ const ProductGrid = () => {
     }
   }, [filteredRow.length]);
 
+  const [editField, setEditField] = useState<keyof Products | null>('name');
+
+  const handleCellUpdate = (newRow: Products, oldRow: any) => {
+    console.log(editField);
+    // // if (!editField) {
+    // //   return;
+    // }
+    const rowId = newRow.id;
+    const newValue = newRow[editField as keyof Products];
+
+    updateProduct({
+      variables: {
+        updateProductInput: {
+          id: rowId,
+          [editField as keyof Products]: newValue,
+        },
+      },
+      onCompleted: () => {
+        return newRow;
+      },
+      onError: () => {
+        return oldRow;
+      },
+    });
+  };
+
+  const handleCellEditStart = (params: GridCellEditStartParams) => {
+    const field = params.field as keyof Products;
+    setEditField(field);
+  };
+
+  const handleCellEditStop = () => {
+    setEditField(null);
+  };
+  const handleEditError = () => {
+    setEditField(null);
+  };
+
   return (
     <DataGrid
+      onProcessRowUpdateError={handleEditError}
+      onCellEditStop={handleCellEditStop}
+      onCellEditStart={handleCellEditStart}
+      processRowUpdate={handleCellUpdate}
       disableRowSelectionOnClick
       checkboxSelection
       density="compact"
