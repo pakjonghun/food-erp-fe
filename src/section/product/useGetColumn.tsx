@@ -4,9 +4,12 @@ import { GridColDef } from '@mui/x-data-grid';
 import CategoryAutoComplete from './CategoryAutoComplete';
 import { useProductCategories } from '@/graphql/hooks/productCategory/productCategories';
 import DeliveryTypeSelect from './DeliveryTypeSelect';
+import { useSnack } from '@/context/snackContext/SnackProvider';
+import { GridApiCommunity } from '@mui/x-data-grid/internals';
 
-const useGetColumn = () => {
+const useGetColumn = (apiRef: GridApiCommunity) => {
   const { data, loading } = useProductCategories();
+  const snack = useSnack();
 
   const productColumnList: GridColDef[] = [
     {
@@ -60,6 +63,14 @@ const useGetColumn = () => {
         return numberFormat(value);
       },
       editable: true,
+      preProcessEditCellProps: (params) => {
+        const hasError = params.props.value < 0;
+        if (hasError) {
+          snack({ message: '0이상의 값을 입력하세요.', variant: 'error' });
+          apiRef.stopCellEditMode({ id: params.id, field: 'wonPrice', ignoreModifications: true });
+        }
+        return { ...params.props, error: hasError };
+      },
     },
 
     {
@@ -75,6 +86,14 @@ const useGetColumn = () => {
 
         return numberFormat(value);
       },
+      preProcessEditCellProps: (params) => {
+        const hasError = params.props.value < 0;
+        if (hasError) {
+          snack({ message: '0이상의 값을 입력하세요.', variant: 'error' });
+          apiRef.stopCellEditMode({ id: params.id, field: 'salePrice', ignoreModifications: true });
+        }
+        return { ...params.props, error: hasError };
+      },
       editable: true,
     },
     {
@@ -89,6 +108,14 @@ const useGetColumn = () => {
         }
 
         return numberFormat(value);
+      },
+      preProcessEditCellProps: (params) => {
+        const hasError = params.props.value < 0;
+        if (hasError) {
+          snack({ message: '0이상의 값을 입력하세요.', variant: 'error' });
+          apiRef.stopCellEditMode({ id: params.id, field: 'leadTime', ignoreModifications: true });
+        }
+        return { ...params.props, error: hasError };
       },
       editable: true,
     },
