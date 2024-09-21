@@ -39,7 +39,17 @@ const DashboardPage = () => {
     <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: 2, m: 3 }}>
       <Card sx={{ p: 2 }} variant="elevation" elevation={2}>
         <Typography sx={{ mb: 1 }}>사방넷 엑셀파일 편집</Typography>
-        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: {
+              xs: 1,
+              sm: 2,
+            },
+          }}
+        >
           <FileUploadInput
             loading={umeLoading}
             onlyExcel

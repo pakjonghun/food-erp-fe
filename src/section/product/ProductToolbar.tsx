@@ -1,5 +1,5 @@
 import Iconify from '@/components/icon/Iconify';
-import { Button, CircularProgress } from '@mui/material';
+import { Button, CircularProgress, Theme, useMediaQuery } from '@mui/material';
 import { gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
 import ProductUpload from './ProductUpload';
 import { productColumnList } from './constants';
@@ -11,6 +11,7 @@ import BaseToolbar from '@/components/dataGrid/BaseToolbar';
 import { useRemoveManyProduct } from '@/graphql/hooks/product/removeMany';
 import { client } from '@/graphql/client/apolloClient';
 import { useSnack } from '@/context/snackContext/SnackProvider';
+import { useTheme } from '@emotion/react';
 
 const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(apiRef);
 
@@ -37,6 +38,8 @@ const ProductToolbar = () => {
   const selectedRows = apiRef.current.getSelectedRows();
   const selectedSize = selectedRows.size;
   const selectedIds = Array.from(selectedRows, (item) => item[0]) as string[];
+  const theme = useTheme() as Theme;
+  const isDownSm = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
   const handleClickDelete = () => {
@@ -83,13 +86,13 @@ const ProductToolbar = () => {
           )}
           <ProductUpload sx={{ width: { xs: '100%', sm: 'auto' } }} />
           <Button
-            variant="text"
+            variant={isDownSm ? 'contained' : 'text'}
             size="small"
             sx={{ width: { xs: '100%', sm: 'auto' } }}
             onClick={() => handleExport({ getRowsToExport: getFilteredRow })}
             startIcon={<Iconify icon="ic:baseline-download" width={18} />}
           >
-            엑셀다운로드
+            엑셀 다운로드
           </Button>
         </>
       }

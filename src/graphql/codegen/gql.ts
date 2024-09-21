@@ -16,6 +16,7 @@ const documents = {
     "\n  mutation login($loginInput: LoginInput!) {\n    login(loginInput: $loginInput)\n  }\n": types.LoginDocument,
     "\n  query products {\n    products {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n      }\n    }\n  }\n": types.ProductsDocument,
     "\n  mutation removeManyProduct($idListInput: IdListInput!) {\n    removeManyProduct(idListInput: $idListInput)\n  }\n": types.RemoveManyProductDocument,
+    "\n  query productCategories {\n    productCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n": types.ProductCategoriesDocument,
 };
 
 /**
@@ -44,6 +45,10 @@ export function graphql(source: "\n  query products {\n    products {\n      tot
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation removeManyProduct($idListInput: IdListInput!) {\n    removeManyProduct(idListInput: $idListInput)\n  }\n"): (typeof documents)["\n  mutation removeManyProduct($idListInput: IdListInput!) {\n    removeManyProduct(idListInput: $idListInput)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query productCategories {\n    productCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query productCategories {\n    productCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

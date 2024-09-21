@@ -96,7 +96,7 @@ const BaseToolbar: FC<Props> = ({
               sm: 'nowrap',
             },
             gap: {
-              xs: 2,
+              xs: 1,
               sm: 3,
             },
             justifyContent: {

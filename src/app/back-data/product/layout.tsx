@@ -1,71 +1,61 @@
 'use client';
 
 import { FC, ReactNode } from 'react';
-import BasicBreadCrumbs from '@/components/breadCrumb/IconBreadcrumbs';
-import { BasicTabs } from '@/components/tab/BaseTabs';
+import RouterTabs from '@/components/tab/RouterTabs';
 import { TabType } from '@/components/tab/type';
-import useBread from '@/hooks/useBread';
-import { bread, canBack, title } from '@/store/layout';
-import { useReactiveVar } from '@apollo/client';
-import { Button, IconButton, Stack, Typography } from '@mui/material';
-import Iconify from '@/components/icon/Iconify';
+import ProductLayout from '@/layout/product/ProductLayout';
+import { Box, Button } from '@mui/material';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import Iconify from '@/components/icon/Iconify';
+import { usePathname } from 'next/navigation';
+import { useReactiveVar } from '@apollo/client';
+import { canBack } from '@/store/layout';
 
 interface Props {
-  category: ReactNode;
   children: ReactNode;
 }
 
-const ProductLayout: FC<Props> = ({ children, category }) => {
-  useBread();
+const Layout: FC<Props> = ({ children }) => {
+  const path = usePathname();
+  const back = useReactiveVar(canBack);
+
   const tabs: TabType[] = [
     {
       label: '제품',
-      value: 0,
-      children,
+      value: '/back-data/product',
     },
     {
       label: '카테고리',
-      value: 1,
-      children: category,
+      value: '/back-data/product/category',
     },
   ];
 
-  const subTitle = useReactiveVar(title);
-  const breadList = useReactiveVar(bread);
-  const back = useReactiveVar(canBack);
-  const router = useRouter();
+  const isCategory = path.includes(tabs[1].value);
 
-  const handleBackClick = () => {
-    router.back();
-  };
+  const actionSection = isCategory ? (
+    <Button
+      href="/back-data/product/category/new"
+      component={Link}
+      startIcon={<Iconify icon="ic:baseline-plus" width={18} />}
+    >
+      카테고리 등록
+    </Button>
+  ) : (
+    <Button
+      href="/back-data/product/new"
+      component={Link}
+      startIcon={<Iconify icon="ic:baseline-plus" width={18} />}
+    >
+      제품등록
+    </Button>
+  );
 
   return (
-    <Stack sx={{ flex: 1, mx: 3 }}>
-      <Stack sx={{ mt: 2 }} flexDirection="row" justifyContent="space-between">
-        <Stack flexDirection="row" gap={2} alignItems="center">
-          {back && (
-            <IconButton onClick={handleBackClick} size="small">
-              <Iconify icon="material-symbols:arrow-back" width={18} />
-            </IconButton>
-          )}
-          <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            {subTitle}
-          </Typography>
-        </Stack>
-        <Button
-          href="/back-data/product/new"
-          component={Link}
-          startIcon={<Iconify icon="ic:baseline-plus" width={18} />}
-        >
-          제품등록
-        </Button>
-      </Stack>
-      <BasicBreadCrumbs breadList={breadList} />
-      <BasicTabs tabs={tabs} />
-    </Stack>
+    <ProductLayout actionSection={actionSection}>
+      {!back && <RouterTabs tabs={tabs} />}
+      <Box sx={{ flexGrow: 1, height: 3 }}>{children}</Box>
+    </ProductLayout>
   );
 };
 
-export default ProductLayout;
+export default Layout;

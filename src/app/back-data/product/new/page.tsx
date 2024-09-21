@@ -1,7 +1,7 @@
-import React from 'react';
+import NewProduct from '@/section/newProduct/NewProduct';
 
-const CreatePage = () => {
-  return <>create</>;
+const CreateProductPage = () => {
+  return <NewProduct />;
 };
 
-export default CreatePage;
+export default CreateProductPage;

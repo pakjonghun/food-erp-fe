@@ -12,10 +12,6 @@ interface Props {
 }
 
 const BasicBreadCrumbs: FC<Props> = ({ breadList }) => {
-  console.log(
-    ' pathlist: ',
-    breadList.map((b) => b.path)
-  );
   return (
     <Breadcrumbs sx={{ my: 3 }} aria-label="breadcrumb">
       {breadList.map((l) => {

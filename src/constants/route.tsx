@@ -20,6 +20,15 @@ export const PATH = {
     label: '제품등록',
     canBack: true,
   },
+  'back-data/product/category': {
+    path: 'back-data/product/category',
+    label: '카테고리',
+  },
+  'back-data/product/category/new': {
+    path: 'back-data/product/new',
+    label: '카테고리 등록',
+    canBack: true,
+  },
 };
 
 export const publicPathList: string[] = ['sign-in'];

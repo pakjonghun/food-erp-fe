@@ -1,7 +1,4 @@
-import { ReactNode } from 'react';
-
 export type TabType = {
-  value: number;
+  value: string;
   label: string;
-  children: ReactNode;
 };

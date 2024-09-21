@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode;
 }
 
-const DashboardLayout: FC<Props> = ({ children }) => {
+const BackDataLayout: FC<Props> = ({ children }) => {
   return (
     <WithNavLayout nav={<BaseNav />} header={<PrivateHeader />}>
       {children}
@@ -15,4 +15,4 @@ const DashboardLayout: FC<Props> = ({ children }) => {
   );
 };
 
-export default DashboardLayout;
+export default BackDataLayout;

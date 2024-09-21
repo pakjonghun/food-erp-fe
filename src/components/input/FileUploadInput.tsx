@@ -1,8 +1,9 @@
 'use client';
 
 import { FC, ReactNode, useState } from 'react';
-import { Box, Button, CircularProgress, SxProps } from '@mui/material';
+import { Box, Button, CircularProgress, SxProps, Theme, useMediaQuery } from '@mui/material';
 import Iconify from '../icon/Iconify';
+import { useTheme } from '@emotion/react';
 
 interface Props {
   title: string;
@@ -28,10 +29,13 @@ const FileUploadInput: FC<Props> = ({
     setFileKey(Date.now());
   };
 
+  const theme = useTheme() as Theme;
+  const isDownSm = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <Box sx={{ display: 'flex', justifyContent: 'flex-end', ...sx }}>
       <Button
-        variant="text"
+        variant={isDownSm ? 'contained' : 'text'}
         size="small"
         disabled={loading}
         htmlFor={title}
