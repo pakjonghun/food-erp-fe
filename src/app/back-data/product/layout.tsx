@@ -31,7 +31,6 @@ const Layout: FC<Props> = ({ children }) => {
   ];
 
   const isCategory = path.includes(tabs[1].value);
-
   const actionSection = isCategory ? (
     <Button
       href="/back-data/product/category/new"
@@ -51,7 +50,7 @@ const Layout: FC<Props> = ({ children }) => {
   );
 
   return (
-    <ProductLayout actionSection={actionSection}>
+    <ProductLayout actionSection={!back && actionSection}>
       {!back && <RouterTabs tabs={tabs} />}
       <Box sx={{ flexGrow: 1, height: 3, pb: 3 }}>{children}</Box>
     </ProductLayout>

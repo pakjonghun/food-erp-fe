@@ -76,14 +76,18 @@ const NewProduct = () => {
   };
 
   return (
-    <Form onSubmit={methods.handleSubmit(onSubmit)} methods={methods}>
-      <Card variant="outlined">
+    <Form
+      sx={{ maxWidth: 'lg', mx: 'auto' }}
+      onSubmit={methods.handleSubmit(onSubmit)}
+      methods={methods}
+    >
+      <Card variant="outlined" sx={{ boxShadow: 1 }}>
         <CardHeader subheader="새로운 제품 정보를 입력합니다." />
         <Divider
           sx={{
             mb: 3,
             boxShadow: 0,
-            borderColor: (theme) => theme.palette.grey[200],
+            // borderColor: (theme) => theme.palette.grey[200],
           }}
         />
         <Stack sx={{ gap: 3, mx: 3, mb: 3 }}>

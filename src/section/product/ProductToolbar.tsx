@@ -77,7 +77,9 @@ const ProductToolbar: FC<Props> = ({ column }) => {
               size="small"
               disabled={loading}
               onClick={handleClickDelete}
-              sx={{ width: { xs: '100%', sm: 'auto' } }}
+              sx={{
+                width: { xs: '100%', sm: 'auto', color: 'hotpink' },
+              }}
               startIcon={
                 loading ? (
                   <CircularProgress size={18} />
