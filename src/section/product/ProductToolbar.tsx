@@ -67,10 +67,12 @@ const ProductToolbar = () => {
         <>
           {selectedSize > 0 && (
             <Button
+              variant="text"
+              size="small"
               disabled={loading}
               onClick={handleClickDelete}
               sx={{ width: { xs: '100%', sm: 'auto' } }}
-              endIcon={
+              startIcon={
                 loading ? (
                   <CircularProgress size={18} />
                 ) : (
@@ -81,6 +83,8 @@ const ProductToolbar = () => {
           )}
           <ProductUpload sx={{ width: { xs: '100%', sm: 'auto' } }} />
           <Button
+            variant="text"
+            size="small"
             sx={{ width: { xs: '100%', sm: 'auto' } }}
             onClick={() => handleExport({ getRowsToExport: getFilteredRow })}
             startIcon={<Iconify icon="ic:baseline-download" width={18} />}

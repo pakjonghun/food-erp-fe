@@ -11,7 +11,11 @@ interface Props {
   breadList: BreadType[];
 }
 
-const IconBreadcrumbs: FC<Props> = ({ breadList }) => {
+const BasicBreadCrumbs: FC<Props> = ({ breadList }) => {
+  console.log(
+    ' pathlist: ',
+    breadList.map((b) => b.path)
+  );
   return (
     <Breadcrumbs sx={{ my: 3 }} aria-label="breadcrumb">
       {breadList.map((l) => {
@@ -22,19 +26,17 @@ const IconBreadcrumbs: FC<Props> = ({ breadList }) => {
             key={key}
             component={NavLink}
             underline="hover"
-            sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+            sx={{ display: 'flex', alignItems: 'center' }}
             color="inherit"
             href={`/${l.path}`}
           >
-            {l.icon}
             {l.label}
           </Link>
         ) : (
           <Typography
             key={key}
-            sx={{ color: 'text.primary', display: 'flex', alignItems: 'center', gap: 1 }}
+            sx={{ color: 'text.primary', display: 'flex', alignItems: 'center' }}
           >
-            {l.icon}
             {l.label}
           </Typography>
         );
@@ -43,4 +45,4 @@ const IconBreadcrumbs: FC<Props> = ({ breadList }) => {
   );
 };
 
-export default IconBreadcrumbs;
+export default BasicBreadCrumbs;

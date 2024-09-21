@@ -54,7 +54,10 @@ const BaseToolbar: FC<Props> = ({
                 xs: '100%',
                 sm: 'auto',
               },
-              minWidth: 300,
+              minWidth: {
+                xs: '100%',
+                sm: 300,
+              },
               p: 0,
             }}
             variant="outlined"
@@ -87,14 +90,20 @@ const BaseToolbar: FC<Props> = ({
           </FormControl>
         </Stack>
         <Stack
-          gap={1}
           sx={{
+            flexWrap: {
+              xs: 'wrap',
+              sm: 'nowrap',
+            },
+            gap: {
+              xs: 2,
+              sm: 3,
+            },
             justifyContent: {
               xs: 'flex-end',
             },
             flexDirection: {
-              xs: 'column',
-              sm: 'row',
+              xs: 'row',
             },
           }}
         >
