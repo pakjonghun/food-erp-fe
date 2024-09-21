@@ -77,7 +77,7 @@ const NewProduct = () => {
 
   return (
     <Form
-      sx={{ maxWidth: 'lg', mx: 'auto' }}
+      sx={{ maxWidth: 'lg', mx: 'auto', pb: 3 }}
       onSubmit={methods.handleSubmit(onSubmit)}
       methods={methods}
     >
