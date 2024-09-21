@@ -1,9 +1,8 @@
 import Iconify from '@/components/icon/Iconify';
 import { Button, CircularProgress, Theme, useMediaQuery } from '@mui/material';
-import { gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
+import { GridColDef, gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
 import ProductUpload from './ProductUpload';
-import { productColumnList } from './constants';
-import { useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { productCount, productKeyword, productTarget } from '@/store/backdata';
 import { useReactiveVar } from '@apollo/client';
 import useTextDebounce from '@/hooks/useTextDebounce';
@@ -15,7 +14,11 @@ import { useTheme } from '@emotion/react';
 
 const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(apiRef);
 
-const ProductToolbar = () => {
+interface Props {
+  column: GridColDef[];
+}
+
+const ProductToolbar: FC<Props> = ({ column }) => {
   const [keyword, setKeyword] = useState('');
   const delayText = useTextDebounce({ keyword });
   const handleChangeTarget = (target: string) => productTarget(target);
@@ -61,7 +64,7 @@ const ProductToolbar = () => {
   return (
     <BaseToolbar
       searchCount={searchCount}
-      targetList={productColumnList}
+      targetList={column}
       target={target}
       onChangeTarget={handleChangeTarget}
       onChangeKeyword={handleChangeKeyword}

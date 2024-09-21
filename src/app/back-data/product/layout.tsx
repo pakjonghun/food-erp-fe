@@ -53,7 +53,7 @@ const Layout: FC<Props> = ({ children }) => {
   return (
     <ProductLayout actionSection={actionSection}>
       {!back && <RouterTabs tabs={tabs} />}
-      <Box sx={{ flexGrow: 1, height: 3 }}>{children}</Box>
+      <Box sx={{ flexGrow: 1, height: 3, pb: 3 }}>{children}</Box>
     </ProductLayout>
   );
 };

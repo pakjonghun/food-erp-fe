@@ -31,6 +31,7 @@ const NewProduct = () => {
   const router = useRouter();
   const [createProduct, { loading: productCreating }] = useCreateProduct();
   const { data, loading } = useProductCategories();
+
   const categories = data?.productCategories.data ?? [];
   const snack = useSnack();
 

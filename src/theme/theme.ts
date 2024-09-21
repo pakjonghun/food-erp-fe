@@ -82,7 +82,7 @@ const MuiDrawer: Components<Theme>['MuiDrawer'] = {
 };
 
 const MuiPaper: Components<Theme>['MuiPaper'] = {
-  defaultProps: { elevation: 0 },
+  // defaultProps: { elevation: 0 },
   styleOverrides: {
     outlined: ({ theme }) => ({ borderColor: alpha(theme.palette.grey[500], 0.16) }),
   },

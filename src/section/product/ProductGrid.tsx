@@ -1,69 +1,60 @@
-import { DataGrid, GridCellEditStartParams, GridCellParams } from '@mui/x-data-grid';
-import { useProducts } from '@/graphql/hooks/product/products';
+import { DataGrid, GridCellEditStartParams } from '@mui/x-data-grid';
 import Toolbar from './ProductToolbar';
-import { productColumnList } from './constants';
-import { useReactiveVar } from '@apollo/client';
-import { productCount, productKeyword, productTarget } from '@/store/backdata';
-import LoadingRow from '@/components/dataGrid/LoadingRow';
 import EmptyRow from '@/components/dataGrid/EmptyRow';
-import { useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { useUpdateProduct } from '@/graphql/hooks/product/updateProduct';
 import { Products } from '@/graphql/codegen/graphql';
+import { useSnack } from '@/context/snackContext/SnackProvider';
+import useGetColumn from './useGetColumn';
 
-const ProductGrid = () => {
+interface Props {
+  rows: any[];
+  loading: boolean;
+}
+
+const ProductGrid: FC<Props> = ({ rows, loading }) => {
   const [updateProduct, { loading: updating }] = useUpdateProduct();
 
-  const { data, loading } = useProducts();
-  const rows = data?.products.data ?? [];
-  const target = useReactiveVar(productTarget);
-  const keyword = useReactiveVar(productKeyword);
-  const filteredRow = rows.filter((row) => {
-    const value = row[target as keyof typeof row];
-    if (typeof value == 'string') {
-      return value.toLowerCase().includes(keyword.toLowerCase());
-    }
-
-    if (typeof value == 'number') {
-      return value.toString().includes(keyword);
-    }
-
-    return true;
-  });
-
-  const handleSetCount = (count: number) => {
-    productCount(count);
-  };
-
-  useEffect(() => {
-    if (filteredRow.length) {
-      handleSetCount(filteredRow.length);
-    }
-  }, [filteredRow.length]);
-
   const [editField, setEditField] = useState<keyof Products | null>('name');
+  const snack = useSnack();
 
-  const handleCellUpdate = (newRow: Products, oldRow: any) => {
-    console.log(editField);
-    // // if (!editField) {
-    // //   return;
-    // }
-    const rowId = newRow.id;
-    const newValue = newRow[editField as keyof Products];
-
-    updateProduct({
-      variables: {
-        updateProductInput: {
-          id: rowId,
-          [editField as keyof Products]: newValue,
-        },
-      },
-      onCompleted: () => {
-        return newRow;
-      },
-      onError: () => {
+  const handleCellUpdate = async (newRow: Products, oldRow: any) => {
+    try {
+      if (!editField) {
         return oldRow;
-      },
-    });
+      }
+      const rowId = newRow.id;
+      let newValue = newRow[editField as keyof Products];
+      let oldValue = oldRow[editField as keyof Products];
+      let field: string = editField;
+
+      if (editField == 'category') {
+        newValue = newValue?.name ?? null;
+        oldValue = oldValue?.name ?? null;
+        field = 'categoryName';
+      } else {
+        if (newValue == oldValue) {
+          return oldRow;
+        }
+      }
+
+      const result = await updateProduct({
+        variables: {
+          updateProductInput: {
+            id: rowId,
+            [field as keyof Products]: newValue,
+          },
+        },
+      });
+
+      snack({ message: '업데이트가 완료되었습니다.', variant: 'success' });
+      return result.data?.updateProduct ?? oldRow;
+    } catch (e) {
+      console.log(e);
+
+      snack({ message: '업데이트가 실패하였습니다.', variant: 'error' });
+      return oldRow;
+    }
   };
 
   const handleCellEditStart = (params: GridCellEditStartParams) => {
@@ -71,26 +62,24 @@ const ProductGrid = () => {
     setEditField(field);
   };
 
-  const handleCellEditStop = () => {
-    setEditField(null);
-  };
-  const handleEditError = () => {
+  const handleEditError = (err: any) => {
+    snack({ message: '업데이트가 실패하였습니다.', variant: 'error' });
     setEditField(null);
   };
 
+  const columns = useGetColumn();
   return (
     <DataGrid
       onProcessRowUpdateError={handleEditError}
-      onCellEditStop={handleCellEditStop}
       onCellEditStart={handleCellEditStart}
       processRowUpdate={handleCellUpdate}
       disableRowSelectionOnClick
       checkboxSelection
       density="compact"
-      loading={loading}
+      loading={loading || updating}
       disableColumnMenu={true}
-      rows={filteredRow}
-      columns={productColumnList}
+      rows={rows}
+      columns={columns}
       slotProps={{
         toolbar: {
           showQuickFilter: true,
@@ -100,9 +89,8 @@ const ProductGrid = () => {
         },
       }}
       slots={{
-        loadingOverlay: LoadingRow,
         noRowsOverlay: EmptyRow,
-        toolbar: Toolbar,
+        toolbar: (params) => <Toolbar column={columns} {...params} />,
       }}
       localeText={{
         MuiTablePagination: {
