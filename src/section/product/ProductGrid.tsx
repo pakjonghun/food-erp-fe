@@ -6,6 +6,8 @@ import { useUpdateProduct } from '@/graphql/hooks/product/updateProduct';
 import { Products } from '@/graphql/codegen/graphql';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import useGetColumn from './useGetColumn';
+import { AxiosError } from 'axios';
+import { ApolloError } from '@apollo/client';
 
 interface Props {
   rows: any[];
@@ -49,9 +51,7 @@ const ProductGrid: FC<Props> = ({ rows, loading }) => {
 
       snack({ message: '업데이트가 완료되었습니다.', variant: 'success' });
       return result.data?.updateProduct ?? oldRow;
-    } catch (e) {
-      console.log(e);
-
+    } catch (err) {
       snack({ message: '업데이트가 실패하였습니다.', variant: 'error' });
       return oldRow;
     }
@@ -62,7 +62,7 @@ const ProductGrid: FC<Props> = ({ rows, loading }) => {
     setEditField(field);
   };
 
-  const handleEditError = (err: any) => {
+  const handleEditError = () => {
     snack({ message: '업데이트가 실패하였습니다.', variant: 'error' });
     setEditField(null);
   };
