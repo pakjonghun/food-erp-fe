@@ -27,6 +27,7 @@ const ProductCategoryUpload: FC<Props> = ({ sx }) => {
     if (err) {
       const message = err.response?.data?.message || err.message;
       snack({ message: message ?? '', title: err.name ?? '', variant: 'error' });
+      setLoading(false);
     } else {
       setTimeout(() => {
         client.cache.evict({

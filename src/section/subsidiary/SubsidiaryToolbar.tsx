@@ -55,7 +55,7 @@ const SubsidiaryToolbar: FC<Props> = ({ column }) => {
       },
       onCompleted: () => {
         setSnack({ message: '삭제가 완료되었습니다.', variant: 'success' });
-        client.cache.evict({ fieldName: 'subsidiarys', broadcast: true });
+        client.cache.evict({ fieldName: 'subsidiaries', broadcast: true });
       },
       onError: (err) => {
         setSnack({ message: err?.message ?? '삭제가 실패하였습니다.', variant: 'error' });

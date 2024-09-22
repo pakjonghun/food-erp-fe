@@ -25,6 +25,7 @@ const ProductUpload: FC<Props> = ({ sx }) => {
     if (err) {
       const message = err.response?.data?.message || err.message;
       setSnack({ message: message ?? '', title: err.name ?? '', variant: 'error' });
+      setLoading(false);
     } else {
       setTimeout(() => {
         client.cache.evict({
