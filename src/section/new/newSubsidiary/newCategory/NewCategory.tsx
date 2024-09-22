@@ -41,7 +41,16 @@ const NewCategory: FC<Props> = ({ onClose, onSuccess }) => {
     });
   };
   return (
-    <Stack flexDirection="row" gap={1} alignItems="flex-start">
+    <Stack
+      sx={{
+        flexDirection: {
+          xs: 'column',
+          sm: 'row',
+        },
+      }}
+      flexDirection="row"
+      gap={1}
+    >
       <FormStack sx={{ flex: 1, gap: 1 }}>
         <Controller
           control={methods.control}
