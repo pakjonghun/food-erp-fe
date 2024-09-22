@@ -7,6 +7,7 @@ import { navExpand, navOpen } from '@/store/nav';
 import { useTheme } from '@emotion/react';
 import Iconify from '../icon/Iconify';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 interface Props {
   nav: ReactNode;
@@ -15,12 +16,17 @@ interface Props {
 }
 
 const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
+  const path = usePathname();
   const isNavOpen = useReactiveVar(navOpen);
   const isNavExpand = useReactiveVar(navExpand);
   const navWidth = isNavExpand ? 'var(--nav-width)' : 'var(--nav-mini-width)';
   const navWidthVar = isNavOpen ? navWidth : 0;
   const theme = useTheme() as Theme;
   const isDownMd = useMediaQuery(theme.breakpoints.down('md'));
+
+  useEffect(() => {
+    navOpen(false);
+  }, [path]);
 
   useEffect(() => {
     if (isDownMd) {
