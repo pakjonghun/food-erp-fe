@@ -2,6 +2,7 @@
 
 import FormStack from '@/components/form/FormStack';
 import { useSnack } from '@/context/snackContext/SnackProvider';
+import { ProductCategories } from '@/graphql/codegen/graphql';
 import { useCreateProductCategory } from '@/graphql/hooks/productCategory/createProductCategory';
 import { IdNameForm, idNameSchema } from '@/validations/idName';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,9 +12,10 @@ import { Controller, useForm } from 'react-hook-form';
 
 interface Props {
   onClose: () => void;
+  onSuccess: (newItem: IdNameForm) => void;
 }
 
-const NewCategory: FC<Props> = ({ onClose }) => {
+const NewCategory: FC<Props> = ({ onClose, onSuccess }) => {
   const methods = useForm<IdNameForm>({
     resolver: zodResolver(idNameSchema),
     defaultValues: { id: '', name: '' },
@@ -21,7 +23,6 @@ const NewCategory: FC<Props> = ({ onClose }) => {
   });
 
   const snack = useSnack();
-
   const [createCategory, { loading: categoryCreating }] = useCreateProductCategory();
   const onSubmit = () => {
     const values = methods.getValues();
@@ -31,6 +32,7 @@ const NewCategory: FC<Props> = ({ onClose }) => {
       },
       onCompleted: () => {
         snack({ message: '카테고리 등록이 완료되었습니다.', variant: 'success' });
+        onSuccess(values);
         onClose();
       },
       onError: (err) => {

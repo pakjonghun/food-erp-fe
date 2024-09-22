@@ -177,7 +177,7 @@ const NewProduct = () => {
                       </Button>
                     </Stack>
                     <Collapse timeout="auto" in={showCreateCategory} unmountOnExit>
-                      <NewCategory onClose={handleCancelCategory} />
+                      <NewCategory onSuccess={field.onChange} onClose={handleCancelCategory} />
                     </Collapse>
                   </Stack>
                 );
