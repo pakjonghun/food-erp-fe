@@ -1,32 +1,32 @@
 import { DataGrid, GridCellEditStartParams } from '@mui/x-data-grid';
-import Toolbar from './ProductCategoryToolbar';
+import Toolbar from './SubsidiaryCategoryToolbar';
 import EmptyRow from '@/components/dataGrid/EmptyRow';
 import { FC, useCallback, useState } from 'react';
-import { Products } from '@/graphql/codegen/graphql';
+import { Subsidiaries } from '@/graphql/codegen/graphql';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import useGetColumn from './useGetColumn';
 import { ApolloError } from '@apollo/client';
-import { useUpdateProductCategory } from '@/graphql/hooks/productCategory/updateProductCategory';
+import { useUpdateSubsidiaryCategory } from '@/graphql/hooks/subsidiaryCategory/update';
 
 interface Props {
   rows: any[];
   loading: boolean;
 }
 
-const ProductCategoryGrid: FC<Props> = ({ rows, loading }) => {
-  const [updateProductCategory, { loading: updating }] = useUpdateProductCategory();
+const SubsidiaryCategoryGrid: FC<Props> = ({ rows, loading }) => {
+  const [updateSubsidiaryCategory, { loading: updating }] = useUpdateSubsidiaryCategory();
 
-  const [editField, setEditField] = useState<keyof Products | null>('name');
+  const [editField, setEditField] = useState<keyof Subsidiaries | null>('name');
   const snack = useSnack();
 
-  const handleCellUpdate = async (newRow: Products, oldRow: any) => {
+  const handleCellUpdate = async (newRow: Subsidiaries, oldRow: any) => {
     try {
       if (!editField) {
         return oldRow;
       }
       const rowId = newRow.id;
-      let newValue = newRow[editField as keyof Products];
-      let oldValue = oldRow[editField as keyof Products];
+      let newValue = newRow[editField as keyof Subsidiaries];
+      let oldValue = oldRow[editField as keyof Subsidiaries];
       let field: string = editField;
 
       if (!newValue) {
@@ -38,17 +38,17 @@ const ProductCategoryGrid: FC<Props> = ({ rows, loading }) => {
         return oldRow;
       }
 
-      const result = await updateProductCategory({
+      const result = await updateSubsidiaryCategory({
         variables: {
-          updateProductCategoryInput: {
+          updateSubsidiaryCategoryInput: {
             id: rowId,
-            [field as keyof Products]: newValue,
+            [field as keyof Subsidiaries]: newValue,
           },
         },
       });
 
       snack({ message: '업데이트가 완료되었습니다.', variant: 'success' });
-      return result.data?.updateProductCategory ?? oldRow;
+      return result.data?.updateSubsidiaryCategory ?? oldRow;
     } catch (err: unknown) {
       const apolloError = err as ApolloError;
 
@@ -58,7 +58,7 @@ const ProductCategoryGrid: FC<Props> = ({ rows, loading }) => {
   };
 
   const handleCellEditStart = (params: GridCellEditStartParams) => {
-    const field = params.field as keyof Products;
+    const field = params.field as keyof Subsidiaries;
     setEditField(field);
   };
 
@@ -104,4 +104,4 @@ const ProductCategoryGrid: FC<Props> = ({ rows, loading }) => {
   );
 };
 
-export default ProductCategoryGrid;
+export default SubsidiaryCategoryGrid;

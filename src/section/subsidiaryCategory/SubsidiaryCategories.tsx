@@ -2,24 +2,24 @@
 
 import { useEffect } from 'react';
 import { useReactiveVar } from '@apollo/client';
-import ProductCategoryGrid from './ProductCategoryGrid';
+import SubsidiaryCategoryGrid from './SubsidiaryCategoryGrid';
 import {
-  productCategoryCount,
-  productCategoryKeyword,
-  productCategoryTarget,
+  subsidiaryCategoryCount,
+  subsidiaryCategoryKeyword,
+  subsidiaryCategoryTarget,
 } from '@/store/backdata';
-import { useProductCategories } from '@/graphql/hooks/productCategory/productCategories';
+import { useSubsidiaryCategories } from '@/graphql/hooks/subsidiaryCategory/subsidiaryCategories';
 
-const ProductCategory = () => {
-  const target = useReactiveVar(productCategoryTarget);
-  const keyword = useReactiveVar(productCategoryKeyword);
+const SubsidiaryCategory = () => {
+  const target = useReactiveVar(subsidiaryCategoryTarget);
+  const keyword = useReactiveVar(subsidiaryCategoryKeyword);
 
   const handleSetCount = (count: number) => {
-    productCategoryCount(count);
+    subsidiaryCategoryCount(count);
   };
 
-  const { data, loading } = useProductCategories();
-  const rows = data?.productCategories.data ?? [];
+  const { data, loading } = useSubsidiaryCategories();
+  const rows = data?.subsidiaryCategories.data ?? [];
   const filteredRow = rows.filter((row) => {
     const value = row[target as keyof typeof row];
     return !!value?.toLowerCase().includes(keyword.toLowerCase());
@@ -31,7 +31,7 @@ const ProductCategory = () => {
     }
   }, [filteredRow.length]);
 
-  return <ProductCategoryGrid rows={filteredRow} loading={loading} />;
+  return <SubsidiaryCategoryGrid rows={filteredRow} loading={loading} />;
 };
 
-export default ProductCategory;
+export default SubsidiaryCategory;

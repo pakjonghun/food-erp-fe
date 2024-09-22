@@ -19,14 +19,14 @@ const NewSubsidiaryCategory = () => {
   });
 
   const snack = useSnack();
-  const [createCategory, { loading: creating }] = useCreateSubsidiaryCategory();
+  const [create, { loading: creating }] = useCreateSubsidiaryCategory();
 
   const handleClose = () => {
     router.back();
   };
 
   const onSubmit = (values: IdNameForm) => {
-    createCategory({
+    create({
       variables: {
         createSubsidiaryCategoryInput: values,
       },

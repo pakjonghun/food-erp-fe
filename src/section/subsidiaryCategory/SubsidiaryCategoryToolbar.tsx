@@ -1,12 +1,12 @@
 import Iconify from '@/components/icon/Iconify';
 import { Button, CircularProgress, Theme, useMediaQuery } from '@mui/material';
 import { GridColDef, gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
-import ProductUpload from './ProductCategoryUpload';
+import SubsidiaryUpload from './SubsidiaryCategoryUpload';
 import { FC, useCallback, useEffect, useState } from 'react';
 import {
-  productCategoryCount,
-  productCategoryKeyword,
-  productCategoryTarget,
+  subsidiaryCategoryCount,
+  subsidiaryCategoryKeyword,
+  subsidiaryCategoryTarget,
 } from '@/store/backdata';
 import { useReactiveVar } from '@apollo/client';
 import useTextDebounce from '@/hooks/useTextDebounce';
@@ -14,7 +14,7 @@ import BaseToolbar from '@/components/dataGrid/BaseToolbar';
 import { client } from '@/graphql/client/apolloClient';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { useTheme } from '@emotion/react';
-import { useRemoveManyProductCategory } from '@/graphql/hooks/productCategory/removeMany';
+import { useRemoveManySubsidiaryCategory } from '@/graphql/hooks/subsidiaryCategory/removeMany';
 
 const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(apiRef);
 
@@ -22,15 +22,16 @@ interface Props {
   column: GridColDef[];
 }
 
-const ProductCategoryToolbar: FC<Props> = ({ column }) => {
+const SubsidiaryCategoryToolbar: FC<Props> = ({ column }) => {
   const [keyword, setKeyword] = useState('');
   const delayText = useTextDebounce({ keyword });
-  const handleChangeTarget = (target: string) => productCategoryTarget(target);
-  const handleChangeProductCategoryKeyword = (target: string) => productCategoryKeyword(target);
-  const searchCount = useReactiveVar(productCategoryCount);
-  const target = useReactiveVar(productCategoryTarget);
+  const handleChangeTarget = (target: string) => subsidiaryCategoryTarget(target);
+  const handleChangeSubsidiaryCategoryKeyword = (target: string) =>
+    subsidiaryCategoryKeyword(target);
+  const searchCount = useReactiveVar(subsidiaryCategoryCount);
+  const target = useReactiveVar(subsidiaryCategoryTarget);
 
-  const [removeCategoryList, { loading }] = useRemoveManyProductCategory();
+  const [removeCategoryList, { loading }] = useRemoveManySubsidiaryCategory();
   const setSnack = useSnack();
 
   const handleChangeKeyword = useCallback((value: string) => {
@@ -38,7 +39,7 @@ const ProductCategoryToolbar: FC<Props> = ({ column }) => {
   }, []);
 
   useEffect(() => {
-    handleChangeProductCategoryKeyword(delayText);
+    handleChangeSubsidiaryCategoryKeyword(delayText);
   }, [delayText]);
 
   const apiRef = useGridApiContext();
@@ -58,7 +59,7 @@ const ProductCategoryToolbar: FC<Props> = ({ column }) => {
       },
       onCompleted: () => {
         setSnack({ message: '삭제가 완료되었습니다.', variant: 'success' });
-        client.cache.evict({ fieldName: 'productCategories', broadcast: true });
+        client.cache.evict({ fieldName: 'subsidiaryCategories', broadcast: true });
       },
       onError: (err) => {
         setSnack({ message: err?.message ?? '삭제가 실패하였습니다.', variant: 'error' });
@@ -93,7 +94,7 @@ const ProductCategoryToolbar: FC<Props> = ({ column }) => {
               }
             >{`${selectedSize}개 선택 삭제`}</Button>
           )}
-          <ProductUpload sx={{ width: { xs: '100%', sm: 'auto' } }} />
+          <SubsidiaryUpload sx={{ width: { xs: '100%', sm: 'auto' } }} />
           <Button
             variant={isDownSm ? 'contained' : 'text'}
             size="small"
@@ -109,4 +110,4 @@ const ProductCategoryToolbar: FC<Props> = ({ column }) => {
   );
 };
 
-export default ProductCategoryToolbar;
+export default SubsidiaryCategoryToolbar;

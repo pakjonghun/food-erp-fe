@@ -12,7 +12,7 @@ interface Props {
   sx?: SxProps;
 }
 
-const ProductCategoryUpload: FC<Props> = ({ sx }) => {
+const SubsidiaryCategoryUpload: FC<Props> = ({ sx }) => {
   const snack = useSnack();
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,7 @@ const ProductCategoryUpload: FC<Props> = ({ sx }) => {
       return;
     }
     setLoading(true);
-    const err = (await uploadExcelFile('product-category', inputFile)) as AxiosError<{
+    const err = (await uploadExcelFile('subsidiary-category', inputFile)) as AxiosError<{
       message: string;
     }>;
     if (err) {
@@ -32,7 +32,7 @@ const ProductCategoryUpload: FC<Props> = ({ sx }) => {
       setTimeout(() => {
         client.cache.evict({
           id: 'ROOT_QUERY',
-          fieldName: 'productCategories',
+          fieldName: 'subsidiaryCategories',
         });
         client.cache.gc();
         setLoading(false);
@@ -51,4 +51,4 @@ const ProductCategoryUpload: FC<Props> = ({ sx }) => {
   );
 };
 
-export default ProductCategoryUpload;
+export default SubsidiaryCategoryUpload;

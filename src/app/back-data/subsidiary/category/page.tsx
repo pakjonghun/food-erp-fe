@@ -1,7 +1,7 @@
-import ProductCategory from '@/section/productCategory/ProductCategory';
+import SubsidiaryCategory from '@/section/subsidiaryCategory/SubsidiaryCategories';
 
 const ProductCategoryPage = () => {
-  return <ProductCategory />;
+  return <SubsidiaryCategory />;
 };
 
 export default ProductCategoryPage;
