@@ -1,7 +1,7 @@
-import ProductSection from '@/section/product/Product';
+import Product from '@/section/product/Product';
 
 const BackDataPage = () => {
-  return <ProductSection />;
+  return <Product />;
 };
 
 export default BackDataPage;

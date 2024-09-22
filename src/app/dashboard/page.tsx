@@ -5,7 +5,7 @@ import { downloadParsedExcelFile } from '@/actions/upload';
 import Iconify from '@/components/icon/Iconify';
 import FileUploadInput from '@/components/input/FileUploadInput';
 import { useSnack } from '@/context/snackContext/SnackProvider';
-import ProductSection from '@/section/product/Product';
+import Product from '@/section/product/Product';
 import { Box, Card, CircularProgress, Typography } from '@mui/material';
 import { AxiosError } from 'axios';
 import { useState } from 'react';
@@ -67,7 +67,7 @@ const DashboardPage = () => {
         </Box>
       </Card>
       <Card sx={{ height: 3, flexGrow: 1, pb: 2 }} variant="elevation" elevation={2}>
-        <ProductSection />
+        <Product />
       </Card>
     </Box>
   );

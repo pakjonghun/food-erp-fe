@@ -6,7 +6,7 @@ import { productCount, productKeyword, productTarget } from '@/store/backdata';
 import { useProducts } from '@/graphql/hooks/product/products';
 import { useEffect } from 'react';
 
-const Product = () => {
+const ProductCategory = () => {
   const target = useReactiveVar(productTarget);
   const keyword = useReactiveVar(productKeyword);
 
@@ -38,4 +38,4 @@ const Product = () => {
   return <ProductGrid rows={filteredRow} loading={loading} />;
 };
 
-export default Product;
+export default ProductCategory;
