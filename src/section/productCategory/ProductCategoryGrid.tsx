@@ -1,7 +1,7 @@
 import { DataGrid, GridCellEditStartParams } from '@mui/x-data-grid';
 import Toolbar from './ProductCategoryToolbar';
 import EmptyRow from '@/components/dataGrid/EmptyRow';
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { Products } from '@/graphql/codegen/graphql';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import useGetColumn from './useGetColumn';
@@ -68,6 +68,8 @@ const ProductCategoryGrid: FC<Props> = ({ rows, loading }) => {
   };
 
   const columns = useGetColumn();
+  const toolbar = useCallback((params: any) => <Toolbar column={columns} {...params} />, []);
+
   return (
     <DataGrid
       onProcessRowUpdateError={handleEditError}
@@ -90,7 +92,7 @@ const ProductCategoryGrid: FC<Props> = ({ rows, loading }) => {
       }}
       slots={{
         noRowsOverlay: EmptyRow,
-        toolbar: (params) => <Toolbar column={columns} {...params} />,
+        toolbar,
       }}
       localeText={{
         MuiTablePagination: {
