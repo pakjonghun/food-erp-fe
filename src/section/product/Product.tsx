@@ -17,6 +17,10 @@ const Product = () => {
   const { data, loading } = useProducts();
   const rows = data?.products.data ?? [];
   const filteredRow = rows.filter((row) => {
+    if (keyword == '') {
+      return true;
+    }
+
     const value = row[target as keyof typeof row];
     if (typeof value == 'string') {
       return value.toLowerCase().includes(keyword.toLowerCase());
@@ -29,10 +33,6 @@ const Product = () => {
     if (value != null && typeof value == 'object') {
       const realValue = value?.name;
       return realValue?.toLowerCase().includes(keyword.toLowerCase());
-    }
-
-    if (keyword == '') {
-      return true;
     }
 
     return false;

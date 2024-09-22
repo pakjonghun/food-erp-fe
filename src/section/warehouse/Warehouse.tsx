@@ -17,6 +17,10 @@ const Warehouse = () => {
   const { data, loading } = useWarehouses();
   const rows = data?.warehouses.data ?? [];
   const filteredRow = rows.filter((row) => {
+    if (keyword == '') {
+      return true;
+    }
+
     const value = row[target as keyof typeof row];
     return !!value?.toLowerCase().includes(keyword.toLowerCase());
   });
