@@ -1,9 +1,9 @@
 'use client';
 
-import { Box } from '@mui/material';
+import ProductCategory from '@/section/productCategory/ProductCategory';
 
 const ProductCategoryPage = () => {
-  return <Box sx={{ bgcolor: 'pink' }}>category</Box>;
+  return <ProductCategory />;
 };
 
 export default ProductCategoryPage;

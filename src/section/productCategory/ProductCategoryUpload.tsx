@@ -12,8 +12,8 @@ interface Props {
   sx?: SxProps;
 }
 
-const ProductUpload: FC<Props> = ({ sx }) => {
-  const setSnack = useSnack();
+const ProductCategoryUpload: FC<Props> = ({ sx }) => {
+  const snack = useSnack();
   const [loading, setLoading] = useState(false);
 
   const handleChangeFile = async (inputFile?: File) => {
@@ -21,19 +21,21 @@ const ProductUpload: FC<Props> = ({ sx }) => {
       return;
     }
     setLoading(true);
-    const err = (await uploadExcelFile('product', inputFile)) as AxiosError<{ message: string }>;
+    const err = (await uploadExcelFile('product-category', inputFile)) as AxiosError<{
+      message: string;
+    }>;
     if (err) {
       const message = err.response?.data?.message || err.message;
-      setSnack({ message: message ?? '', title: err.name ?? '', variant: 'error' });
+      snack({ message: message ?? '', title: err.name ?? '', variant: 'error' });
     } else {
       setTimeout(() => {
         client.cache.evict({
           id: 'ROOT_QUERY',
-          fieldName: 'products',
+          fieldName: 'productCategories',
         });
         client.cache.gc();
         setLoading(false);
-        setSnack({ message: '파일 업로드가 완료되었습니다.' });
+        snack({ message: '파일 업로드가 완료되었습니다.' });
       }, 500);
     }
   };
@@ -48,4 +50,4 @@ const ProductUpload: FC<Props> = ({ sx }) => {
   );
 };
 
-export default ProductUpload;
+export default ProductCategoryUpload;

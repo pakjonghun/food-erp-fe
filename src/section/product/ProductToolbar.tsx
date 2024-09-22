@@ -21,6 +21,8 @@ interface Props {
 const ProductToolbar: FC<Props> = ({ column }) => {
   const [keyword, setKeyword] = useState('');
   const delayText = useTextDebounce({ keyword });
+
+  console.log('delayText : ', delayText);
   const handleChangeTarget = (target: string) => productTarget(target);
   const handleChangeProductKeyword = (target: string) => productKeyword(target);
   const searchCount = useReactiveVar(productCount);

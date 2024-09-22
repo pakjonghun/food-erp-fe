@@ -1,32 +1,28 @@
 'use client';
 
-import { useReactiveVar } from '@apollo/client';
-import ProductGrid from './ProductGrid';
-import { productCount, productKeyword, productTarget } from '@/store/backdata';
-import { useProducts } from '@/graphql/hooks/product/products';
 import { useEffect } from 'react';
+import { useReactiveVar } from '@apollo/client';
+import ProductCategoryGrid from './ProductCategoryGrid';
+import {
+  productCategoryCount,
+  productCategoryKeyword,
+  productCategoryTarget,
+} from '@/store/backdata';
+import { useProductCategories } from '@/graphql/hooks/productCategory/productCategories';
 
 const ProductCategory = () => {
-  const target = useReactiveVar(productTarget);
-  const keyword = useReactiveVar(productKeyword);
+  const target = useReactiveVar(productCategoryTarget);
+  const keyword = useReactiveVar(productCategoryKeyword);
 
   const handleSetCount = (count: number) => {
-    productCount(count);
+    productCategoryCount(count);
   };
 
-  const { data, loading } = useProducts();
-  const rows = data?.products.data ?? [];
+  const { data, loading } = useProductCategories();
+  const rows = data?.productCategories.data ?? [];
   const filteredRow = rows.filter((row) => {
     const value = row[target as keyof typeof row];
-    if (typeof value == 'string') {
-      return value.toLowerCase().includes(keyword.toLowerCase());
-    }
-
-    if (typeof value == 'number') {
-      return value.toString().includes(keyword);
-    }
-
-    return true;
+    return !!value?.toLowerCase().includes(keyword.toLowerCase());
   });
 
   useEffect(() => {
@@ -35,7 +31,7 @@ const ProductCategory = () => {
     }
   }, [filteredRow.length]);
 
-  return <ProductGrid rows={filteredRow} loading={loading} />;
+  return <ProductCategoryGrid rows={filteredRow} loading={loading} />;
 };
 
 export default ProductCategory;

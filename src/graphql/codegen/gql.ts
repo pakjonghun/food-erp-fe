@@ -20,6 +20,8 @@ const documents = {
     "\n  mutation updateProduct($updateProductInput: UpdateProductInput!) {\n    updateProduct(updateProductInput: $updateProductInput) {\n      id\n      name\n      barCode\n      wonPrice\n      salePrice\n      leadTime\n      deliveryType\n      category {\n        id\n        name\n      }\n    }\n  }\n": types.UpdateProductDocument,
     "\n  mutation createProductCategory($createProductCategoryInput: CreateProductCategoryInput!) {\n    createProductCategory(createProductCategoryInput: $createProductCategoryInput) {\n      id\n      name\n    }\n  }\n": types.CreateProductCategoryDocument,
     "\n  query productCategories {\n    productCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n": types.ProductCategoriesDocument,
+    "\n  mutation removeManyProductCategory($idListInput: IdListInput!) {\n    removeManyProductCategory(idListInput: $idListInput)\n  }\n": types.RemoveManyProductCategoryDocument,
+    "\n  mutation updateProductCategory($updateProductCategoryInput: UpdateProductCategoryInput!) {\n    updateProductCategory(updateProductCategoryInput: $updateProductCategoryInput) {\n      id\n      name\n    }\n  }\n": types.UpdateProductCategoryDocument,
 };
 
 /**
@@ -64,6 +66,14 @@ export function graphql(source: "\n  mutation createProductCategory($createProdu
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query productCategories {\n    productCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query productCategories {\n    productCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation removeManyProductCategory($idListInput: IdListInput!) {\n    removeManyProductCategory(idListInput: $idListInput)\n  }\n"): (typeof documents)["\n  mutation removeManyProductCategory($idListInput: IdListInput!) {\n    removeManyProductCategory(idListInput: $idListInput)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation updateProductCategory($updateProductCategoryInput: UpdateProductCategoryInput!) {\n    updateProductCategory(updateProductCategoryInput: $updateProductCategoryInput) {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation updateProductCategory($updateProductCategoryInput: UpdateProductCategoryInput!) {\n    updateProductCategory(updateProductCategoryInput: $updateProductCategoryInput) {\n      id\n      name\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

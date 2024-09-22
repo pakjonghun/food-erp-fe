@@ -1,20 +1,20 @@
-import { DataGrid, GridCellEditStartParams, useGridApiRef } from '@mui/x-data-grid';
-import Toolbar from './ProductToolbar';
+import { DataGrid, GridCellEditStartParams } from '@mui/x-data-grid';
+import Toolbar from './ProductCategoryToolbar';
 import EmptyRow from '@/components/dataGrid/EmptyRow';
 import { FC, useState } from 'react';
-import { useUpdateProduct } from '@/graphql/hooks/product/updateProduct';
 import { Products } from '@/graphql/codegen/graphql';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import useGetColumn from './useGetColumn';
 import { ApolloError } from '@apollo/client';
+import { useUpdateProductCategory } from '@/graphql/hooks/productCategory/updateProductCategory';
 
 interface Props {
   rows: any[];
   loading: boolean;
 }
 
-const ProductGrid: FC<Props> = ({ rows, loading }) => {
-  const [updateProduct, { loading: updating }] = useUpdateProduct();
+const ProductCategoryGrid: FC<Props> = ({ rows, loading }) => {
+  const [updateProductCategory, { loading: updating }] = useUpdateProductCategory();
 
   const [editField, setEditField] = useState<keyof Products | null>('name');
   const snack = useSnack();
@@ -29,19 +29,18 @@ const ProductGrid: FC<Props> = ({ rows, loading }) => {
       let oldValue = oldRow[editField as keyof Products];
       let field: string = editField;
 
-      if (editField == 'category') {
-        newValue = newValue?.name ?? null;
-        oldValue = oldValue?.name ?? null;
-        field = 'categoryName';
+      if (!newValue) {
+        snack({ message: '카테고리 이름을 입력하세요.', variant: 'error' });
+        return oldRow;
       }
 
       if (newValue == oldValue) {
         return oldRow;
       }
 
-      const result = await updateProduct({
+      const result = await updateProductCategory({
         variables: {
-          updateProductInput: {
+          updateProductCategoryInput: {
             id: rowId,
             [field as keyof Products]: newValue,
           },
@@ -49,7 +48,7 @@ const ProductGrid: FC<Props> = ({ rows, loading }) => {
       });
 
       snack({ message: '업데이트가 완료되었습니다.', variant: 'success' });
-      return result.data?.updateProduct ?? oldRow;
+      return result.data?.updateProductCategory ?? oldRow;
     } catch (err: unknown) {
       const apolloError = err as ApolloError;
 
@@ -68,11 +67,9 @@ const ProductGrid: FC<Props> = ({ rows, loading }) => {
     setEditField(null);
   };
 
-  const apiRef = useGridApiRef();
-  const columns = useGetColumn(apiRef.current);
+  const columns = useGetColumn();
   return (
     <DataGrid
-      apiRef={apiRef}
       onProcessRowUpdateError={handleEditError}
       onCellEditStart={handleCellEditStart}
       processRowUpdate={handleCellUpdate}
@@ -105,4 +102,4 @@ const ProductGrid: FC<Props> = ({ rows, loading }) => {
   );
 };
 
-export default ProductGrid;
+export default ProductCategoryGrid;

@@ -1,9 +1,16 @@
 import Iconify from '@/components/icon/Iconify';
 import { Button, CircularProgress, Theme, useMediaQuery } from '@mui/material';
 import { GridColDef, gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
-import ProductUpload from './ProductUpload';
+import ProductUpload from './ProductCategoryUpload';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { productCount, productKeyword, productTarget } from '@/store/backdata';
+import {
+  productCategoryCount,
+  productCategoryKeyword,
+  productCategoryTarget,
+  productCount,
+  productKeyword,
+  productTarget,
+} from '@/store/backdata';
 import { useReactiveVar } from '@apollo/client';
 import useTextDebounce from '@/hooks/useTextDebounce';
 import BaseToolbar from '@/components/dataGrid/BaseToolbar';
@@ -11,6 +18,8 @@ import { useRemoveManyProduct } from '@/graphql/hooks/product/removeMany';
 import { client } from '@/graphql/client/apolloClient';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { useTheme } from '@emotion/react';
+import { RemoveManyProductCategoryDocument } from '@/graphql/codegen/graphql';
+import { useRemoveManyProductCategory } from '@/graphql/hooks/productCategory/removeMany';
 
 const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(apiRef);
 
@@ -18,15 +27,15 @@ interface Props {
   column: GridColDef[];
 }
 
-const ProductToolbar: FC<Props> = ({ column }) => {
+const ProductCategoryToolbar: FC<Props> = ({ column }) => {
   const [keyword, setKeyword] = useState('');
   const delayText = useTextDebounce({ keyword });
-  const handleChangeTarget = (target: string) => productTarget(target);
-  const handleChangeProductKeyword = (target: string) => productKeyword(target);
-  const searchCount = useReactiveVar(productCount);
-  const target = useReactiveVar(productTarget);
+  const handleChangeTarget = (target: string) => productCategoryTarget(target);
+  const handleChangeProductCategoryKeyword = (target: string) => productCategoryKeyword(target);
+  const searchCount = useReactiveVar(productCategoryCount);
+  const target = useReactiveVar(productCategoryTarget);
 
-  const [removeProductList, { loading }] = useRemoveManyProduct();
+  const [removeCategoryList, { loading }] = useRemoveManyProductCategory();
   const setSnack = useSnack();
 
   const handleChangeKeyword = useCallback((value: string) => {
@@ -34,7 +43,7 @@ const ProductToolbar: FC<Props> = ({ column }) => {
   }, []);
 
   useEffect(() => {
-    handleChangeProductKeyword(delayText);
+    handleChangeProductCategoryKeyword(delayText);
   }, [delayText]);
 
   const apiRef = useGridApiContext();
@@ -46,7 +55,7 @@ const ProductToolbar: FC<Props> = ({ column }) => {
 
   const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
   const handleClickDelete = () => {
-    removeProductList({
+    removeCategoryList({
       variables: {
         idListInput: {
           idList: selectedIds,
@@ -54,7 +63,7 @@ const ProductToolbar: FC<Props> = ({ column }) => {
       },
       onCompleted: () => {
         setSnack({ message: '삭제가 완료되었습니다.', variant: 'success' });
-        client.cache.evict({ fieldName: 'products', broadcast: true });
+        client.cache.evict({ fieldName: 'productCategories', broadcast: true });
       },
       onError: (err) => {
         setSnack({ message: err?.message ?? '삭제가 실패하였습니다.', variant: 'error' });
@@ -105,4 +114,4 @@ const ProductToolbar: FC<Props> = ({ column }) => {
   );
 };
 
-export default ProductToolbar;
+export default ProductCategoryToolbar;
