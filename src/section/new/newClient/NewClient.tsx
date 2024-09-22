@@ -195,7 +195,6 @@ const NewClient = () => {
                 return (
                   <TextField
                     {...field}
-                    autoFocus
                     fullWidth
                     error={!!errorMessage}
                     helperText={errorMessage}
@@ -212,7 +211,6 @@ const NewClient = () => {
                 return (
                   <TextField
                     {...field}
-                    autoFocus
                     fullWidth
                     error={!!errorMessage}
                     helperText={errorMessage}
@@ -231,7 +229,6 @@ const NewClient = () => {
                 return (
                   <TextField
                     {...field}
-                    autoFocus
                     fullWidth
                     error={!!errorMessage}
                     helperText={errorMessage}
@@ -248,7 +245,6 @@ const NewClient = () => {
                 return (
                   <TextField
                     {...field}
-                    autoFocus
                     fullWidth
                     error={!!errorMessage}
                     helperText={errorMessage}
