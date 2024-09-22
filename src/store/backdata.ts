@@ -20,6 +20,16 @@ export const subsidiaryCategoryKeyword = makeVar('');
 export const subsidiaryCategoryTarget = makeVar('name');
 export const subsidiaryCategoryCount = makeVar(0);
 
+//client
+export const clientKeyword = makeVar('');
+export const clientTarget = makeVar('name');
+export const clientCount = makeVar(0);
+
+//clientType
+export const clientTypeKeyword = makeVar('');
+export const clientTypeTarget = makeVar('name');
+export const clientTypeCount = makeVar(0);
+
 //warehouse
 export const warehouseKeyword = makeVar('');
 export const warehouseTarget = makeVar('name');
