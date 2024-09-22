@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AUTH_TOKEN } from './constants/auth';
-import { auth, logout } from './actions/auth';
+import { auth } from './actions/auth';
 import { PATH, publicPathList } from './constants/route';
 
 export async function middleware(request: NextRequest) {
@@ -19,7 +19,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(`/${PATH.dashboard.path}`, request.url));
   }
   if (!isPublic && !isGranted) {
-    await logout();
     return NextResponse.redirect(new URL(`/${PATH['sign-in'].path}`, request.url));
   }
 
@@ -27,5 +26,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|assets|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
+  matcher: [
+    '/((?!api|logout|_next/static|assets|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+  ],
 };

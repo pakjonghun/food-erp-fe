@@ -52,7 +52,18 @@ const Layout: FC<Props> = ({ children }) => {
   return (
     <BackDataLayout actionSection={!back && actionSection}>
       {!back && <RouterTabs tabs={tabs} />}
-      <Box sx={{ flexGrow: 1, height: 3, pb: 3 }}>{children}</Box>
+      <Box
+        sx={{
+          flexGrow: 1,
+          height: {
+            xs: 'auto',
+            sm: 3,
+          },
+          pb: 3,
+        }}
+      >
+        {children}
+      </Box>
     </BackDataLayout>
   );
 };
