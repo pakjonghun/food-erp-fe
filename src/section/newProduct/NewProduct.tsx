@@ -4,10 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Autocomplete,
   Button,
-  Card,
-  CardHeader,
   Collapse,
-  Divider,
   FormControl,
   FormHelperText,
   InputAdornment,
@@ -19,7 +16,6 @@ import {
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { NewProductForm, newProductSchema } from './validate';
-import Form from '@/components/form/Form';
 import { useProductCategories } from '@/graphql/hooks/productCategory/productCategories';
 import FormStack from '@/components/form/FormStack';
 import { DeliveryType } from '@/graphql/codegen/graphql';
@@ -28,8 +24,8 @@ import { useRouter } from 'next/navigation';
 import { useCreateProduct } from '@/graphql/hooks/product/createProduct';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { useState } from 'react';
-import { useCreateProductCategory } from '@/graphql/hooks/productCategory/createProductCategory';
 import NewCategory from './newCategory/NewCategory';
+import NewLayout from '@/layout/new/New';
 
 const NewProduct = () => {
   const [showCreateCategory, setShowCreateCategory] = useState(false);
@@ -89,21 +85,12 @@ const NewProduct = () => {
   };
 
   return (
-    <Form
-      sx={{ maxWidth: 'lg', mx: 'auto', pb: 3 }}
-      onSubmit={methods.handleSubmit(onSubmit)}
+    <NewLayout
       methods={methods}
-    >
-      <Card variant="outlined" sx={{ boxShadow: 1 }}>
-        <CardHeader subheader="새로운 제품 정보를 입력합니다." />
-        <Divider
-          sx={{
-            mb: 3,
-            boxShadow: 0,
-            // borderColor: (theme) => theme.palette.grey[200],
-          }}
-        />
-        <Stack sx={{ gap: 3, mx: 3, mb: 3 }}>
+      subHeader="새로운 제품 정보를 입력합니다."
+      onSubmit={onSubmit}
+      inputSection={
+        <>
           <FormStack>
             <Controller
               control={methods.control}
@@ -293,29 +280,22 @@ const NewProduct = () => {
               }}
             />
           </FormStack>
-        </Stack>
-      </Card>
-      <FormStack
-        sx={{
-          mt: 3,
-          ml: {
-            xs: 'none',
-            sm: 'auto',
-          },
-          gap: 1,
-        }}
-      >
-        <Button disabled={productCreating} variant="outlined" onClick={handleClickCancel}>
-          뒤로가기
-        </Button>
-        <Button
-          disabled={productCreating || Object.keys(methods.formState.errors).length > 0}
-          type="submit"
-        >
-          제품등록
-        </Button>
-      </FormStack>
-    </Form>
+        </>
+      }
+      actionSection={
+        <>
+          <Button disabled={productCreating} variant="outlined" onClick={handleClickCancel}>
+            뒤로가기
+          </Button>
+          <Button
+            disabled={productCreating || Object.keys(methods.formState.errors).length > 0}
+            type="submit"
+          >
+            제품등록
+          </Button>
+        </>
+      }
+    />
   );
 };
 

@@ -2,7 +2,6 @@
 
 import FormStack from '@/components/form/FormStack';
 import { useSnack } from '@/context/snackContext/SnackProvider';
-import { ProductCategories } from '@/graphql/codegen/graphql';
 import { useCreateProductCategory } from '@/graphql/hooks/productCategory/createProductCategory';
 import { IdNameForm, idNameSchema } from '@/validations/idName';
 import { zodResolver } from '@hookform/resolvers/zod';
