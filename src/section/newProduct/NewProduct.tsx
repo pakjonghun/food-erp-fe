@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   CardHeader,
+  Collapse,
   Divider,
   FormControl,
   FormHelperText,
@@ -26,8 +27,12 @@ import Iconify from '@/components/icon/Iconify';
 import { useRouter } from 'next/navigation';
 import { useCreateProduct } from '@/graphql/hooks/product/createProduct';
 import { useSnack } from '@/context/snackContext/SnackProvider';
+import { useState } from 'react';
+import { useCreateProductCategory } from '@/graphql/hooks/productCategory/createProductCategory';
+import NewCategory from './newCategory/NewCategory';
 
 const NewProduct = () => {
+  const [showCreateCategory, setShowCreateCategory] = useState(false);
   const router = useRouter();
   const [createProduct, { loading: productCreating }] = useCreateProduct();
   const { data, loading } = useProductCategories();
@@ -73,6 +78,14 @@ const NewProduct = () => {
         snack({ message: errMessage ?? '제품등록이 실패했습니다.', variant: 'error' });
       },
     });
+  };
+
+  const handleShowNewCategory = () => {
+    setShowCreateCategory((prev) => !prev);
+  };
+
+  const handleCancelCategory = () => {
+    setShowCreateCategory(false);
   };
 
   return (
@@ -135,27 +148,42 @@ const NewProduct = () => {
               render={({ field, fieldState }) => {
                 const errorMessage = fieldState.error?.message ?? '';
                 return (
-                  <Autocomplete
-                    fullWidth
-                    getOptionLabel={(o) => o.name}
-                    isOptionEqualToValue={(a, b) => a.id == b.id}
-                    onChange={(_, v) => field.onChange(v)}
-                    value={field.value ?? null}
-                    loading={loading}
-                    loadingText="카테고리를 검색중입니다."
-                    options={categories}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        error={!!errorMessage}
-                        helperText={errorMessage}
-                        label="카테고리"
+                  <Stack sx={{ width: '100%' }} flexDirection="column" gap={1}>
+                    <Stack flexDirection="row" gap={1}>
+                      <Autocomplete
+                        fullWidth
+                        getOptionLabel={(o) => o.name}
+                        isOptionEqualToValue={(a, b) => a.id == b.id}
+                        onChange={(_, v) => field.onChange(v)}
+                        value={field.value ?? null}
+                        loading={loading}
+                        loadingText="카테고리를 검색중입니다."
+                        options={categories}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            error={!!errorMessage}
+                            helperText={errorMessage}
+                            label="카테고리"
+                          />
+                        )}
                       />
-                    )}
-                  />
+                      <Button
+                        size="small"
+                        sx={{ textWrap: 'nowrap' }}
+                        onClick={handleShowNewCategory}
+                      >
+                        새 카테고리
+                      </Button>
+                    </Stack>
+                    <Collapse timeout="auto" in={showCreateCategory} unmountOnExit>
+                      <NewCategory onClose={handleCancelCategory} />
+                    </Collapse>
+                  </Stack>
                 );
               }}
             />
+
             <Controller
               control={methods.control}
               name="barCode"
@@ -279,7 +307,10 @@ const NewProduct = () => {
         <Button disabled={productCreating} variant="outlined" onClick={handleClickCancel}>
           뒤로가기
         </Button>
-        <Button disabled={productCreating} type="submit">
+        <Button
+          disabled={productCreating || Object.keys(methods.formState.errors).length > 0}
+          type="submit"
+        >
           제품등록
         </Button>
       </FormStack>
