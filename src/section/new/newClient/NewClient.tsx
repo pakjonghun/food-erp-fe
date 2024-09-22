@@ -288,7 +288,7 @@ const NewClient = () => {
                     />
                     <Button
                       size="small"
-                      sx={{ textWrap: 'nowrap' }}
+                      sx={{ textWrap: 'nowrap', px: 3 }}
                       onClick={handleShowNewCategory}
                     >
                       새 거래처 타입

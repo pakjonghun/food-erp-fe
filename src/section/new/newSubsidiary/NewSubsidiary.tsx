@@ -139,7 +139,7 @@ const NewSubsidiary = () => {
                       />
                       <Button
                         size="small"
-                        sx={{ textWrap: 'nowrap' }}
+                        sx={{ textWrap: 'nowrap', px: 3 }}
                         onClick={handleShowNewCategory}
                       >
                         새 카테고리
