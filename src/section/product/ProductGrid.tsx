@@ -33,10 +33,10 @@ const ProductGrid: FC<Props> = ({ rows, loading }) => {
         newValue = newValue?.name ?? null;
         oldValue = oldValue?.name ?? null;
         field = 'categoryName';
-      } else {
-        if (newValue == oldValue) {
-          return oldRow;
-        }
+      }
+
+      if (newValue == oldValue) {
+        return oldRow;
       }
 
       const result = await updateProduct({
