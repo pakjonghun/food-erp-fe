@@ -15,13 +15,21 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  mutation login($loginInput: LoginInput!) {\n    login(loginInput: $loginInput)\n  }\n": types.LoginDocument,
     "\n  mutation createProduct($createProductInput: CreateProductInput!) {\n    createProduct(createProductInput: $createProductInput) {\n      id\n      name\n      barCode\n      wonPrice\n      salePrice\n      leadTime\n      deliveryType\n      category {\n        id\n        name\n      }\n    }\n  }\n": types.CreateProductDocument,
-    "\n  query products {\n    products {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        salePrice\n        barCode\n        leadTime\n        deliveryType\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n": types.ProductsDocument,
+    "\n  query products {\n    products {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        salePrice\n        barCode\n        deliveryType\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n": types.ProductsDocument,
     "\n  mutation removeManyProduct($idListInput: IdListInput!) {\n    removeManyProduct(idListInput: $idListInput)\n  }\n": types.RemoveManyProductDocument,
     "\n  mutation updateProduct($updateProductInput: UpdateProductInput!) {\n    updateProduct(updateProductInput: $updateProductInput) {\n      id\n      name\n      barCode\n      wonPrice\n      salePrice\n      leadTime\n      deliveryType\n      category {\n        id\n        name\n      }\n    }\n  }\n": types.UpdateProductDocument,
     "\n  mutation createProductCategory($createProductCategoryInput: CreateProductCategoryInput!) {\n    createProductCategory(createProductCategoryInput: $createProductCategoryInput) {\n      id\n      name\n    }\n  }\n": types.CreateProductCategoryDocument,
     "\n  query productCategories {\n    productCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n": types.ProductCategoriesDocument,
     "\n  mutation removeManyProductCategory($idListInput: IdListInput!) {\n    removeManyProductCategory(idListInput: $idListInput)\n  }\n": types.RemoveManyProductCategoryDocument,
     "\n  mutation updateProductCategory($updateProductCategoryInput: UpdateProductCategoryInput!) {\n    updateProductCategory(updateProductCategoryInput: $updateProductCategoryInput) {\n      id\n      name\n    }\n  }\n": types.UpdateProductCategoryDocument,
+    "\n  mutation createSubsidiary($createSubsidiaryInput: CreateSubsidiaryInput!) {\n    createSubsidiary(createSubsidiaryInput: $createSubsidiaryInput) {\n      id\n      name\n      wonPrice\n      leadTime\n      category {\n        id\n        name\n      }\n    }\n  }\n": types.CreateSubsidiaryDocument,
+    "\n  mutation removeManySubsidiary($idListInput: IdListInput!) {\n    removeManySubsidiary(idListInput: $idListInput)\n  }\n": types.RemoveManySubsidiaryDocument,
+    "\n  query subsidiaries {\n    subsidiaries {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n": types.SubsidiariesDocument,
+    "\n  mutation updateSubsidiary($updateSubsidiaryInput: UpdateSubsidiaryInput!) {\n    updateSubsidiary(updateSubsidiaryInput: $updateSubsidiaryInput) {\n      id\n      name\n      wonPrice\n      leadTime\n      category {\n        id\n        name\n      }\n    }\n  }\n": types.UpdateSubsidiaryDocument,
+    "\n  mutation createSubsidiaryCategory(\n    $createSubsidiaryCategoryInput: CreateSubsidiaryCategoryInput!\n  ) {\n    createSubsidiaryCategory(createSubsidiaryCategoryInput: $createSubsidiaryCategoryInput) {\n      id\n      name\n    }\n  }\n": types.CreateSubsidiaryCategoryDocument,
+    "\n  mutation removeManySubsidiaryCategory($idListInput: IdListInput!) {\n    removeManySubsidiaryCategory(idListInput: $idListInput)\n  }\n": types.RemoveManySubsidiaryCategoryDocument,
+    "\n  query subsidiaryCategories {\n    subsidiaryCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n": types.SubsidiaryCategoriesDocument,
+    "\n  mutation updateSubsidiaryCategory(\n    $updateSubsidiaryCategoryInput: UpdateSubsidiaryCategoryInput!\n  ) {\n    updateSubsidiaryCategory(updateSubsidiaryCategoryInput: $updateSubsidiaryCategoryInput) {\n      id\n      name\n    }\n  }\n": types.UpdateSubsidiaryCategoryDocument,
 };
 
 /**
@@ -49,7 +57,7 @@ export function graphql(source: "\n  mutation createProduct($createProductInput:
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query products {\n    products {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        salePrice\n        barCode\n        leadTime\n        deliveryType\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query products {\n    products {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        salePrice\n        barCode\n        leadTime\n        deliveryType\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query products {\n    products {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        salePrice\n        barCode\n        deliveryType\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query products {\n    products {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        salePrice\n        barCode\n        deliveryType\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -74,6 +82,38 @@ export function graphql(source: "\n  mutation removeManyProductCategory($idListI
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation updateProductCategory($updateProductCategoryInput: UpdateProductCategoryInput!) {\n    updateProductCategory(updateProductCategoryInput: $updateProductCategoryInput) {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation updateProductCategory($updateProductCategoryInput: UpdateProductCategoryInput!) {\n    updateProductCategory(updateProductCategoryInput: $updateProductCategoryInput) {\n      id\n      name\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation createSubsidiary($createSubsidiaryInput: CreateSubsidiaryInput!) {\n    createSubsidiary(createSubsidiaryInput: $createSubsidiaryInput) {\n      id\n      name\n      wonPrice\n      leadTime\n      category {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation createSubsidiary($createSubsidiaryInput: CreateSubsidiaryInput!) {\n    createSubsidiary(createSubsidiaryInput: $createSubsidiaryInput) {\n      id\n      name\n      wonPrice\n      leadTime\n      category {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation removeManySubsidiary($idListInput: IdListInput!) {\n    removeManySubsidiary(idListInput: $idListInput)\n  }\n"): (typeof documents)["\n  mutation removeManySubsidiary($idListInput: IdListInput!) {\n    removeManySubsidiary(idListInput: $idListInput)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query subsidiaries {\n    subsidiaries {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query subsidiaries {\n    subsidiaries {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation updateSubsidiary($updateSubsidiaryInput: UpdateSubsidiaryInput!) {\n    updateSubsidiary(updateSubsidiaryInput: $updateSubsidiaryInput) {\n      id\n      name\n      wonPrice\n      leadTime\n      category {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation updateSubsidiary($updateSubsidiaryInput: UpdateSubsidiaryInput!) {\n    updateSubsidiary(updateSubsidiaryInput: $updateSubsidiaryInput) {\n      id\n      name\n      wonPrice\n      leadTime\n      category {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation createSubsidiaryCategory(\n    $createSubsidiaryCategoryInput: CreateSubsidiaryCategoryInput!\n  ) {\n    createSubsidiaryCategory(createSubsidiaryCategoryInput: $createSubsidiaryCategoryInput) {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation createSubsidiaryCategory(\n    $createSubsidiaryCategoryInput: CreateSubsidiaryCategoryInput!\n  ) {\n    createSubsidiaryCategory(createSubsidiaryCategoryInput: $createSubsidiaryCategoryInput) {\n      id\n      name\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation removeManySubsidiaryCategory($idListInput: IdListInput!) {\n    removeManySubsidiaryCategory(idListInput: $idListInput)\n  }\n"): (typeof documents)["\n  mutation removeManySubsidiaryCategory($idListInput: IdListInput!) {\n    removeManySubsidiaryCategory(idListInput: $idListInput)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query subsidiaryCategories {\n    subsidiaryCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query subsidiaryCategories {\n    subsidiaryCategories {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation updateSubsidiaryCategory(\n    $updateSubsidiaryCategoryInput: UpdateSubsidiaryCategoryInput!\n  ) {\n    updateSubsidiaryCategory(updateSubsidiaryCategoryInput: $updateSubsidiaryCategoryInput) {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation updateSubsidiaryCategory(\n    $updateSubsidiaryCategoryInput: UpdateSubsidiaryCategoryInput!\n  ) {\n    updateSubsidiaryCategory(updateSubsidiaryCategoryInput: $updateSubsidiaryCategoryInput) {\n      id\n      name\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

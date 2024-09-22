@@ -1,20 +1,16 @@
 import Iconify from '@/components/icon/Iconify';
 import { Button, CircularProgress, Theme, useMediaQuery } from '@mui/material';
 import { GridColDef, gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
-import ProductUpload from './ProductCategoryUpload';
+import SubsidiaryUpload from './SubsidiaryUpload';
 import { FC, useCallback, useEffect, useState } from 'react';
-import {
-  productCategoryCount,
-  productCategoryKeyword,
-  productCategoryTarget,
-} from '@/store/backdata';
+import { subsidiaryCount, subsidiaryKeyword, subsidiaryTarget } from '@/store/backdata';
 import { useReactiveVar } from '@apollo/client';
 import useTextDebounce from '@/hooks/useTextDebounce';
 import BaseToolbar from '@/components/dataGrid/BaseToolbar';
+import { useRemoveManySubsidiary } from '@/graphql/hooks/subsidiary/removeMany';
 import { client } from '@/graphql/client/apolloClient';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { useTheme } from '@emotion/react';
-import { useRemoveManyProductCategory } from '@/graphql/hooks/productCategory/removeMany';
 
 const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(apiRef);
 
@@ -22,15 +18,16 @@ interface Props {
   column: GridColDef[];
 }
 
-const ProductCategoryToolbar: FC<Props> = ({ column }) => {
+const SubsidiaryToolbar: FC<Props> = ({ column }) => {
   const [keyword, setKeyword] = useState('');
   const delayText = useTextDebounce({ keyword });
-  const handleChangeTarget = (target: string) => productCategoryTarget(target);
-  const handleChangeProductCategoryKeyword = (target: string) => productCategoryKeyword(target);
-  const searchCount = useReactiveVar(productCategoryCount);
-  const target = useReactiveVar(productCategoryTarget);
 
-  const [removeCategoryList, { loading }] = useRemoveManyProductCategory();
+  const handleChangeTarget = (target: string) => subsidiaryTarget(target);
+  const handleChangeSubsidiaryKeyword = (target: string) => subsidiaryKeyword(target);
+  const searchCount = useReactiveVar(subsidiaryCount);
+  const target = useReactiveVar(subsidiaryTarget);
+
+  const [removeSubsidiaryList, { loading }] = useRemoveManySubsidiary();
   const setSnack = useSnack();
 
   const handleChangeKeyword = useCallback((value: string) => {
@@ -38,7 +35,7 @@ const ProductCategoryToolbar: FC<Props> = ({ column }) => {
   }, []);
 
   useEffect(() => {
-    handleChangeProductCategoryKeyword(delayText);
+    handleChangeSubsidiaryKeyword(delayText);
   }, [delayText]);
 
   const apiRef = useGridApiContext();
@@ -50,7 +47,7 @@ const ProductCategoryToolbar: FC<Props> = ({ column }) => {
 
   const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
   const handleClickDelete = () => {
-    removeCategoryList({
+    removeSubsidiaryList({
       variables: {
         idListInput: {
           idList: selectedIds,
@@ -58,7 +55,7 @@ const ProductCategoryToolbar: FC<Props> = ({ column }) => {
       },
       onCompleted: () => {
         setSnack({ message: '삭제가 완료되었습니다.', variant: 'success' });
-        client.cache.evict({ fieldName: 'productCategories', broadcast: true });
+        client.cache.evict({ fieldName: 'subsidiarys', broadcast: true });
       },
       onError: (err) => {
         setSnack({ message: err?.message ?? '삭제가 실패하였습니다.', variant: 'error' });
@@ -93,7 +90,7 @@ const ProductCategoryToolbar: FC<Props> = ({ column }) => {
               }
             >{`${selectedSize}개 선택 삭제`}</Button>
           )}
-          <ProductUpload sx={{ width: { xs: '100%', sm: 'auto' } }} />
+          <SubsidiaryUpload sx={{ width: { xs: '100%', sm: 'auto' } }} />
           <Button
             variant={isDownSm ? 'contained' : 'text'}
             size="small"
@@ -109,4 +106,4 @@ const ProductCategoryToolbar: FC<Props> = ({ column }) => {
   );
 };
 
-export default ProductCategoryToolbar;
+export default SubsidiaryToolbar;

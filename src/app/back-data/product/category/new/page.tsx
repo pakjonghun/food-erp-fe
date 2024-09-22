@@ -1,4 +1,4 @@
-import NewProductCategory from '@/section/newCategory/NewProductCategory';
+import NewProductCategory from '@/section/newProductCategory/NewProductCategory';
 
 const CreateProductPage = () => {
   return <NewProductCategory />;

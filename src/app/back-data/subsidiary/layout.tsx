@@ -21,19 +21,19 @@ const Layout: FC<Props> = ({ children }) => {
 
   const tabs: TabType[] = [
     {
-      label: '제품',
-      value: '/back-data/product',
+      label: '부자재',
+      value: '/back-data/subsidiary',
     },
     {
       label: '카테고리',
-      value: '/back-data/product/category',
+      value: '/back-data/subsidiary/category',
     },
   ];
 
   const isCategory = path.includes(tabs[1].value);
   const actionSection = isCategory ? (
     <Button
-      href="/back-data/product/category/new"
+      href="/back-data/subsidiary/category/new"
       component={Link}
       startIcon={<Iconify icon="ic:baseline-plus" width={18} />}
     >
@@ -41,11 +41,11 @@ const Layout: FC<Props> = ({ children }) => {
     </Button>
   ) : (
     <Button
-      href="/back-data/product/new"
+      href="/back-data/subsidiary/new"
       component={Link}
       startIcon={<Iconify icon="ic:baseline-plus" width={18} />}
     >
-      제품 등록
+      부자재 등록
     </Button>
   );
 

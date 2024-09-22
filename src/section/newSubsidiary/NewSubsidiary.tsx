@@ -1,49 +1,33 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  Autocomplete,
-  Button,
-  Collapse,
-  FormControl,
-  FormHelperText,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-} from '@mui/material';
+import { Autocomplete, Button, Collapse, Stack, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
-import { NewProductForm, newProductSchema } from './validate';
-import { useProductCategories } from '@/graphql/hooks/productCategory/productCategories';
+import { NewSubsidiaryForm, newSubsidiarySchema } from './validate';
+import { useSubsidiaryCategories } from '@/graphql/hooks/subsidiaryCategory/subsidiaryCategories';
 import FormStack from '@/components/form/FormStack';
-import { DeliveryType } from '@/graphql/codegen/graphql';
-import Iconify from '@/components/icon/Iconify';
 import { useRouter } from 'next/navigation';
-import { useCreateProduct } from '@/graphql/hooks/product/createProduct';
+import { useCreateSubsidiary } from '@/graphql/hooks/subsidiary/create';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { useState } from 'react';
 import NewCategory from './newCategory/NewCategory';
 import NewLayout from '@/layout/new/New';
 
-const NewProduct = () => {
+const NewSubsidiary = () => {
+  const snack = useSnack();
   const [showCreateCategory, setShowCreateCategory] = useState(false);
   const router = useRouter();
-  const [createProduct, { loading: productCreating }] = useCreateProduct();
-  const { data, loading } = useProductCategories();
+  const [create, { loading: creating }] = useCreateSubsidiary();
+  const { data, loading } = useSubsidiaryCategories();
 
-  const categories = data?.productCategories.data ?? [];
-  const snack = useSnack();
+  const categories = data?.subsidiaryCategories.data ?? [];
 
-  const methods = useForm<NewProductForm>({
-    resolver: zodResolver(newProductSchema),
+  const methods = useForm<NewSubsidiaryForm>({
+    resolver: zodResolver(newSubsidiarySchema),
     defaultValues: {
       id: '',
       name: '',
-      barCode: '',
       categoryName: null,
-      delivertType: null,
     },
   });
 
@@ -51,27 +35,24 @@ const NewProduct = () => {
     router.back();
   };
 
-  const onSubmit = (value: NewProductForm) => {
-    createProduct({
+  const onSubmit = (value: NewSubsidiaryForm) => {
+    create({
       variables: {
-        createProductInput: {
+        createSubsidiaryInput: {
           id: value.id,
           name: value.name,
-          barCode: value.barCode,
           categoryName: value.categoryName?.name,
-          deliveryType: value.delivertType,
           leadTime: value.leadTime,
-          salePrice: value.salePrice,
           wonPrice: value.wonPrice,
         },
       },
       onCompleted: () => {
-        snack({ message: '제품 등록이 완료되었습니다.', variant: 'success' });
-        router.push('/back-data/product');
+        snack({ message: '부자재 등록이 완료되었습니다.', variant: 'success' });
+        router.push('/back-data/subsidiary');
       },
       onError: (err) => {
         const errMessage = err?.message;
-        snack({ message: errMessage ?? '제품 등록이 실패했습니다.', variant: 'error' });
+        snack({ message: errMessage ?? '부자재 등록이 실패했습니다.', variant: 'error' });
       },
     });
   };
@@ -87,7 +68,7 @@ const NewProduct = () => {
   return (
     <NewLayout
       methods={methods}
-      subHeader="새로운 제품 정보를 입력합니다."
+      subHeader="새로운 부자재 정보를 입력합니다."
       onSubmit={onSubmit}
       inputSection={
         <>
@@ -105,7 +86,7 @@ const NewProduct = () => {
                     fullWidth
                     error={!!errorMessage}
                     helperText={errorMessage}
-                    label="제품 코드"
+                    label="부자재 코드"
                   />
                 );
               }}
@@ -122,7 +103,7 @@ const NewProduct = () => {
                     fullWidth
                     error={!!errorMessage}
                     helperText={errorMessage}
-                    label="제품 이름"
+                    label="부자재 이름"
                   />
                 );
               }}
@@ -174,24 +155,6 @@ const NewProduct = () => {
 
             <Controller
               control={methods.control}
-              name="barCode"
-              render={({ field, fieldState }) => {
-                const errorMessage = fieldState.error?.message ?? '';
-                return (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    label="바코드"
-                    error={!!errorMessage}
-                    helperText={errorMessage}
-                  />
-                );
-              }}
-            />
-          </FormStack>
-          <FormStack>
-            <Controller
-              control={methods.control}
               name="wonPrice"
               render={({ field, fieldState }) => {
                 const errorMessage = fieldState.error?.message ?? '';
@@ -208,90 +171,38 @@ const NewProduct = () => {
                 );
               }}
             />
-            <Controller
-              control={methods.control}
-              name="salePrice"
-              render={({ field, fieldState }) => {
-                const errorMessage = fieldState.error?.message ?? '';
-                return (
-                  <TextField
-                    {...field}
-                    value={field.value ?? ''}
-                    label="판매가"
-                    error={!!errorMessage}
-                    helperText={errorMessage}
-                    type="number"
-                    fullWidth
-                  />
-                );
-              }}
-            />
           </FormStack>
-          <FormStack>
-            <Controller
-              control={methods.control}
-              name="leadTime"
-              render={({ field, fieldState }) => {
-                const errorMessage = fieldState.error?.message ?? '';
-                return (
-                  <TextField
-                    {...field}
-                    value={field.value ?? ''}
-                    label="리드타임"
-                    error={!!errorMessage}
-                    helperText={errorMessage}
-                    type="number"
-                    fullWidth
-                  />
-                );
-              }}
-            />
-            <Controller
-              control={methods.control}
-              name="delivertType"
-              render={({ field, fieldState }) => {
-                const errorMessage = fieldState.error?.message ?? '';
-                return (
-                  <FormControl fullWidth>
-                    <InputLabel shrink>배송타입</InputLabel>
-                    <Select
-                      displayEmpty
-                      label="배송타입"
-                      error={!!errorMessage}
-                      value={field.value ?? ''}
-                      onChange={field.onChange}
-                      endAdornment={
-                        <InputAdornment position="end" sx={{ mr: 2 }}>
-                          <Iconify
-                            sx={{ cursor: 'pointer' }}
-                            onClick={() => field.onChange(null)}
-                            icon="iconoir:cancel"
-                            width={18}
-                          />
-                        </InputAdornment>
-                      }
-                    >
-                      <MenuItem value={DeliveryType.Pay}>유료배송</MenuItem>
-                      <MenuItem value={DeliveryType.Free}>무료배송</MenuItem>
-                    </Select>
-                    <FormHelperText error={!!errorMessage}>{errorMessage}</FormHelperText>
-                  </FormControl>
-                );
-              }}
-            />
-          </FormStack>
+
+          <Controller
+            control={methods.control}
+            name="leadTime"
+            render={({ field, fieldState }) => {
+              const errorMessage = fieldState.error?.message ?? '';
+              return (
+                <TextField
+                  {...field}
+                  value={field.value ?? ''}
+                  label="리드타임"
+                  error={!!errorMessage}
+                  helperText={errorMessage}
+                  type="number"
+                  fullWidth
+                />
+              );
+            }}
+          />
         </>
       }
       actionSection={
         <>
-          <Button disabled={productCreating} variant="outlined" onClick={handleClickCancel}>
+          <Button disabled={creating} variant="outlined" onClick={handleClickCancel}>
             뒤로가기
           </Button>
           <Button
-            disabled={productCreating || Object.keys(methods.formState.errors).length > 0}
+            disabled={creating || Object.keys(methods.formState.errors).length > 0}
             type="submit"
           >
-            제품 등록
+            부자재 등록
           </Button>
         </>
       }
@@ -299,4 +210,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default NewSubsidiary;

@@ -1,18 +1,15 @@
 import { graphql } from '@/graphql/codegen';
 import { useQuery } from '@apollo/client';
 
-const products = graphql(`
-  query products {
-    products {
+const subsidiaries = graphql(`
+  query subsidiaries {
+    subsidiaries {
       totalCount
       data {
         id
         name
         wonPrice
         leadTime
-        salePrice
-        barCode
-        deliveryType
         category {
           id
           name
@@ -22,6 +19,6 @@ const products = graphql(`
   }
 `);
 
-export const useProducts = () => {
-  return useQuery(products);
+export const useSubsidiaries = () => {
+  return useQuery(subsidiaries);
 };

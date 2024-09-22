@@ -1,21 +1,21 @@
 'use client';
 
-import { useReactiveVar } from '@apollo/client';
-import ProductGrid from './ProductGrid';
-import { productCount, productKeyword, productTarget } from '@/store/backdata';
-import { useProducts } from '@/graphql/hooks/product/products';
 import { useEffect } from 'react';
+import { useReactiveVar } from '@apollo/client';
+import ProductGrid from './SubsidiaryGrid';
+import { subsidiaryCount, subsidiaryKeyword, subsidiaryTarget } from '@/store/backdata';
+import { useSubsidiaries } from '@/graphql/hooks/subsidiary/subsidiaries';
 
-const Product = () => {
-  const target = useReactiveVar(productTarget);
-  const keyword = useReactiveVar(productKeyword);
+const Subsidiary = () => {
+  const target = useReactiveVar(subsidiaryTarget);
+  const keyword = useReactiveVar(subsidiaryKeyword);
 
   const handleSetCount = (count: number) => {
-    productCount(count);
+    subsidiaryCount(count);
   };
 
-  const { data, loading } = useProducts();
-  const rows = data?.products.data ?? [];
+  const { data, loading } = useSubsidiaries();
+  const rows = data?.subsidiaries.data ?? [];
   const filteredRow = rows.filter((row) => {
     const value = row[target as keyof typeof row];
     if (typeof value == 'string') {
@@ -23,7 +23,6 @@ const Product = () => {
     }
 
     if (typeof value == 'number') {
-      console.log('v k', value, keyword, value.toString().includes(keyword));
       return value.toString().includes(keyword);
     }
 
@@ -34,8 +33,6 @@ const Product = () => {
     return false;
   });
 
-  console.log('filteredRow : ', filteredRow.length);
-
   useEffect(() => {
     if (filteredRow.length) {
       handleSetCount(filteredRow.length);
@@ -45,4 +42,4 @@ const Product = () => {
   return <ProductGrid rows={filteredRow} loading={loading} />;
 };
 
-export default Product;
+export default Subsidiary;
