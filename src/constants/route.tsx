@@ -56,12 +56,23 @@ export const PATH = {
 
   //창고
   'back-data/warehouse': {
-    path: 'back-data/subsidiary',
+    path: 'back-data/warehouse',
     label: '창고',
   },
   'back-data/warehouse/new': {
     path: 'back-data/warehouse/new',
     label: '창고 등록',
+    canBack: true,
+  },
+
+  //공장
+  'back-data/factory': {
+    path: 'back-data/factory',
+    label: '공장',
+  },
+  'back-data/factory/new': {
+    path: 'back-data/factory/new',
+    label: '공장 등록',
     canBack: true,
   },
 };

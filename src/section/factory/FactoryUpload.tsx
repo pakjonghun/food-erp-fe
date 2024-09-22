@@ -12,7 +12,7 @@ interface Props {
   sx?: SxProps;
 }
 
-const WarehouseUpload: FC<Props> = ({ sx }) => {
+const FactoryUpload: FC<Props> = ({ sx }) => {
   const snack = useSnack();
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,7 @@ const WarehouseUpload: FC<Props> = ({ sx }) => {
       return;
     }
     setLoading(true);
-    const err = (await uploadExcelFile('warehouse', inputFile)) as AxiosError<{
+    const err = (await uploadExcelFile('factory', inputFile)) as AxiosError<{
       message: string;
     }>;
     if (err) {
@@ -32,7 +32,7 @@ const WarehouseUpload: FC<Props> = ({ sx }) => {
       setTimeout(() => {
         client.cache.evict({
           id: 'ROOT_QUERY',
-          fieldName: 'warehouses',
+          fieldName: 'factories',
           broadcast: true,
         });
         client.cache.gc();
@@ -52,4 +52,4 @@ const WarehouseUpload: FC<Props> = ({ sx }) => {
   );
 };
 
-export default WarehouseUpload;
+export default FactoryUpload;

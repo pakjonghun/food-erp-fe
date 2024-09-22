@@ -34,6 +34,14 @@ export const navList: NavItem[] = [
         label: '창고',
         icon: <Iconify icon="material-symbols:warehouse" width={18} />,
       },
+
+      //공장
+      {
+        type: 'link',
+        path: '/back-data/factory',
+        label: '공장',
+        icon: <Iconify icon="material-symbols:factory" width={19} />,
+      },
     ],
   },
 ];

@@ -14,6 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation login($loginInput: LoginInput!) {\n    login(loginInput: $loginInput)\n  }\n": types.LoginDocument,
+    "\n  mutation createFactory($createFactoryInput: CreateFactoryInput!) {\n    createFactory(createFactoryInput: $createFactoryInput) {\n      id\n      name\n      address\n      note\n      phoneNumber\n    }\n  }\n": types.CreateFactoryDocument,
+    "\n  query factories {\n    factories {\n      totalCount\n      data {\n        id\n        name\n        address\n        note\n        phoneNumber\n      }\n    }\n  }\n": types.FactoriesDocument,
+    "\n  mutation removeManyFactory($idListInput: IdListInput!) {\n    removeManyFactory(idListInput: $idListInput)\n  }\n": types.RemoveManyFactoryDocument,
+    "\n  mutation updateFactory($updateFactoryInput: UpdateFactoryInput!) {\n    updateFactory(updateFactoryInput: $updateFactoryInput) {\n      id\n      name\n      address\n      note\n      phoneNumber\n    }\n  }\n": types.UpdateFactoryDocument,
     "\n  mutation createProduct($createProductInput: CreateProductInput!) {\n    createProduct(createProductInput: $createProductInput) {\n      id\n      name\n      barCode\n      wonPrice\n      salePrice\n      leadTime\n      deliveryType\n      category {\n        id\n        name\n      }\n    }\n  }\n": types.CreateProductDocument,
     "\n  query products {\n    products {\n      totalCount\n      data {\n        id\n        name\n        wonPrice\n        leadTime\n        salePrice\n        barCode\n        deliveryType\n        category {\n          id\n          name\n        }\n      }\n    }\n  }\n": types.ProductsDocument,
     "\n  mutation removeManyProduct($idListInput: IdListInput!) {\n    removeManyProduct(idListInput: $idListInput)\n  }\n": types.RemoveManyProductDocument,
@@ -54,6 +58,22 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation login($loginInput: LoginInput!) {\n    login(loginInput: $loginInput)\n  }\n"): (typeof documents)["\n  mutation login($loginInput: LoginInput!) {\n    login(loginInput: $loginInput)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation createFactory($createFactoryInput: CreateFactoryInput!) {\n    createFactory(createFactoryInput: $createFactoryInput) {\n      id\n      name\n      address\n      note\n      phoneNumber\n    }\n  }\n"): (typeof documents)["\n  mutation createFactory($createFactoryInput: CreateFactoryInput!) {\n    createFactory(createFactoryInput: $createFactoryInput) {\n      id\n      name\n      address\n      note\n      phoneNumber\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query factories {\n    factories {\n      totalCount\n      data {\n        id\n        name\n        address\n        note\n        phoneNumber\n      }\n    }\n  }\n"): (typeof documents)["\n  query factories {\n    factories {\n      totalCount\n      data {\n        id\n        name\n        address\n        note\n        phoneNumber\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation removeManyFactory($idListInput: IdListInput!) {\n    removeManyFactory(idListInput: $idListInput)\n  }\n"): (typeof documents)["\n  mutation removeManyFactory($idListInput: IdListInput!) {\n    removeManyFactory(idListInput: $idListInput)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation updateFactory($updateFactoryInput: UpdateFactoryInput!) {\n    updateFactory(updateFactoryInput: $updateFactoryInput) {\n      id\n      name\n      address\n      note\n      phoneNumber\n    }\n  }\n"): (typeof documents)["\n  mutation updateFactory($updateFactoryInput: UpdateFactoryInput!) {\n    updateFactory(updateFactoryInput: $updateFactoryInput) {\n      id\n      name\n      address\n      note\n      phoneNumber\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

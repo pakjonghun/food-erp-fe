@@ -31,6 +31,7 @@ const SubsidiaryUpload: FC<Props> = ({ sx }) => {
         client.cache.evict({
           id: 'ROOT_QUERY',
           fieldName: 'subsidiaries',
+          broadcast: true,
         });
         client.cache.gc();
         setLoading(false);

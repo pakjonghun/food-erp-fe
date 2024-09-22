@@ -33,6 +33,7 @@ const ProductCategoryUpload: FC<Props> = ({ sx }) => {
         client.cache.evict({
           id: 'ROOT_QUERY',
           fieldName: 'productCategories',
+          broadcast: true,
         });
         client.cache.gc();
         setLoading(false);

@@ -31,6 +31,7 @@ const ProductUpload: FC<Props> = ({ sx }) => {
         client.cache.evict({
           id: 'ROOT_QUERY',
           fieldName: 'products',
+          broadcast: true,
         });
         client.cache.gc();
         setLoading(false);
