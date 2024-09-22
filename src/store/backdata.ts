@@ -19,3 +19,8 @@ export const subsidiaryCount = makeVar(0);
 export const subsidiaryCategoryKeyword = makeVar('');
 export const subsidiaryCategoryTarget = makeVar('name');
 export const subsidiaryCategoryCount = makeVar(0);
+
+//warehouse
+export const warehouseKeyword = makeVar('');
+export const warehouseTarget = makeVar('name');
+export const warehouseCount = makeVar(0);

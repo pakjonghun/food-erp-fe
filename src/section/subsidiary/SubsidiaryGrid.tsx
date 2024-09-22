@@ -41,6 +41,15 @@ const SubsidiaryGrid: FC<Props> = ({ rows, loading }) => {
         return oldRow;
       }
 
+      if (field == 'name' && !newValue) {
+        snack({ message: '이름을 입력하세요.', variant: 'error' });
+        return oldRow;
+      }
+
+      if (field == 'name' && !newValue) {
+        newValue = null;
+      }
+
       const result = await update({
         variables: {
           updateSubsidiaryInput: {

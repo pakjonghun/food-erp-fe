@@ -1,4 +1,4 @@
-import NewSubsidiary from '@/section/newSubsidiary/NewSubsidiary';
+import NewSubsidiary from '@/section/new/newSubsidiary/NewSubsidiary';
 
 const CreateProductPage = () => {
   return <NewSubsidiary />;

@@ -1,4 +1,4 @@
-import NewSubsidiaryCategory from '@/section/newSubsidiaryCategory/NewSubsidiaryCategory';
+import NewSubsidiaryCategory from '@/section/new/newSubsidiaryCategory/NewSubsidiaryCategory';
 
 const CreateProductPage = () => {
   return <NewSubsidiaryCategory />;

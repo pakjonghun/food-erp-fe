@@ -39,7 +39,7 @@ const Product = () => {
   });
 
   useEffect(() => {
-    if (filteredRow.length) {
+    if (filteredRow.length != null) {
       handleSetCount(filteredRow.length);
     }
   }, [filteredRow.length]);

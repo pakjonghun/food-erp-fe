@@ -53,6 +53,17 @@ export const PATH = {
     label: '카테고리 등록',
     canBack: true,
   },
+
+  //창고
+  'back-data/warehouse': {
+    path: 'back-data/subsidiary',
+    label: '창고',
+  },
+  'back-data/warehouse/new': {
+    path: 'back-data/warehouse/new',
+    label: '창고 등록',
+    canBack: true,
+  },
 };
 
 export const publicPathList: string[] = ['sign-in'];

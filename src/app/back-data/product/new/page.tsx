@@ -1,4 +1,4 @@
-import NewProduct from '@/section/newProduct/NewProduct';
+import NewProduct from '@/section/new/newProduct/NewProduct';
 
 const CreateProductPage = () => {
   return <NewProduct />;
