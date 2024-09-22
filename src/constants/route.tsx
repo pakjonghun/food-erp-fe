@@ -28,7 +28,7 @@ export const PATH = {
     label: '카테고리',
   },
   'back-data/product/category/new': {
-    path: 'back-data/product/new',
+    path: 'back-data/product/category/new',
     label: '카테고리 등록',
     canBack: true,
   },
@@ -41,7 +41,7 @@ export const PATH = {
 
   'back-data/subsidiary/new': {
     path: 'back-data/subsidiary/new',
-    label: '부자재등록',
+    label: '부자재 등록',
     canBack: true,
   },
   'back-data/subsidiary/category': {
@@ -49,7 +49,28 @@ export const PATH = {
     label: '카테고리',
   },
   'back-data/subsidiary/category/new': {
-    path: 'back-data/subsidiary/new',
+    path: 'back-data/subsidiary/category/new',
+    label: '카테고리 등록',
+    canBack: true,
+  },
+
+  //거래처
+  'back-data/client': {
+    path: 'back-data/client',
+    label: '거래처',
+  },
+
+  'back-data/client/new': {
+    path: 'back-data/client/new',
+    label: '거래처 등록',
+    canBack: true,
+  },
+  'back-data/client/type': {
+    path: 'back-data/client/type',
+    label: '거래처 타입',
+  },
+  'back-data/client/type/new': {
+    path: 'back-data/client/type/new',
     label: '카테고리 등록',
     canBack: true,
   },

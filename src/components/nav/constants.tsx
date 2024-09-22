@@ -26,7 +26,12 @@ export const navList: NavItem[] = [
         label: '부자재',
         icon: <Iconify icon="dashicons:products" width={16} />,
       },
-
+      {
+        type: 'link',
+        path: '/back-data/client',
+        label: '거래처',
+        icon: <Iconify icon="fa6-solid:handshake-simple" width={18} />,
+      },
       //창고
       {
         type: 'link',
