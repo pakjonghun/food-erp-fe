@@ -27,7 +27,18 @@ const Layout: FC<Props> = ({ children }) => {
 
   return (
     <BackDataLayout actionSection={!back && actionSection}>
-      <Box sx={{ flexGrow: 1, height: 3, pb: 3 }}>{children}</Box>
+      <Box
+        sx={{
+          flexGrow: 1,
+          height: {
+            xs: '100vh',
+            sm: 3,
+          },
+          pb: 3,
+        }}
+      >
+        {children}
+      </Box>
     </BackDataLayout>
   );
 };

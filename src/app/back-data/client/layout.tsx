@@ -56,7 +56,7 @@ const Layout: FC<Props> = ({ children }) => {
         sx={{
           flexGrow: 1,
           height: {
-            xs: 'auto',
+            xs: '100vh',
             sm: 3,
           },
           pb: 3,
