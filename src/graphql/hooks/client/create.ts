@@ -32,7 +32,7 @@ export const useCreateClient = () => {
       const newClient = data.createClient;
       cache.modify({
         fields: {
-          subsidiaries: ({ totalCount, data } = { totalCount: 0, data: [] }) => {
+          clients: ({ totalCount, data } = { totalCount: 0, data: [] }) => {
             return {
               totalCount: totalCount + 1,
               data: [newClient, ...data],
