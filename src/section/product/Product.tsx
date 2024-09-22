@@ -23,8 +23,12 @@ const Product = () => {
     }
 
     if (typeof value == 'number') {
-      console.log('v k', value, keyword, value.toString().includes(keyword));
       return value.toString().includes(keyword);
+    }
+
+    if (value != null && typeof value == 'object') {
+      const realValue = value?.name;
+      return realValue?.toLowerCase().includes(keyword.toLowerCase());
     }
 
     if (keyword == '') {
@@ -33,8 +37,6 @@ const Product = () => {
 
     return false;
   });
-
-  console.log('filteredRow : ', filteredRow.length);
 
   useEffect(() => {
     if (filteredRow.length) {

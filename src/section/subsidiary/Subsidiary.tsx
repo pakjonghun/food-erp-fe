@@ -26,6 +26,11 @@ const Subsidiary = () => {
       return value.toString().includes(keyword);
     }
 
+    if (value != null && typeof value == 'object') {
+      const realValue = value?.name;
+      return realValue?.toLowerCase().includes(keyword.toLowerCase());
+    }
+
     if (keyword == '') {
       return true;
     }
