@@ -12,7 +12,7 @@ interface Props {
   sx?: SxProps;
 }
 
-const SubsidiaryUpload: FC<Props> = ({ sx }) => {
+const ClientUpload: FC<Props> = ({ sx }) => {
   const setSnack = useSnack();
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,7 @@ const SubsidiaryUpload: FC<Props> = ({ sx }) => {
       return;
     }
     setLoading(true);
-    const err = (await uploadExcelFile('subsidiary', inputFile)) as AxiosError<{ message: string }>;
+    const err = (await uploadExcelFile('client', inputFile)) as AxiosError<{ message: string }>;
     if (err) {
       const message = err.response?.data?.message || err.message;
       setSnack({ message: message ?? '', title: err.name ?? '', variant: 'error' });
@@ -30,12 +30,12 @@ const SubsidiaryUpload: FC<Props> = ({ sx }) => {
       setTimeout(() => {
         client.cache.evict({
           id: 'ROOT_QUERY',
-          fieldName: 'subsidiaries',
+          fieldName: 'clients',
           broadcast: true,
         });
         client.cache.evict({
           id: 'ROOT_QUERY',
-          fieldName: 'subsidiaryCategories',
+          fieldName: 'clientTypes',
           broadcast: true,
         });
         client.cache.gc();
@@ -55,4 +55,4 @@ const SubsidiaryUpload: FC<Props> = ({ sx }) => {
   );
 };
 
-export default SubsidiaryUpload;
+export default ClientUpload;

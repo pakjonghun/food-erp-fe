@@ -1,7 +1,7 @@
-import SubsidiaryCategory from '@/section/subsidiaryCategory/SubsidiaryCategories';
+import ClientType from '@/section/clientType/ClientType';
 
-const ProductCategoryPage = () => {
-  return <SubsidiaryCategory />;
+const ClientTypePage = () => {
+  return <ClientType />;
 };
 
-export default ProductCategoryPage;
+export default ClientTypePage;

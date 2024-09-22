@@ -33,6 +33,11 @@ const ProductUpload: FC<Props> = ({ sx }) => {
           fieldName: 'products',
           broadcast: true,
         });
+        client.cache.evict({
+          id: 'ROOT_QUERY',
+          fieldName: 'productCategories',
+          broadcast: true,
+        });
         client.cache.gc();
         setLoading(false);
         setSnack({ message: '파일 업로드가 완료되었습니다.' });

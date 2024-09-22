@@ -18,6 +18,10 @@ const documents = {
     "\n  mutation createClient($createClientInput: CreateClientInput!) {\n    createClient(createClientInput: $createClientInput) {\n      id\n      name\n      isSabangService\n      feeRate\n      businessName\n      businessNumber\n      payDate\n      manager\n      managerTel\n      inActive\n      clientType {\n        id\n        name\n      }\n    }\n  }\n": types.CreateClientDocument,
     "\n  mutation removeManyClient($idListInput: IdListInput!) {\n    removeManyClient(idListInput: $idListInput)\n  }\n": types.RemoveManyClientDocument,
     "\n  mutation updateClient($updateClientInput: UpdateClientInput!) {\n    updateClient(updateClientInput: $updateClientInput) {\n      id\n      name\n      isSabangService\n      feeRate\n      businessName\n      businessNumber\n      payDate\n      manager\n      managerTel\n      inActive\n      clientType {\n        id\n        name\n      }\n    }\n  }\n": types.UpdateClientDocument,
+    "\n  query clientTypes {\n    clientTypes {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n": types.ClientTypesDocument,
+    "\n  mutation createClientType($createClientTypeInput: CreateClientTypeInput!) {\n    createClientType(createClientTypeInput: $createClientTypeInput) {\n      id\n      name\n    }\n  }\n": types.CreateClientTypeDocument,
+    "\n  mutation removeManyClientType($idListInput: IdListInput!) {\n    removeManyClientType(idListInput: $idListInput)\n  }\n": types.RemoveManyClientTypeDocument,
+    "\n  mutation updateClientType($updateClientTypeInput: UpdateClientTypeInput!) {\n    updateClientType(updateClientTypeInput: $updateClientTypeInput) {\n      id\n      name\n    }\n  }\n": types.UpdateClientTypeDocument,
     "\n  mutation createFactory($createFactoryInput: CreateFactoryInput!) {\n    createFactory(createFactoryInput: $createFactoryInput) {\n      id\n      name\n      address\n      note\n      phoneNumber\n    }\n  }\n": types.CreateFactoryDocument,
     "\n  query factories {\n    factories {\n      totalCount\n      data {\n        id\n        name\n        address\n        note\n        phoneNumber\n      }\n    }\n  }\n": types.FactoriesDocument,
     "\n  mutation removeManyFactory($idListInput: IdListInput!) {\n    removeManyFactory(idListInput: $idListInput)\n  }\n": types.RemoveManyFactoryDocument,
@@ -78,6 +82,22 @@ export function graphql(source: "\n  mutation removeManyClient($idListInput: IdL
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation updateClient($updateClientInput: UpdateClientInput!) {\n    updateClient(updateClientInput: $updateClientInput) {\n      id\n      name\n      isSabangService\n      feeRate\n      businessName\n      businessNumber\n      payDate\n      manager\n      managerTel\n      inActive\n      clientType {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation updateClient($updateClientInput: UpdateClientInput!) {\n    updateClient(updateClientInput: $updateClientInput) {\n      id\n      name\n      isSabangService\n      feeRate\n      businessName\n      businessNumber\n      payDate\n      manager\n      managerTel\n      inActive\n      clientType {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query clientTypes {\n    clientTypes {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query clientTypes {\n    clientTypes {\n      totalCount\n      data {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation createClientType($createClientTypeInput: CreateClientTypeInput!) {\n    createClientType(createClientTypeInput: $createClientTypeInput) {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation createClientType($createClientTypeInput: CreateClientTypeInput!) {\n    createClientType(createClientTypeInput: $createClientTypeInput) {\n      id\n      name\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation removeManyClientType($idListInput: IdListInput!) {\n    removeManyClientType(idListInput: $idListInput)\n  }\n"): (typeof documents)["\n  mutation removeManyClientType($idListInput: IdListInput!) {\n    removeManyClientType(idListInput: $idListInput)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation updateClientType($updateClientTypeInput: UpdateClientTypeInput!) {\n    updateClientType(updateClientTypeInput: $updateClientTypeInput) {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation updateClientType($updateClientTypeInput: UpdateClientTypeInput!) {\n    updateClientType(updateClientTypeInput: $updateClientTypeInput) {\n      id\n      name\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

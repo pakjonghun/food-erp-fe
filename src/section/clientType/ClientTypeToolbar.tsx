@@ -1,16 +1,16 @@
 import Iconify from '@/components/icon/Iconify';
 import { Button, CircularProgress, Theme, useMediaQuery } from '@mui/material';
 import { GridColDef, gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
-import SubsidiaryUpload from './SubsidiaryUpload';
+import SubsidiaryUpload from './ClientTypeUpload';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { subsidiaryCount, subsidiaryKeyword, subsidiaryTarget } from '@/store/backdata';
+import { clientTypeCount, clientTypeKeyword, clientTypeTarget } from '@/store/backdata';
 import { useReactiveVar } from '@apollo/client';
 import useTextDebounce from '@/hooks/useTextDebounce';
 import BaseToolbar from '@/components/dataGrid/BaseToolbar';
-import { useRemoveManySubsidiary } from '@/graphql/hooks/subsidiary/removeMany';
 import { client } from '@/graphql/client/apolloClient';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import { useTheme } from '@emotion/react';
+import { useRemoveManyClientType } from '@/graphql/hooks/clientType/removeMany';
 
 const getFilteredRow = ({ apiRef }: any) => gridExpandedSortedRowIdsSelector(apiRef);
 
@@ -18,16 +18,15 @@ interface Props {
   column: GridColDef[];
 }
 
-const SubsidiaryToolbar: FC<Props> = ({ column }) => {
+const ClientTypeToolbar: FC<Props> = ({ column }) => {
   const [keyword, setKeyword] = useState('');
   const delayText = useTextDebounce({ keyword });
+  const handleChangeTarget = (target: string) => clientTypeTarget(target);
+  const handleChangeClientTypeKeyword = (target: string) => clientTypeKeyword(target);
+  const searchCount = useReactiveVar(clientTypeCount);
+  const target = useReactiveVar(clientTypeTarget);
 
-  const handleChangeTarget = (target: string) => subsidiaryTarget(target);
-  const handleChangeSubsidiaryKeyword = (target: string) => subsidiaryKeyword(target);
-  const searchCount = useReactiveVar(subsidiaryCount);
-  const target = useReactiveVar(subsidiaryTarget);
-
-  const [removeSubsidiaryList, { loading }] = useRemoveManySubsidiary();
+  const [removeCategoryList, { loading }] = useRemoveManyClientType();
   const setSnack = useSnack();
 
   const handleChangeKeyword = useCallback((value: string) => {
@@ -35,7 +34,7 @@ const SubsidiaryToolbar: FC<Props> = ({ column }) => {
   }, []);
 
   useEffect(() => {
-    handleChangeSubsidiaryKeyword(delayText);
+    handleChangeClientTypeKeyword(delayText);
   }, [delayText]);
 
   const apiRef = useGridApiContext();
@@ -47,7 +46,7 @@ const SubsidiaryToolbar: FC<Props> = ({ column }) => {
 
   const handleExport = (options: any) => apiRef.current.exportDataAsCsv(options);
   const handleClickDelete = () => {
-    removeSubsidiaryList({
+    removeCategoryList({
       variables: {
         idListInput: {
           idList: selectedIds,
@@ -55,7 +54,7 @@ const SubsidiaryToolbar: FC<Props> = ({ column }) => {
       },
       onCompleted: () => {
         setSnack({ message: '삭제가 완료되었습니다.', variant: 'success' });
-        client.cache.evict({ fieldName: 'subsidiaries', broadcast: true });
+        client.cache.evict({ fieldName: 'clientTypes', broadcast: true });
         client.cache.gc();
       },
       onError: (err) => {
@@ -107,4 +106,4 @@ const SubsidiaryToolbar: FC<Props> = ({ column }) => {
   );
 };
 
-export default SubsidiaryToolbar;
+export default ClientTypeToolbar;

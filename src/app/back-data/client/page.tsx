@@ -1,7 +1,7 @@
-import Subsidiary from '@/section/subsidiary/Subsidiary';
+import Client from '@/section/client/Client';
 
 const BackDataPage = () => {
-  return <Subsidiary />;
+  return <Client />;
 };
 
 export default BackDataPage;

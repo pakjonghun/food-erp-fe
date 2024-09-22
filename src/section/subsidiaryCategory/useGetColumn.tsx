@@ -6,7 +6,7 @@ const useGetColumn = () => {
       field: 'id',
       headerName: '코드',
       minWidth: 80,
-      flex: 0.5,
+      flex: 1,
     },
     {
       field: 'name',

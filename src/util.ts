@@ -5,3 +5,7 @@ export function numberFormat(number: number) {
     maximumFractionDigits: 0,
   }).format(number);
 }
+
+export function percentFormat(number: number) {
+  return `${Math.floor(number * 10000) / 100}%`;
+}

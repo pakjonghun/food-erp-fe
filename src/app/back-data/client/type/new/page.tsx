@@ -1,7 +1,7 @@
-import NewSubsidiaryCategory from '@/section/new/newSubsidiaryCategory/NewSubsidiaryCategory';
+import NewClientType from '@/section/new/newClientType/NewClientType';
 
 const CreateProductPage = () => {
-  return <NewSubsidiaryCategory />;
+  return <NewClientType />;
 };
 
 export default CreateProductPage;
