@@ -75,7 +75,7 @@ const ClientToolbar: FC<Props> = ({ column }) => {
         <>
           {selectedSize > 0 && (
             <Button
-              variant="text"
+              variant={isDownSm ? 'contained' : 'text'}
               size="small"
               disabled={loading}
               onClick={handleClickDelete}

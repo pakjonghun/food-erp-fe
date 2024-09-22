@@ -25,8 +25,10 @@ const WithNavLayout: FC<Props> = ({ header, nav, children }) => {
   const isDownMd = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
-    navOpen(false);
-  }, [path]);
+    if (isDownMd) {
+      navOpen(false);
+    }
+  }, [path, isDownMd]);
 
   useEffect(() => {
     if (isDownMd) {
