@@ -1,5 +1,5 @@
 import Iconify from '@/components/icon/Iconify';
-import { Button, CircularProgress, Theme, useMediaQuery } from '@mui/material';
+import { alpha, Button, CircularProgress, Theme, useMediaQuery } from '@mui/material';
 import { GridColDef, gridExpandedSortedRowIdsSelector, useGridApiContext } from '@mui/x-data-grid';
 import ProductUpload from './ProductUpload';
 import { FC, useCallback, useEffect, useState } from 'react';
@@ -75,12 +75,14 @@ const ProductToolbar: FC<Props> = ({ column }) => {
         <>
           {selectedSize > 0 && (
             <Button
-              variant="text"
+              variant={isDownSm ? 'contained' : 'text'}
               size="small"
               disabled={loading}
               onClick={handleClickDelete}
               sx={{
-                width: { xs: '100%', sm: 'auto', color: 'hotpink' },
+                width: { xs: '100%', sm: 'auto' },
+                color: (theme) => theme.palette.error.main,
+                bgcolor: (theme) => (isDownSm ? alpha(theme.palette.error.light, 0.3) : ''),
               }}
               startIcon={
                 loading ? (
