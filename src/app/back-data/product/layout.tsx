@@ -3,7 +3,7 @@
 import { FC, ReactNode } from 'react';
 import RouterTabs from '@/components/tab/RouterTabs';
 import { TabType } from '@/components/tab/type';
-import ProductLayout from '@/layout/product/ProductLayout';
+import BackDataLayout from '@/layout/backData/BackDataLayout';
 import { Box, Button } from '@mui/material';
 import Link from 'next/link';
 import Iconify from '@/components/icon/Iconify';
@@ -50,10 +50,10 @@ const Layout: FC<Props> = ({ children }) => {
   );
 
   return (
-    <ProductLayout actionSection={!back && actionSection}>
+    <BackDataLayout actionSection={!back && actionSection}>
       {!back && <RouterTabs tabs={tabs} />}
       <Box sx={{ flexGrow: 1, height: 3, pb: 3 }}>{children}</Box>
-    </ProductLayout>
+    </BackDataLayout>
   );
 };
 

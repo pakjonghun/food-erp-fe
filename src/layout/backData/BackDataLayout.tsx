@@ -15,7 +15,7 @@ interface Props {
   children: ReactNode;
 }
 
-const ProductLayout: FC<Props> = ({ actionSection, children }) => {
+const BackDataLayout: FC<Props> = ({ actionSection, children }) => {
   const subTitle = useReactiveVar(title);
   const breadList = useReactiveVar(bread);
   const back = useReactiveVar(canBack);
@@ -48,4 +48,4 @@ const ProductLayout: FC<Props> = ({ actionSection, children }) => {
   );
 };
 
-export default ProductLayout;
+export default BackDataLayout;

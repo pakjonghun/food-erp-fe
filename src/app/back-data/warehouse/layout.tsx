@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, ReactNode } from 'react';
-import ProductLayout from '@/layout/product/ProductLayout';
+import BackDataLayout from '@/layout/backData/BackDataLayout';
 import { Box, Button } from '@mui/material';
 import Link from 'next/link';
 import Iconify from '@/components/icon/Iconify';
@@ -26,9 +26,9 @@ const Layout: FC<Props> = ({ children }) => {
   );
 
   return (
-    <ProductLayout actionSection={!back && actionSection}>
+    <BackDataLayout actionSection={!back && actionSection}>
       <Box sx={{ flexGrow: 1, height: 3, pb: 3 }}>{children}</Box>
-    </ProductLayout>
+    </BackDataLayout>
   );
 };
 
