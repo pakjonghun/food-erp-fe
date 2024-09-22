@@ -1,7 +1,7 @@
-import NewSubsidiary from '@/section/new/newSubsidiary/NewSubsidiary';
+import NewClient from '@/section/new/newClient/NewClient';
 
 const CreateProductPage = () => {
-  return <NewSubsidiary />;
+  return <NewClient />;
 };
 
 export default CreateProductPage;
