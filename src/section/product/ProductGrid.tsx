@@ -1,4 +1,9 @@
-import { DataGrid, GridCellEditStartParams, useGridApiRef } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridCellEditStartParams,
+  GridCellEditStopParams,
+  useGridApiRef,
+} from '@mui/x-data-grid';
 import Toolbar from './ProductToolbar';
 import EmptyRow from '@/components/dataGrid/EmptyRow';
 import { FC, useState } from 'react';
@@ -14,6 +19,7 @@ interface Props {
 }
 
 const ProductGrid: FC<Props> = ({ rows, loading }) => {
+  const apiRef = useGridApiRef();
   const [updateProduct, { loading: updating }] = useUpdateProduct();
 
   const [editField, setEditField] = useState<keyof Products | null>('name');
@@ -47,12 +53,10 @@ const ProductGrid: FC<Props> = ({ rows, loading }) => {
           },
         },
       });
-
       snack({ message: '업데이트가 완료되었습니다.', variant: 'success' });
       return result.data?.updateProduct ?? oldRow;
     } catch (err: unknown) {
       const apolloError = err as ApolloError;
-
       snack({ message: apolloError.message ?? '업데이트가 실패하였습니다.', variant: 'error' });
       return oldRow;
     }
@@ -68,7 +72,6 @@ const ProductGrid: FC<Props> = ({ rows, loading }) => {
     setEditField(null);
   };
 
-  const apiRef = useGridApiRef();
   const columns = useGetColumn(apiRef.current);
   return (
     <DataGrid

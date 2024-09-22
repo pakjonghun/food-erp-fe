@@ -69,7 +69,7 @@ const useGetColumn = (apiRef: GridApiCommunity) => {
           snack({ message: '0이상의 값을 입력하세요.', variant: 'error' });
           apiRef.stopCellEditMode({ id: params.id, field: 'wonPrice', ignoreModifications: true });
         }
-        return { ...params.props, error: hasError };
+        return { ...params.props };
       },
     },
 
@@ -92,7 +92,7 @@ const useGetColumn = (apiRef: GridApiCommunity) => {
           snack({ message: '0이상의 값을 입력하세요.', variant: 'error' });
           apiRef.stopCellEditMode({ id: params.id, field: 'salePrice', ignoreModifications: true });
         }
-        return { ...params.props, error: hasError };
+        return { ...params.props };
       },
       editable: true,
     },
@@ -115,7 +115,7 @@ const useGetColumn = (apiRef: GridApiCommunity) => {
           snack({ message: '0이상의 값을 입력하세요.', variant: 'error' });
           apiRef.stopCellEditMode({ id: params.id, field: 'leadTime', ignoreModifications: true });
         }
-        return { ...params.props, error: hasError };
+        return { ...params.props };
       },
       editable: true,
     },
