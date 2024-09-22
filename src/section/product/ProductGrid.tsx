@@ -6,7 +6,6 @@ import { useUpdateProduct } from '@/graphql/hooks/product/updateProduct';
 import { Products } from '@/graphql/codegen/graphql';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import useGetColumn from './useGetColumn';
-import { AxiosError } from 'axios';
 import { ApolloError } from '@apollo/client';
 
 interface Props {

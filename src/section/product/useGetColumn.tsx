@@ -28,7 +28,7 @@ const useGetColumn = (apiRef: GridApiCommunity) => {
     {
       field: 'category',
       headerName: '카테고리',
-      minWidth: 80,
+      minWidth: 140,
       flex: 0.5,
       valueGetter: (value: ProductCategoryItem, row) => {
         return value?.name;

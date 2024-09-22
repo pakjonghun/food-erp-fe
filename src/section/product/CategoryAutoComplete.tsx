@@ -20,6 +20,7 @@ const CategoryAutoComplete: FC<Props> = ({ loading, categories, editColProps }) 
 
   return (
     <Autocomplete
+      size="small"
       fullWidth
       getOptionLabel={(o) => o.name}
       isOptionEqualToValue={(a, b) => a.id == b.id}
@@ -27,6 +28,7 @@ const CategoryAutoComplete: FC<Props> = ({ loading, categories, editColProps }) 
       value={typeof value == 'string' ? { id: 'initValue', name: value } : value ?? null}
       loading={loading}
       loadingText="카테고리를 검색중입니다."
+      noOptionsText="검색결과 없음"
       options={categories}
       renderInput={(params) => <TextField {...params} />}
     />

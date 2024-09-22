@@ -158,6 +158,7 @@ const NewProduct = () => {
                         value={field.value ?? null}
                         loading={loading}
                         loadingText="카테고리를 검색중입니다."
+                        noOptionsText="검색된 카테고리가 없습니다."
                         options={categories}
                         renderInput={(params) => (
                           <TextField
