@@ -529,6 +529,14 @@ export type ProductCategoryItem = {
   name: Scalars['String']['output'];
 };
 
+export type ProductNames = {
+  __typename?: 'ProductNames';
+  createdAt: Scalars['Date']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  productId: Scalars['String']['output'];
+};
+
 export type Products = {
   __typename?: 'Products';
   barCode?: Maybe<Scalars['String']['output']>;
@@ -538,6 +546,7 @@ export type Products = {
   id: Scalars['ID']['output'];
   leadTime?: Maybe<Scalars['Int']['output']>;
   name: Scalars['String']['output'];
+  productNameList?: Maybe<Array<ProductNames>>;
   salePrice?: Maybe<Scalars['Int']['output']>;
   wonPrice?: Maybe<Scalars['Int']['output']>;
 };

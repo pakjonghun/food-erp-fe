@@ -1,1 +1,1 @@
-export type ClientName = 'ume' | 'ho';
+export type ClientName = 'ume' | 'hoze';

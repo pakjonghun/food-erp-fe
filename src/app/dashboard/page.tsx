@@ -6,7 +6,7 @@ import Iconify from '@/components/icon/Iconify';
 import FileUploadInput from '@/components/input/FileUploadInput';
 import { useSnack } from '@/context/snackContext/SnackProvider';
 import Product from '@/section/product/Product';
-import { Box, Card, CircularProgress, Typography } from '@mui/material';
+import { Box, Card, Typography } from '@mui/material';
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 
@@ -61,7 +61,7 @@ const DashboardPage = () => {
             loading={hoLoading}
             onlyExcel
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
-            handleChangeFile={(file) => handleChangeFile('ho', file)}
+            handleChangeFile={(file) => handleChangeFile('hoze', file)}
             title="호제"
           />
         </Box>
