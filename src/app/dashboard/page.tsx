@@ -68,28 +68,28 @@ const DashboardPage = () => {
             loading={hoLoading}
             onlyExcel
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
-            handleChangeFile={(file) => handleChangeFile('hoze', file)}
+            handleChangeFile={(file) => handleChangeFile('moa', file)}
             title="모아갈비"
           />
           <FileUploadInput
             loading={hoLoading}
             onlyExcel
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
-            handleChangeFile={(file) => handleChangeFile('ume', file)}
+            handleChangeFile={(file) => handleChangeFile('dhfnb', file)}
             title="대한에프앤비"
           />
           <FileUploadInput
             loading={hoLoading}
             onlyExcel
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
-            handleChangeFile={(file) => handleChangeFile('ume', file)}
+            handleChangeFile={(file) => handleChangeFile('baul', file)}
             title="바울목장"
           />
           <FileUploadInput
             loading={hoLoading}
             onlyExcel
             icon={<Iconify icon="ri:file-edit-fill" width={18} />}
-            handleChangeFile={(file) => handleChangeFile('ume', file)}
+            handleChangeFile={(file) => handleChangeFile('daro', file)}
             title="대로축산"
           />
         </Box>
