@@ -64,6 +64,34 @@ const DashboardPage = () => {
             handleChangeFile={(file) => handleChangeFile('hoze', file)}
             title="호제"
           />
+          <FileUploadInput
+            loading={hoLoading}
+            onlyExcel
+            icon={<Iconify icon="ri:file-edit-fill" width={18} />}
+            handleChangeFile={(file) => handleChangeFile('hoze', file)}
+            title="모아갈비"
+          />
+          <FileUploadInput
+            loading={hoLoading}
+            onlyExcel
+            icon={<Iconify icon="ri:file-edit-fill" width={18} />}
+            handleChangeFile={(file) => handleChangeFile('ume', file)}
+            title="대한에프앤비"
+          />
+          <FileUploadInput
+            loading={hoLoading}
+            onlyExcel
+            icon={<Iconify icon="ri:file-edit-fill" width={18} />}
+            handleChangeFile={(file) => handleChangeFile('ume', file)}
+            title="바울목장"
+          />
+          <FileUploadInput
+            loading={hoLoading}
+            onlyExcel
+            icon={<Iconify icon="ri:file-edit-fill" width={18} />}
+            handleChangeFile={(file) => handleChangeFile('ume', file)}
+            title="대로축산"
+          />
         </Box>
       </Card>
       <Card sx={{ height: 3, flexGrow: 1, pb: 2 }} variant="elevation" elevation={2}>
